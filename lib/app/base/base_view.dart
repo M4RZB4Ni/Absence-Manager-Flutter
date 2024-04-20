@@ -1,6 +1,5 @@
 import 'package:communere/app/base/base_controller.dart';
 import 'package:communere/app/extentions/extentions.dart';
-import 'package:communere/app/network/exception_handler.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/app/resources/app_spacing.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +11,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 abstract class BaseView<Controller extends BaseController>
     extends GetView<Controller> {
-  BaseView({final Key? key}) : super(key: key);
+  BaseView({super.key});
 
   final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
@@ -43,9 +42,7 @@ abstract class BaseView<Controller extends BaseController>
           loading: () => _showLoading(),
           data: (final data) => annotatedRegion(context),
           lostConnection: (widget) => noInternet(),
-          error: (ExceptionHandler error) {
-            return "Error in Load Data".toWidget();
-          },
+          error: (error) => "Error in Load Data".toWidget(),
         ),
       ),
     );

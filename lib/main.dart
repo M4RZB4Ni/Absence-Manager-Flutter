@@ -34,8 +34,6 @@ class MyApp extends StatelessWidget {
           title: AppText.appName, // Set the application title.
           initialBinding:
               MainBinding(), // Use MainBinding for initial setup and dependency injection.
-          debugShowCheckedModeBanner:
-              true, // Show the debug banner in checked mode.
           // initialRoute:
           //     HomeScreen.url, // Set the initial route to the HomeScreen.
           // getPages:
