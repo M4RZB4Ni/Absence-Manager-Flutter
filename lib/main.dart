@@ -1,20 +1,14 @@
 // Import necessary packages and files.
 import 'package:communere/app/di/main_binding.dart';
 import 'package:communere/app/resources/app_text.dart';
-import 'package:communere/app/router/pages.dart';
-import 'package:communere/presentation/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Main function to run the Flutter application.
 void main() async {
   // Ensure that Flutter bindings are initialized.
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Load environment variables from the .env file.
-  await dotenv.load(fileName: ".env");
 
   // Run the application with the MyApp widget.
   runApp(const MyApp());
@@ -42,10 +36,10 @@ class MyApp extends StatelessWidget {
               MainBinding(), // Use MainBinding for initial setup and dependency injection.
           debugShowCheckedModeBanner:
               true, // Show the debug banner in checked mode.
-          initialRoute:
-              HomeScreen.url, // Set the initial route to the HomeScreen.
-          getPages:
-              AppPages.pages, // Define the application's pages using AppPages.
+          // initialRoute:
+          //     HomeScreen.url, // Set the initial route to the HomeScreen.
+          // getPages:
+          //     AppPages.pages, // Define the application's pages using AppPages.
         );
       },
     );

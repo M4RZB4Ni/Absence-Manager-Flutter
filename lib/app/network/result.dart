@@ -1,20 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Generate a part file using Freezed package.
-part 'response.freezed.dart';
-part 'response.g.dart';
+part 'result.freezed.dart';
+part 'result.g.dart';
 
 // Freezed annotation to create a union type for API responses.
 @freezed
-class Response with _$Response {
+class Result with _$Result {
   // Factory constructor for a response object.
-  const factory Response({
+  const factory Result({
     required bool status, // Indicates the success or failure of the response.
-    required dynamic result, // Holds the result data of the response.
-    required int statusCode, // Represents the HTTP status code of the response.
-  }) = _Response;
+    required dynamic payload, // Holds the result data of the response.
+    required String message, // Represents the HTTP status code of the response.
+  }) = _Result;
 
   // Factory method to deserialize a JSON map into a Response object.
-  factory Response.fromJson(Map<String, dynamic> json) =>
-      _$ResponseFromJson(json);
+  factory Result.fromJson(Map<String, dynamic> json) =>
+      _$ResultFromJson(json);
 }
