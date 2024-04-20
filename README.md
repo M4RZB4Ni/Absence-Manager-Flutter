@@ -1,7 +1,7 @@
-# The Simple Flicker App - Flutter
+# The Crewmeister coding challenge - Flutter
 
 ## Overview
-This is a Flutter project developed as a technical test by **Hamid Marzbani**. The project focuses on develop a structured, robust, testable, and scalable application for absence manager.
+This Flutter project was developed as a technical test by **Hamid Marzbani** by request of Crewmeister company. The project focuses on creating a structured, robust, testable, scalable application for absence managers.
 
 ## Table of Contents
 - [Architecture](#architecture)
