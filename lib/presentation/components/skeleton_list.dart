@@ -1,5 +1,5 @@
 // Import necessary packages and files.
-import 'package:communere/app/extentions/extentions.dart';
+import 'package:communere/app/extentions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

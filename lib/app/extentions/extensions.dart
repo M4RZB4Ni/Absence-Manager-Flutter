@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,6 +22,13 @@ extension AppString on String {
 
   /// Get the real image address from the string name of an asset
   String get animation => 'assets/animations/$this.json';
+}
+
+extension JsonFileReaderExtension on String {
+  Future<Map<String,dynamic>> readJsonFile() async {
+    String content = await File(this).readAsString();
+    return jsonDecode(content);
+  }
 }
 
 extension Reactive on double {

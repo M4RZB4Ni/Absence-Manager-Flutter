@@ -1,5 +1,5 @@
 import 'package:communere/app/base/base_controller.dart';
-import 'package:communere/app/extentions/extentions.dart';
+import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/app/resources/app_spacing.dart';
 import 'package:flutter/cupertino.dart';

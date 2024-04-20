@@ -3,6 +3,9 @@ part 'exception_handler.freezed.dart';
 
 @freezed
 class ExceptionHandler with _$ExceptionHandler {
+
+  const factory ExceptionHandler.jsonDecodingError({required Exception exception}) = JsonDecodingError;
+
   const factory ExceptionHandler.requestCancelled() = RequestCancelled;
 
   const factory ExceptionHandler.unauthorizedRequest(final String message) =
@@ -81,6 +84,9 @@ class ExceptionHandler with _$ExceptionHandler {
   }) {
     var errorMessage = '';
     exceptionHandler.when(
+      jsonDecodingError: (Exception e) {
+        errorMessage = 'Failed to decode JSON data error ${e.toString()}';
+      },
       notImplemented: () {
         errorMessage = 'Not Implemented';
       },
@@ -230,13 +236,5 @@ class ExceptionHandler with _$ExceptionHandler {
     }
   }
 
-  // factory ExceptionHandler.getException(final Exception error,
-  //     {required dynamic stackTrace}) {
-  //   debugPrint('low level error--> ${error}');
-  //
-  //
-  //
-  //
-  //
-  // }
+
 }
