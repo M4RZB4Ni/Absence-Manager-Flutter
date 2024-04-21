@@ -5,7 +5,7 @@ import 'package:communere/domain/data_source/absence_manager_data_source.dart';
 import '../../app/base/api_result.dart';
 // Importing data models for crew members and leave requests.
 import '../../domain/repository/absence_manager_repository.dart';
-import '../models/crew/crew_member.dart';
+import '../models/crew/crew_member_model.dart';
 import '../models/leave_request/leave_request_model.dart';
 
 /// An implementation of the [AbsenceManagerRepository] that uses a local data source.

@@ -1,7 +1,7 @@
 // Importing core functionality for API results handling.
 import '../../app/base/api_result.dart';
 
-import '../../data/models/crew/crew_member.dart';
+import '../../data/models/crew/crew_member_model.dart';
 import '../../data/models/leave_request/leave_request_model.dart';
 
 /// An abstract repository class defining the contract for absence management operations.

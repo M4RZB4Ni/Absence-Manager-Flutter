@@ -4,7 +4,7 @@ import 'package:communere/app/network/exception_handler.dart';
 
 import '../../../app/base/api_result.dart';
 import '../../../domain/data_source/absence_manager_data_source.dart';
-import '../../models/crew/crew_member.dart';
+import '../../models/crew/crew_member_model.dart';
 import '../../models/leave_request/leave_request_model.dart';
 
 /// A local data source class for managing absences, extending the abstract [AbsenceManagerDataSource].

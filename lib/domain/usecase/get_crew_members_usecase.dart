@@ -2,7 +2,7 @@
 import '../../app/base/api_result.dart';
 import '../repository/absence_manager_repository.dart';
 import 'base/usecase.dart';
-import '../../data/models/crew/crew_member.dart';
+import '../../data/models/crew/crew_member_model.dart';
 
 /// Fetches crew members using the provided repository.
 ///

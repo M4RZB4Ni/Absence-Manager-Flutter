@@ -1,7 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'crew_member.freezed.dart';
-part 'crew_member.g.dart';
+import '../../../domain/entities/crew/crew_entity.dart';
+
+part 'crew_member_model.freezed.dart';
+part 'crew_member_model.g.dart';
 
 @freezed
 class CrewMember with _$CrewMember {
@@ -14,6 +16,17 @@ class CrewMember with _$CrewMember {
   }) = _CrewMember;
 
   factory CrewMember.fromJson(Map<String, dynamic> json) => _$CrewMemberFromJson(json);
+
+  CrewMemberEntity toEntity() {
+    return CrewMemberEntity(
+      crewId: crewId,
+      id: id,
+      image: image,
+      name: name,
+      userId: userId,
+    );
+  }
+
 }
 
 @freezed
@@ -24,4 +37,12 @@ class CrewMembersContainer with _$CrewMembersContainer {
   }) = _CrewMembersContainer;
 
   factory CrewMembersContainer.fromJson(Map<String, dynamic> json) => _$CrewMembersContainerFromJson(json);
+
+  CrewMembersContainerEntity toEntity() {
+    return CrewMembersContainerEntity(
+      message: message,
+      payload: payload.map((crewMember) => crewMember.toEntity()).toList(),
+    );
+  }
+
 }
