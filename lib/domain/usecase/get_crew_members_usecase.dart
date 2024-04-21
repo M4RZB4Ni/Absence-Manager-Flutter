@@ -6,7 +6,6 @@ import '../../data/models/crew/crew_member.dart';
 
 /// Fetches crew members using the provided repository.
 class GetCrewMembersUseCase extends UseCase<CrewMembersContainer, void> {
-
   /// Repository for absence management data.
   final AbsenceManagerRepository _repository;
 
@@ -16,7 +15,6 @@ class GetCrewMembersUseCase extends UseCase<CrewMembersContainer, void> {
   /// Executes the use case to retrieve crew members.
   /// Returns an [ApiResult] with the data or error state.
   @override
-  Future<ApiResult<CrewMembersContainer>> call({void params}) => _repository.getCrewMemberList();
+  Future<ApiResult<CrewMembersContainer>> call({void params}) =>
+      _repository.getCrewMemberList();
 }
-
-
