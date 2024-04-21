@@ -5,6 +5,9 @@ import 'base/usecase.dart';
 import '../../data/models/crew/crew_member.dart';
 
 /// Fetches crew members using the provided repository.
+///
+/// This class extends [UseCase] and uses the [AbsenceManagerRepository]
+/// to retrieve leave requests, encapsulating the operation in an [ApiResult].
 class GetCrewMembersUseCase extends UseCase<CrewMembersContainer, void> {
   /// Repository for absence management data.
   final AbsenceManagerRepository _repository;

@@ -8,7 +8,6 @@ import '../repository/absence_manager_repository.dart';
 /// This class extends [UseCase] and uses the [AbsenceManagerRepository]
 /// to retrieve leave requests, encapsulating the operation in an [ApiResult].
 class GetAbsencesUseCase extends UseCase<LeaveRequestsContainer, DateTime?> {
-
   /// The repository for managing absence data.
   final AbsenceManagerRepository _repository;
 
@@ -18,5 +17,6 @@ class GetAbsencesUseCase extends UseCase<LeaveRequestsContainer, DateTime?> {
   /// Executes the use case to retrieve absence members.
   /// Returns an [ApiResult] with the data or error state.
   @override
-  Future<ApiResult<LeaveRequestsContainer>> call({DateTime? params}) => _repository.getLeavesList();
+  Future<ApiResult<LeaveRequestsContainer>> call({DateTime? params}) =>
+      _repository.getLeavesList();
 }
