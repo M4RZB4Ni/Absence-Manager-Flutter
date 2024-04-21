@@ -1,3 +1,13 @@
+class LeaveRequestsContainerEntity {
+  final String message;
+  final List<LeaveRequestEntity> payload;
+
+  LeaveRequestsContainerEntity({
+    required this.message,
+    required this.payload,
+  });
+}
+
 class LeaveRequestEntity {
   final int? admitterId;
   final String? admitterNote;
@@ -27,5 +37,3 @@ class LeaveRequestEntity {
     required this.userId,
   });
 }
-
-
