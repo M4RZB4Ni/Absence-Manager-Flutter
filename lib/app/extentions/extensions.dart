@@ -20,6 +20,8 @@ extension AppString on String {
     }
   }
 
+  String get toNormalDate => substring(0,10);
+
   /// Get the real image address from the string name of an asset
   String get animation => 'assets/animations/$this.json';
 }

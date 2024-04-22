@@ -11,4 +11,9 @@ mixin AppText {
   static const type = "Type";
   static const nameNotFound = "Name not found";
   static const unknown = "Unknown";
+  static const startDate = "Start Date";
+  static const endDate = "End Date";
+  static const duration = "Duration";
+  static const admitterNote = "Admitter's Note";
+  static const memberNote = "Member's Note";
 }

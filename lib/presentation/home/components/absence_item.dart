@@ -1,3 +1,4 @@
+import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ class AbsenceItem extends StatelessWidget {
   const AbsenceItem(
       {super.key,
       required this.leaveRequestEntity,
-      required this.onExpansionChanged, required this.name});
+      required this.onExpansionChanged,
+      required this.name});
   final LeaveRequestEntity leaveRequestEntity;
   final ValueChanged<bool> onExpansionChanged;
   final String name;
@@ -19,17 +21,35 @@ class AbsenceItem extends StatelessWidget {
     return Slidable(
         key: key,
         child: ExpansionTile(
-            maintainState: true,
             onExpansionChanged: (value) => onExpansionChanged(value),
             title: Text(name),
             subtitle: Text("${AppText.type}: ${leaveRequestEntity.type}"),
             trailing: _statusSituation(leaveRequestEntity),
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+            childrenPadding: const EdgeInsets.symmetric(horizontal: 8),
             children: [
-              Text(leaveRequestEntity.admitterNote.toString()),
-              const Text("Child 1"),
-              const Text("Child 2"),
-              const Text("Child 3"),
-              const Text("Child 4"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                      "${AppText.startDate}: ${leaveRequestEntity.startDate.toString().toNormalDate}"),
+                  Text(
+                      "${AppText.endDate}: ${leaveRequestEntity.endDate.toString().toNormalDate}"),
+                  Text(
+                      "${AppText.duration}: ${leaveRequestEntity.endDate.difference(leaveRequestEntity.startDate).inDays}"),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("${AppText.admitterNote}: ${leaveRequestEntity.admitterNote}"),
+                    Text("${AppText.memberNote}: ${leaveRequestEntity.memberNote}"),
+                  ],
+                ),
+              ),
             ]));
   }
 
@@ -64,5 +84,4 @@ class AbsenceItem extends StatelessWidget {
       ),
     );
   }
-
 }
