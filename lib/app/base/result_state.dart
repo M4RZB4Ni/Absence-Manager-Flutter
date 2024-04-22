@@ -13,5 +13,5 @@ class ResultState<T> with _$ResultState<T> {
 
   const factory ResultState.data({required final T data}) = Data<T>;
 
-  const factory ResultState.error({required ExceptionHandler error}) = Error<T>;
+  const factory ResultState.error({ExceptionHandler? error}) = Error<T>;
 }

@@ -27,16 +27,15 @@ class HomeView extends BaseView<HomeViewModel> {
           width: Get.width),
     );
   }
-
-  @override
-  Widget error(ExceptionHandler e) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Lottie.asset('error'.animation,fit: BoxFit.fill),
-        Text(ExceptionHandler.getErrorMessage(e))
-      ],
-    );
+ @override
+  Widget error(ExceptionHandler? e) {
+   return Column(
+     mainAxisAlignment: MainAxisAlignment.center,
+     children: [
+       Lottie.asset('error'.animation,fit: BoxFit.fill),
+       Text(ExceptionHandler.getErrorMessage(e!))
+     ],
+   );
   }
 
   @override

@@ -26,6 +26,7 @@ class HomeViewModel extends BaseController {
   int currentPage = 1;
   final int pageSize = 10;
 
+
   void _onScroll() {
     if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
       loadMoreAbsence();
@@ -76,6 +77,8 @@ class HomeViewModel extends BaseController {
   }
 
   void _updateUIState() {
+    //if below statement be true means application still loading and no error has been thrown
+    if(pageState!=const ResultState.loading()) return;
     if (crewList.isEmpty && absenceList.isEmpty) {
       updatePageState(const ResultState.empty());
     } else {
@@ -85,10 +88,12 @@ class HomeViewModel extends BaseController {
   }
 
   Future prepareAll() async {
-    // showLoading();
+    showLoading();
     try {
+      // below delay is just to showing you loading state and performance without is definitely better
+      await Future.delayed(const Duration(seconds: 2));
       await Future.wait([prepareMembers(), prepareAbsence()]);
-      // _updateUIState();
+      _updateUIState();
     } on ExceptionHandler catch (error) {
       updatePageState(ResultState.error(error: error));
     }

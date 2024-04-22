@@ -30,7 +30,7 @@ abstract class BaseView<Controller extends BaseController>
 
   Widget empty() => Container();
 
-  Widget error(ExceptionHandler e) => Center(child: Text(ExceptionHandler.getErrorMessage(e)),);
+  Widget error(ExceptionHandler? e) => Center(child: Text(ExceptionHandler.getErrorMessage(e??const ExceptionHandler.unexpectedError())),);
 
   Widget loading() => Container();
 
