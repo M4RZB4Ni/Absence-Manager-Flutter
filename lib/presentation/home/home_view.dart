@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'home_view_model.dart';
 
 class HomeView extends BaseView<HomeViewModel> {
-  static String name="HomeScreen";
+  static String name="/HomeScreen";
   HomeView({super.key});
 
   @override
