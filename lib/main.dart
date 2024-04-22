@@ -1,9 +1,12 @@
 // Import necessary packages and files.
 import 'package:communere/app/di/main_binding.dart';
 import 'package:communere/app/resources/app_text.dart';
+import 'package:communere/presentation/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'app/router/pages.dart';
 
 // Main function to run the Flutter application.
 void main() async {
@@ -26,18 +29,14 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360, 640),
       minTextAdapt: true,
-      splitScreenMode: true,
       builder: (context, child) {
         // Use GetMaterialApp for managing the application's state and routes.
         return GetMaterialApp(
           locale: Get.locale, // Set the locale for localization.
           title: AppText.appName, // Set the application title.
-          initialBinding:
-              MainBinding(), // Use MainBinding for initial setup and dependency injection.
-          // initialRoute:
-          //     HomeScreen.url, // Set the initial route to the HomeScreen.
-          // getPages:
-          //     AppPages.pages, // Define the application's pages using AppPages.
+          initialBinding: MainBinding(), // Use MainBinding for initial setup and dependency injection.
+          initialRoute: HomeView.name, // Set the initial route to the HomeScreen.
+          getPages: AppPages.pages, // Define the application's pages using AppPages.
         );
       },
     );

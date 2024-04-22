@@ -86,7 +86,6 @@ class HomeViewModel extends BaseController {
 
   Future prepareAll() async {
     showLoading();
-
     try {
       await Future.wait([prepareMembers(), prepareAbsence()]);
       _updateUIState();
