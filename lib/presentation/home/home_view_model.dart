@@ -82,8 +82,7 @@ class HomeViewModel extends BaseController {
     if (crewList.isEmpty && absenceList.isEmpty) {
       updatePageState(const ResultState.empty());
     } else {
-      updatePageState(
-          ResultState.data(data: {'crew': crewList, 'absence': absenceList}));
+      hideLoading();
     }
   }
 

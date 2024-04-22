@@ -44,11 +44,15 @@ extension LeaveX on LeaveRequest {
   LeaveRequestEntity toEntity() {
     return LeaveRequestEntity(
         createdAt: createdAt,
+        confirmedAt: confirmedAt,
+        rejectedAt: rejectedAt,
         crewId: crewId,
         endDate: endDate,
         id: id,
         startDate: startDate,
         type: type,
+        admitterNote: admitterNote,
+        memberNote: memberNote,
         userId: userId);
   }
 }

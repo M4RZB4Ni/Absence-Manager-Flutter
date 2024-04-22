@@ -2,6 +2,7 @@ import 'package:communere/app/base/base_view.dart';
 import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/presentation/components/skeleton_list.dart';
+import 'package:communere/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -65,12 +66,13 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   Widget body(BuildContext context) {
     return ListView.separated(
-        itemBuilder: (context, index) {
-          return Container(
-            color: Colors.yellow,
-          ); // temp widget
-        },
-        separatorBuilder: (context, index) => const Divider(),
-        itemCount: controller.absenceList.length);
+        itemBuilder: (ctx, idx) => AbsenceItem(
+              leaveRequestEntity: controller.absenceList[idx],
+              onExpansionChanged: (bool value) {
+                debugPrint("value--> $value");
+              },
+            ),
+        itemCount: controller.absenceList.length,
+        separatorBuilder: (BuildContext context, int index) => const Divider());
   }
 }
