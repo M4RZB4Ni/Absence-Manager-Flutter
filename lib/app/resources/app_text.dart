@@ -9,4 +9,6 @@ mixin AppText {
   static const confirmed = "CONFIRMED";
   static const rejected = "REJECTED";
   static const type = "Type";
+  static const nameNotFound = "Name not found";
+  static const unknown = "Unknown";
 }

@@ -71,6 +71,7 @@ class HomeView extends BaseView<HomeViewModel> {
               onExpansionChanged: (bool value) {
                 debugPrint("value--> $value");
               },
+              name: controller.idToNameMap[controller.absenceList[idx].userId] ?? AppText.unknown,
             ),
         itemCount: controller.absenceList.length,
         separatorBuilder: (BuildContext context, int index) => const Divider());

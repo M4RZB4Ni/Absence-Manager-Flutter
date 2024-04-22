@@ -9,9 +9,10 @@ class AbsenceItem extends StatelessWidget {
   const AbsenceItem(
       {super.key,
       required this.leaveRequestEntity,
-      required this.onExpansionChanged});
+      required this.onExpansionChanged, required this.name});
   final LeaveRequestEntity leaveRequestEntity;
   final ValueChanged<bool> onExpansionChanged;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class AbsenceItem extends StatelessWidget {
         child: ExpansionTile(
             maintainState: true,
             onExpansionChanged: (value) => onExpansionChanged(value),
-            title: Text(leaveRequestEntity.id.toString()),
+            title: Text(name),
             subtitle: Text("${AppText.type}: ${leaveRequestEntity.type}"),
             trailing: _statusSituation(leaveRequestEntity),
             children: [

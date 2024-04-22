@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../app/base/base_controller.dart';
@@ -17,6 +16,7 @@ class HomeViewModel extends BaseController {
 
   RxList<CrewMemberEntity> crewList = RxList.empty();
   RxList<LeaveRequestEntity> absenceList = RxList.empty();
+  Map<int, String> idToNameMap = {};
 
   /// Constructs a [HomeViewModel] with the necessary use cases.
   HomeViewModel(this._absencesUseCase, this._crewMembersUseCase);
@@ -26,9 +26,9 @@ class HomeViewModel extends BaseController {
   int currentPage = 1;
   final int pageSize = 10;
 
-
   void _onScroll() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
       loadMoreAbsence();
     }
   }
@@ -78,10 +78,12 @@ class HomeViewModel extends BaseController {
 
   void _updateUIState() {
     //if below statement be true means application still loading and no error has been thrown
-    if(pageState!=const ResultState.loading()) return;
+    if (pageState != const ResultState.loading()) return;
     if (crewList.isEmpty && absenceList.isEmpty) {
       updatePageState(const ResultState.empty());
     } else {
+      _crewMemberService(crewList);
+
       hideLoading();
     }
   }
@@ -103,7 +105,6 @@ class HomeViewModel extends BaseController {
     prepareAll();
     _scrollController.addListener(_onScroll);
     super.onInit();
-
   }
 
   @override
@@ -112,4 +113,7 @@ class HomeViewModel extends BaseController {
     super.dispose();
   }
 
+  void _crewMemberService(List<CrewMemberEntity> crewList) {
+    idToNameMap = {for (var member in crewList) member.userId: member.name};
+  }
 }
