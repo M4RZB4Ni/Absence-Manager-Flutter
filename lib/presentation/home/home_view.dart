@@ -21,7 +21,7 @@ class HomeView extends BaseView<HomeViewModel> {
       ),
       data: (data) => ListView.separated(
           itemBuilder: (context, index) {
-            return Container(); // temp widget
+            return Container(color: Colors.yellow,); // temp widget
       }, separatorBuilder: (context, index) => const Divider(), itemCount: controller.absenceList.length),
       error: (error) => Center(
         child: Lottie.asset('error'.animation,
