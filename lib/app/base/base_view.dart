@@ -41,8 +41,9 @@ abstract class BaseView<Controller extends BaseController>
           idle: () => annotatedRegion(context),
           loading: () => _showLoading(),
           data: (final data) => annotatedRegion(context),
-          lostConnection: (widget) => noInternet(),
+          // lostConnection: (widget) => noInternet(),
           error: (error) => "Error in Load Data".toWidget(),
+          empty: () => _empty(),
         ),
       ),
     );
@@ -129,4 +130,6 @@ abstract class BaseView<Controller extends BaseController>
 
   FloatingActionButtonLocation? floatingActionButtonLocation() =>
       FloatingActionButtonLocation.endFloat;
+  
+  Widget _empty() => Container();
 }

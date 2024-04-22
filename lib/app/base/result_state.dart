@@ -1,4 +1,5 @@
 import 'package:communere/app/network/exception_handler.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'result_state.freezed.dart';
@@ -9,8 +10,7 @@ class ResultState<T> with _$ResultState<T> {
 
   const factory ResultState.loading() = Loading<T>;
 
-  const factory ResultState.lostConnection({final T? widget}) =
-      LostConnection<T>;
+  const factory ResultState.empty() = Empty<T>;
 
   const factory ResultState.data({required final T data}) = Data<T>;
 
