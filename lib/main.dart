@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         // Use GetMaterialApp for managing the application's state and routes.
         return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           locale: Get.locale, // Set the locale for localization.
           title: AppText.appName, // Set the application title.
           initialBinding: MainBinding(), // Use MainBinding for initial setup and dependency injection.

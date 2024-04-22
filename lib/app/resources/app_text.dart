@@ -4,4 +4,5 @@ mixin AppText {
 
   // Static constant for the Application's Name.
   static const appName = "Crewmeister coding challenge";
+  static const total = "Absences";
 }
