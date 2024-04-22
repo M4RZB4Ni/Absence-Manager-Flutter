@@ -85,7 +85,7 @@ class HomeViewModel extends BaseController {
   }
 
   Future prepareAll() async {
-    showLoading();
+    // showLoading();
     try {
       await Future.wait([prepareMembers(), prepareAbsence()]);
       _updateUIState();
@@ -96,9 +96,10 @@ class HomeViewModel extends BaseController {
 
   @override
   void onInit() async {
-    super.onInit();
     prepareAll();
     _scrollController.addListener(_onScroll);
+    super.onInit();
+
   }
 
   @override

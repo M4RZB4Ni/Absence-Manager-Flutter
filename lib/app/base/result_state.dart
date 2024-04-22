@@ -7,9 +7,9 @@ part 'result_state.freezed.dart';
 class ResultState<T> with _$ResultState<T> {
   const factory ResultState.idle() = Idle<T>;
 
-  const factory ResultState.loading() = Loading<T>;
+  const factory ResultState.loading() = Loading;
 
-  const factory ResultState.empty() = Empty<T>;
+  const factory ResultState.empty() = Empty;
 
   const factory ResultState.data({required final T data}) = Data<T>;
 

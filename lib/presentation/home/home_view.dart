@@ -11,22 +11,34 @@ class HomeView extends BaseView<HomeViewModel> {
   HomeView({super.key});
 
   @override
-  Widget body(BuildContext context) {
-    return controller.pageState.when(
-      idle: () => Container(),
-      loading: () => const SkeletonList(),
-      empty: () => Center(
-        child: Lottie.asset('nothing_found'.animation,
-            width: 70, height: Get.height * 0.50, fit: BoxFit.fill),
-      ),
-      data: (data) => ListView.separated(
-          itemBuilder: (context, index) {
-            return Container(color: Colors.yellow,); // temp widget
-      }, separatorBuilder: (context, index) => const Divider(), itemCount: controller.absenceList.length),
-      error: (error) => Center(
-        child: Lottie.asset('error'.animation,
-            width: 70, height: Get.height * 0.50, fit: BoxFit.fill),
-      ),
+  Color pageBackgroundColor() {
+    return Colors.white;
+  }
+
+  @override
+  Widget loading() {
+    return const SkeletonList();
+  }
+  @override
+  Widget empty() {
+    return Center(
+      child: Lottie.asset('nothing_found'.animation,
+          width: Get.width),
     );
+  }
+
+  @override
+  Widget error() {
+    return Center(
+      child: Lottie.asset('error'.animation,
+          width: 70, height: Get.height * 0.50, fit: BoxFit.fill),
+    );
+  }
+  @override
+  Widget body(BuildContext context) {
+    return ListView.separated(
+        itemBuilder: (context, index) {
+          return Container(color: Colors.yellow,); // temp widget
+        }, separatorBuilder: (context, index) => const Divider(), itemCount: controller.absenceList.length);
   }
 }

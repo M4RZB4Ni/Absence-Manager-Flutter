@@ -1,8 +1,5 @@
 import 'package:communere/app/base/base_controller.dart';
-import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
-import 'package:communere/app/resources/app_spacing.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
@@ -30,6 +27,12 @@ abstract class BaseView<Controller extends BaseController>
 
   Widget body(final BuildContext context);
 
+  Widget empty() => Container();
+
+  Widget error() => Container();
+
+  Widget loading() => Container();
+
   @override
   Widget build(final BuildContext context) {
     return GestureDetector(
@@ -39,11 +42,11 @@ abstract class BaseView<Controller extends BaseController>
       child: Obx(
         () => controller.pageState.when(
           idle: () => annotatedRegion(context),
-          loading: () => _showLoading(),
+          loading: () => annotatedRegion(context,child: this.loading()),
           data: (final data) => annotatedRegion(context),
           // lostConnection: (widget) => noInternet(),
-          error: (error) => "Error in Load Data".toWidget(),
-          empty: () => _empty(),
+          error: (error) => annotatedRegion(context,child: this.error()),
+          empty: () => annotatedRegion(context,child: this.empty()),
         ),
       ),
     );
@@ -67,16 +70,16 @@ abstract class BaseView<Controller extends BaseController>
         ));
   }
 
-  Widget annotatedRegion(final BuildContext context) => AnnotatedRegion(
+  Widget annotatedRegion(final BuildContext context, {final Widget? child}) => AnnotatedRegion(
         value: SystemUiOverlayStyle(
           //Status bar color for android
           statusBarColor: statusBarColor(),
           statusBarIconBrightness: Brightness.light,
         ),
-        child: pageContent(context),
+        child: pageContent(context,child: child),
       );
 
-  Widget pageScaffold(final BuildContext context) => PopScope(
+  Widget pageScaffold(final BuildContext context,{final Widget? child}) => PopScope(
         canPop: false,
         child: Scaffold(
           //sets ios status bar color
@@ -84,18 +87,18 @@ abstract class BaseView<Controller extends BaseController>
           appBar: appBar(context),
           floatingActionButton: floatingActionButton(),
           floatingActionButtonLocation: floatingActionButtonLocation(),
-          body: body(context),
+          body: child??body(context),
           bottomNavigationBar: bottomNavigationBar(context),
           drawer: drawer(),
           resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
         ),
       );
 
-  Widget pageContent(final BuildContext context) => safeArea()
+  Widget pageContent(final BuildContext context,{final Widget? child}) => safeArea()
       ? SafeArea(
-          child: pageScaffold(context),
+          child: pageScaffold(context,child: child),
         )
-      : pageScaffold(context);
+      : pageScaffold(context,child: child);
 
   Widget showErrorSnackBar(final String message) {
     var snackBar = SnackBar(content: Text(message));
@@ -118,18 +121,9 @@ abstract class BaseView<Controller extends BaseController>
 
   Widget? drawer() => null;
 
-  Widget _showLoading() => Center(
-        child: Container(
-          color: Colors.transparent,
-          margin: AppSpacing.s30All,
-          child: CupertinoActivityIndicator(
-            radius: 30.toReactive(),
-          ),
-        ),
-      );
 
   FloatingActionButtonLocation? floatingActionButtonLocation() =>
       FloatingActionButtonLocation.endFloat;
-  
-  Widget _empty() => Container();
+
+
 }
