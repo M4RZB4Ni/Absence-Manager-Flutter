@@ -27,11 +27,13 @@ class CrewMember with _$CrewMember {
   /// to parse the JSON map into a [CrewMember] instance.
   factory CrewMember.fromJson(Map<String, dynamic> json) =>
       _$CrewMemberFromJson(json);
+}
 
-  /// Converts the [CrewMember] instance to a [CrewMemberEntity].
-  ///
-  /// This method is used to convert the Freezed data model to a domain entity,
-  /// which represents the business logic of the application.
+/// Converts the [CrewMember] instance to a [CrewMemberEntity].
+///
+/// This method is used to convert the Freezed data model to a domain entity,
+/// which represents the business logic of the application.
+extension CrewMemberX on CrewMember {
   CrewMemberEntity toEntity() {
     return CrewMemberEntity(
       crewId: crewId,
@@ -63,11 +65,13 @@ class CrewMembersContainer with _$CrewMembersContainer {
   /// to parse the JSON map into a [CrewMembersContainer] instance.
   factory CrewMembersContainer.fromJson(Map<String, dynamic> json) =>
       _$CrewMembersContainerFromJson(json);
+}
 
-  /// Converts the [CrewMembersContainer] instance to a [CrewMembersContainerEntity].
-  ///
-  /// This method is used to convert the Freezed data model to a domain entity,
-  /// which represents the business logic of the application.
+/// Converts the [CrewMembersContainer] instance to a [CrewMembersContainerEntity].
+///
+/// This method is used to convert the Freezed data model to a domain entity,
+/// which represents the business logic of the application.
+extension CrewMembersContainerX on CrewMembersContainer {
   CrewMembersContainerEntity toEntity() {
     return CrewMembersContainerEntity(
       message: message,

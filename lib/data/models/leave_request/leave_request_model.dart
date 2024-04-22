@@ -32,27 +32,24 @@ class LeaveRequest with _$LeaveRequest {
   /// Creates a [LeaveRequest] from a JSON map.
   ///
   /// Utilizes the generated `_$LeaveRequestFromJson` function to parse the JSON map.
-  factory LeaveRequest.fromJson(Map<String, dynamic> json) => _$LeaveRequestFromJson(json);
+  factory LeaveRequest.fromJson(Map<String, dynamic> json) =>
+      _$LeaveRequestFromJson(json);
+}
 
-  /// Converts the [LeaveRequest] instance to a [LeaveRequestEntity].
-  ///
-  /// This method facilitates the transformation of a data model into a domain entity,
-  /// aligning with the business logic and use cases of the application.
+/// Converts the [LeaveRequest] instance to a [LeaveRequestEntity].
+///
+/// This method facilitates the transformation of a data model into a domain entity,
+/// aligning with the business logic and use cases of the application.
+extension LeaveX on LeaveRequest {
   LeaveRequestEntity toEntity() {
     return LeaveRequestEntity(
-      admitterId: admitterId,
-      admitterNote: admitterNote,
-      confirmedAt: confirmedAt,
-      createdAt: createdAt,
-      crewId: crewId,
-      endDate: endDate,
-      id: id,
-      memberNote: memberNote,
-      rejectedAt: rejectedAt,
-      startDate: startDate,
-      type: type,
-      userId: userId,
-    );
+        createdAt: createdAt,
+        crewId: crewId,
+        endDate: endDate,
+        id: id,
+        startDate: startDate,
+        type: type,
+        userId: userId);
   }
 }
 
@@ -73,12 +70,15 @@ class LeaveRequestsContainer with _$LeaveRequestsContainer {
   /// Creates a [LeaveRequestsContainer] from a JSON map.
   ///
   /// Utilizes the generated `_$LeaveRequestsContainerFromJson` function to parse the JSON map.
-  factory LeaveRequestsContainer.fromJson(Map<String, dynamic> json) => _$LeaveRequestsContainerFromJson(json);
+  factory LeaveRequestsContainer.fromJson(Map<String, dynamic> json) =>
+      _$LeaveRequestsContainerFromJson(json);
+}
 
-  /// Converts the [LeaveRequestsContainer] instance to a [LeaveRequestsContainerEntity].
-  ///
-  /// This method is used to convert the Freezed data model to a domain entity,
-  /// which represents the business logic of the application.
+/// Converts the [LeaveRequestsContainer] instance to a [LeaveRequestsContainerEntity].
+///
+/// This method is used to convert the Freezed data model to a domain entity,
+/// which represents the business logic of the application.
+extension LeaveRequestsContainerX on LeaveRequestsContainer {
   LeaveRequestsContainerEntity toEntity() {
     return LeaveRequestsContainerEntity(
       message: message,

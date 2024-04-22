@@ -1,4 +1,7 @@
 // Importing the data source and repository contracts for absence management.
+import 'package:communere/data/models/crew/crew_member_model.dart';
+import 'package:communere/data/models/leave_request/leave_request_model.dart';
+
 import '../../app/base/api_result.dart';
 // Importing domain entities for crew members and leave requests.
 import '../../app/network/exception_handler.dart';
