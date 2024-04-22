@@ -4,6 +4,7 @@ import 'package:communere/presentation/components/skeleton_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import '../../app/network/exception_handler.dart';
 import 'home_view_model.dart';
 
 class HomeView extends BaseView<HomeViewModel> {
@@ -28,12 +29,16 @@ class HomeView extends BaseView<HomeViewModel> {
   }
 
   @override
-  Widget error() {
-    return Center(
-      child: Lottie.asset('error'.animation,
-          width: 70, height: Get.height * 0.50, fit: BoxFit.fill),
+  Widget error(ExceptionHandler e) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Lottie.asset('error'.animation,fit: BoxFit.fill),
+        Text(ExceptionHandler.getErrorMessage(e))
+      ],
     );
   }
+
   @override
   Widget body(BuildContext context) {
     return ListView.separated(

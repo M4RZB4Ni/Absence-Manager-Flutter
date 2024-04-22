@@ -88,7 +88,7 @@ class HomeViewModel extends BaseController {
     // showLoading();
     try {
       await Future.wait([prepareMembers(), prepareAbsence()]);
-      _updateUIState();
+      // _updateUIState();
     } on ExceptionHandler catch (error) {
       updatePageState(ResultState.error(error: error));
     }

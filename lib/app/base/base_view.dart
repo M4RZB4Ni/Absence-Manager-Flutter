@@ -1,4 +1,5 @@
 import 'package:communere/app/base/base_controller.dart';
+import 'package:communere/app/network/exception_handler.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +30,7 @@ abstract class BaseView<Controller extends BaseController>
 
   Widget empty() => Container();
 
-  Widget error() => Container();
+  Widget error(ExceptionHandler e) => Center(child: Text(ExceptionHandler.getErrorMessage(e)),);
 
   Widget loading() => Container();
 
@@ -45,7 +46,7 @@ abstract class BaseView<Controller extends BaseController>
           loading: () => annotatedRegion(context,child: this.loading()),
           data: (final data) => annotatedRegion(context),
           // lostConnection: (widget) => noInternet(),
-          error: (error) => annotatedRegion(context,child: this.error()),
+          error: (error) => annotatedRegion(context,child: this.error(error)),
           empty: () => annotatedRegion(context,child: this.empty()),
         ),
       ),
