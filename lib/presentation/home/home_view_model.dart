@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../app/base/base_controller.dart';
@@ -58,16 +60,19 @@ class HomeViewModel extends BaseController {
     );
   }
 
-  Future<void> loadMoreAbsence()async
-  {
-    if(pageState==const ResultState.loading()) return;
+  Future<void> loadMoreAbsence() async {
+    if (pageState == const ResultState.loading()) return;
     showLoading();
     await prepareAbsence();
     final startIndex = (currentPage - 1) * pageSize;
-    final endIndex = startIndex + pageSize;
+    // Ensure we don't go out of bounds when slicing the list
+    final endIndex = min(startIndex + pageSize, absenceList.length);
     final newItems = absenceList.sublist(startIndex, endIndex);
-    absenceList.addAll(newItems);
-    currentPage++;
+    if (newItems.isNotEmpty) {
+      absenceList.addAll(newItems);
+      currentPage++;
+    }
+    hideLoading(); // Hide loading indicator after operation
   }
 
   void _updateUIState() {
@@ -83,7 +88,7 @@ class HomeViewModel extends BaseController {
     showLoading();
 
     try {
-      await Future.wait([prepareMembers(), loadMoreAbsence()]);
+      await Future.wait([prepareMembers(), prepareAbsence()]);
       _updateUIState();
     } on ExceptionHandler catch (error) {
       updatePageState(ResultState.error(error: error));
