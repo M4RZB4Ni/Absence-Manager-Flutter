@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 extension AppString on String {
   /// Converts a string to a Text Widget
@@ -26,7 +26,7 @@ extension AppString on String {
 
 extension JsonFileReaderExtension on String {
   Future<Map<String,dynamic>> readJsonFile() async {
-    String content = await File(this).readAsString();
+    String content = await DefaultAssetBundle.of(Get.context!).loadString(this);
     return jsonDecode(content);
   }
 }
