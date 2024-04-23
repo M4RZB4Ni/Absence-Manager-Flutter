@@ -1,6 +1,7 @@
 // Import necessary packages and files.
 import 'package:communere/app/di/main_binding.dart';
 import 'package:communere/app/resources/app_text.dart';
+import 'package:communere/app/resources/app_theme.dart';
 import 'package:communere/presentation/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         // Use GetMaterialApp for managing the application's state and routes.
         return GetMaterialApp(
+          theme: AppTheme.light(),
+          darkTheme: AppTheme.light(),
           debugShowCheckedModeBanner: false,
           locale: Get.locale, // Set the locale for localization.
           title: AppText.appName, // Set the application title.

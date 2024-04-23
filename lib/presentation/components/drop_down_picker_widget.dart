@@ -90,7 +90,7 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
               },
               hint: Text(AppText.selectOption,
                   style:
-                      TextStyle(fontSize: 12.sp, color: AppColors.primaryDark)),
+                      TextStyle(fontSize: 13.sp, color: AppColors.primaryDark)),
             ),
           ),
 

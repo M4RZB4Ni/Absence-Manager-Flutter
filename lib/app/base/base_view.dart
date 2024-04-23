@@ -7,6 +7,8 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+import '../resources/app_theme.dart';
+
 abstract class BaseView<Controller extends BaseController>
     extends GetView<Controller> {
   BaseView({super.key});
@@ -112,7 +114,9 @@ abstract class BaseView<Controller extends BaseController>
     );
   }
 
-  Color pageBackgroundColor() => AppColors.background;
+  Color pageBackgroundColor() => AppTheme.mode() == Brightness.light
+      ? AppTheme.light().scaffoldBackgroundColor // Color for light theme
+      : AppTheme.dark().scaffoldBackgroundColor;
 
   Color statusBarColor() => AppColors.transparent;
 

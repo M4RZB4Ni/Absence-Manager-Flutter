@@ -25,11 +25,11 @@ class HomeView extends BaseView<HomeViewModel> {
   /// Constructs a [HomeView] widget.
   HomeView({super.key});
 
-  /// Defines the background color of the page.
+/*  /// Defines the background color of the page.
   @override
   Color pageBackgroundColor() {
     return Colors.white;
-  }
+  }*/
 
   /// Returns the widget to display when the page is in a loading state.
   @override
@@ -61,22 +61,23 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
+
       title: Text(
         AppText.appName,
-        style: TextStyle(
-          fontSize: 13.sp,
-          color: AppColors.onPrimary,
-          fontFamily: "SharpGrotesk",
-          fontWeight: FontWeight.bold,
-        ),
+        // style: TextStyle(
+        //   fontSize: 13.sp,
+        //   color: AppColors.onPrimary,
+        //   fontFamily: "SharpGrotesk",
+        //   fontWeight: FontWeight.bold,
+        // ),
       ),
-      backgroundColor: AppColors.primary,
+      // backgroundColor: AppColors.primary,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 20),
           child: Text(
             "${AppText.total}: ${controller.allAbsences.length}",
-            style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary),
+            style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)
           ),
         ),
       ],

@@ -186,6 +186,7 @@ class HomeViewModel extends BaseController {
         return typeMatches && dateMatches;
       }).toList();
     }
+
   }
 
   /// Filters the list of absences by date.
