@@ -3,10 +3,10 @@ import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-typedef StringSelectionCallback = ValueChanged<String?>;
+import '../../app/extentions/typedefs.dart';
 
 class StringDropdownWidget extends StatefulWidget {
-  final StringSelectionCallback onStringSelected;
+  final SingleValueCallback onStringSelected;
   final List<String> options;
 
   const StringDropdownWidget({

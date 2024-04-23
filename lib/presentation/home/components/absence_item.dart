@@ -3,22 +3,25 @@ import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app/extentions/typedefs.dart';
 import '../../../domain/entities/leave/leave_request_entity.dart';
 
 class AbsenceItem extends StatelessWidget {
   const AbsenceItem(
       {super.key,
       required this.leaveRequestEntity,
-      required this.onExpansionChanged,
+      this.onExpansionChanged,
       required this.name});
   final LeaveRequestEntity leaveRequestEntity;
-  final ValueChanged<bool> onExpansionChanged;
+  final SingleValueCallback? onExpansionChanged;
   final String name;
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-        onExpansionChanged: (value) => onExpansionChanged(value),
+        leading: IconButton(
+            onPressed: () => {}, icon: const Icon(Icons.calendar_today)),
+        onExpansionChanged: onExpansionChanged,
         title: Text(name),
         subtitle: Text("${AppText.type}: ${leaveRequestEntity.type}"),
         trailing: _statusSituation(leaveRequestEntity),
@@ -42,7 +45,8 @@ class AbsenceItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${AppText.admitterNote}: ${leaveRequestEntity.admitterNote}"),
+                Text(
+                    "${AppText.admitterNote}: ${leaveRequestEntity.admitterNote}"),
                 Text("${AppText.memberNote}: ${leaveRequestEntity.memberNote}"),
               ],
             ),

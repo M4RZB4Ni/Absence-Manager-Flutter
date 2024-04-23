@@ -3,12 +3,11 @@ import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../app/extentions/typedefs.dart';
 import '../../app/resources/app_colors.dart';
 
-typedef DateChangeCallback = ValueChanged<DateTime?>;
-
 class DatePickerWidget extends StatefulWidget {
-  final DateChangeCallback onDateChanged;
+  final SingleValueCallback onDateChanged;
 
   const DatePickerWidget({super.key, required this.onDateChanged});
 

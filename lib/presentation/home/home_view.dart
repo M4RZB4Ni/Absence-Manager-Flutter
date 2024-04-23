@@ -74,8 +74,12 @@ class HomeView extends BaseView<HomeViewModel> {
                   onDateChanged: (value) => controller.filterByDate(value),
                 ),
                 StringDropdownWidget(
-                    onStringSelected: (value) => controller.filterByType(value),
-                    options: const ["Sickness", "Vacation",])
+                    onStringSelected: (value) =>
+                        controller.filterByType(value.toString()),
+                    options: const [
+                      "Sickness",
+                      "Vacation",
+                    ])
               ],
             ),
           )),
@@ -86,13 +90,10 @@ class HomeView extends BaseView<HomeViewModel> {
   Widget body(BuildContext context) {
     return Obx(() => ListView.separated(
         controller: controller.paginationScrollController,
-        itemBuilder: (ctx, idx) => AbsenceItem(
-              leaveRequestEntity: controller.absenceList[idx],
-              onExpansionChanged: (bool value) {
-                debugPrint("value--> $value");
-              },
+        itemBuilder: (ctx, i) => AbsenceItem(
+              leaveRequestEntity: controller.absenceList[i],
               name:
-                  controller.idToNameMap[controller.absenceList[idx].userId] ??
+                  controller.idToNameMap[controller.absenceList[i].userId] ??
                       AppText.unknown,
             ),
         itemCount: controller.absenceList.length,
