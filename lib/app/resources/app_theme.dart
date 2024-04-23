@@ -48,6 +48,7 @@ mixin AppTheme {
     );
     return ThemeData(
       brightness: Brightness.light,
+
       primaryColor: AppColors.primary,
       textTheme: lightTextTheme,
       iconButtonTheme: IconButtonThemeData(style: ButtonStyle(
@@ -155,9 +156,6 @@ mixin AppTheme {
       ).copyWith(
         secondary: AppColors.secondaryDark,
       ),
-   /*   dropdownMenuTheme: const DropdownMenuThemeData(
-        textStyle: TextStyle(color: AppColors.primary), // Text color for light theme
-      ),*/
       scaffoldBackgroundColor: AppColors.grey900,
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(

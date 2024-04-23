@@ -39,14 +39,15 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
       width: 160.spMin,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.onPrimary,
+        color:Theme.of(context).brightness == Brightness.light ?
+        ThemeData.light(useMaterial3: true).colorScheme.primary : ThemeData.dark(useMaterial3: true).colorScheme.secondary,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 6,
-            offset: const Offset(0, 3),
+            color: Theme.of(context).brightness == Brightness.light ? Colors.grey.withOpacity(0.2):Colors.white70.withOpacity(0.2) ,
+            spreadRadius: 0.5,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -63,7 +64,8 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
                 style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.primaryDark),
+                    color: Theme.of(context).brightness == Brightness.light ?
+                    ThemeData.light(useMaterial3: true).colorScheme.onPrimary : ThemeData.dark(useMaterial3: true).colorScheme.onSecondary),
               ),
             ),
           ),

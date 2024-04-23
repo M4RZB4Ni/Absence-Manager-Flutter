@@ -1,4 +1,3 @@
-import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,63 +50,46 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
   Widget build(BuildContext context) {
 
     // Builds the dropdown widget with styling and behavior.
-    return Container(
-      height: 35.spMin,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 6,
-            offset: const Offset(0, 3),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Dropdown button to display the options.
+        DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            value: _selectedOption,
+            icon: const Icon(Icons.arrow_drop_down),
+            items:
+                widget.options.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value,/*style: TextStyle(color: AppTheme.mode() == Brightness.light
+                        ? AppTheme.light().cardColor // Color for light theme
+                        : AppTheme.dark().primaryColor)*/)
+                  );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                _selectedOption = newValue;
+              });
+              widget.onStringSelected(newValue);
+            },
+            hint: const Text(AppText.selectOption),
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Dropdown button to display the options.
-          DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: _selectedOption,
-              icon: const Icon(Icons.arrow_drop_down),
-              items:
-                  widget.options.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value,
-                      style:Theme.of(context).textTheme.titleMedium),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedOption = newValue;
-                });
-                widget.onStringSelected(newValue);
-              },
-              hint: Text(AppText.selectOption,
-                  style:
-                      TextStyle(fontSize: 13.sp, color: AppColors.primaryDark)),
-            ),
-          ),
+        ),
 
-          // Clear button to reset the selection.
-          if (_selectedOption != null)
-            SizedBox(
-              width: 18.w,
-              height: 18.h,
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                iconSize: 18.w,
-                icon: const Icon(Icons.clear),
-                onPressed: _resetSelection,
-              ),
+        // Clear button to reset the selection.
+        if (_selectedOption != null)
+          SizedBox(
+            width: 18.w,
+            height: 18.h,
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              iconSize: 18.w,
+              icon: const Icon(Icons.clear),
+              onPressed: _resetSelection,
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }

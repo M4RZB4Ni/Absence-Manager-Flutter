@@ -3,7 +3,7 @@ mixin AppText {
   static const search = "Search...";
 
   // Static constant for the Application's Name.
-  static const appName = "Crewmeister coding challenge";
+  static const appName = "Crewmeister challenge";
   static const total = "All Absences";
   static const requested = "REQUESTED";
   static const confirmed = "CONFIRMED";

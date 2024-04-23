@@ -1,6 +1,5 @@
 import 'package:communere/app/base/base_view.dart';
 import 'package:communere/app/extentions/extensions.dart';
-import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/presentation/components/date_picker_widget.dart';
 import 'package:communere/presentation/components/drop_down_picker_widget.dart';
 import 'package:communere/presentation/components/skeleton_list.dart';
@@ -77,7 +76,7 @@ class HomeView extends BaseView<HomeViewModel> {
           padding: const EdgeInsets.only(right: 20),
           child: Text(
             "${AppText.total}: ${controller.allAbsences.length}",
-            style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)
+          /*  style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)*/
           ),
         ),
       ],
