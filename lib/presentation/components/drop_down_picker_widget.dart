@@ -62,9 +62,7 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
                 widget.options.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value,/*style: TextStyle(color: AppTheme.mode() == Brightness.light
-                        ? AppTheme.light().cardColor // Color for light theme
-                        : AppTheme.dark().primaryColor)*/)
+                    child: Text(value)
                   );
             }).toList(),
             onChanged: (String? newValue) {

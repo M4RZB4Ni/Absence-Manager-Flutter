@@ -171,42 +171,48 @@ class HomeViewModel extends BaseController {
   /// Filters the list of absences by type.
   void filterByType(String? type) {
     _currentTypeFilter = type; // Store the current type filter
-
-    if (type == null && _currentDateFilter == null) {
-      // If both filters are inactive, reset to the full list
-      absenceList.value = List.from(allAbsences);
-    } else {
-      // Apply both filters to the full list
-      absenceList.value = allAbsences.where((entity) {
-        final typeMatches =
-            type == null || entity.type.toLowerCase() == type.toLowerCase();
-        // Check if _currentDateFilter is not null before calling isAtSameMomentAs
-        final dateMatches = _currentDateFilter == null ||
-            (entity.startDate.isAtSameMomentAs(_currentDateFilter!));
-        return typeMatches && dateMatches;
-      }).toList();
-    }
-
+    _filterAbsenceList();
   }
 
   /// Filters the list of absences by date.
   void filterByDate(DateTime? dateTime) {
     _currentDateFilter = dateTime; // Store the current date filter
+    _filterAbsenceList();
+  }
 
-    if (dateTime == null && _currentTypeFilter == null) {
-      // If both filters are inactive, reset to the full list
+  /// Filters the list of absences based on type and date.
+  ///
+  /// This function applies the current type and date filters to the full list of absences.
+  /// If no filters are set, it resets to the full list of absences. If filters are active,
+  /// it applies them and updates the list accordingly. Additionally, it updates the page state
+  /// based on whether the filtered list is empty or not.
+  void _filterAbsenceList() {
+    if (_currentTypeFilter == null && _currentDateFilter == null) {
+      // No filters are set, so reset to the full list of absences.
       absenceList.value = List.from(allAbsences);
     } else {
-      // Apply both filters to the full list
+      // At least one filter is active, so apply it to the full list.
       absenceList.value = allAbsences.where((entity) {
+        // Check if the absence type matches the type filter (if set).
         final typeMatches = _currentTypeFilter == null ||
             entity.type.toLowerCase() == _currentTypeFilter!.toLowerCase();
-        final dateMatches =
-            dateTime == null || entity.startDate.isAtSameMomentAs(dateTime);
+        // Check if the absence start date matches the date filter (if set).
+        final dateMatches = _currentDateFilter == null ||
+            entity.startDate.isAtSameMomentAs(_currentDateFilter!);
+        // Include the absence in the list if it matches both filters.
         return typeMatches && dateMatches;
       }).toList();
     }
+    // Update the page state based on the filtered list's content.
+    if (absenceList.isEmpty) {
+      // If the filtered list is empty, set the page state to empty.
+      updatePageState(const ResultState.empty());
+    } else {
+      // If the filtered list is not empty, reset the page state to its default.
+      resetPageState();
+    }
   }
+
 
   /// Fetches the name of a crew member based on the index and whether they are an admitter.
   String fetchNameOfMember({required int index, bool isAdmitter = false}) {
