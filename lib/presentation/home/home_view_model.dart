@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ical/serializer.dart';
 import '../../app/base/base_controller.dart';
 import '../../app/base/result_state.dart';
 import '../../app/network/exception_handler.dart';
@@ -89,7 +90,6 @@ class HomeViewModel extends BaseController {
     hideLoading(); // Hide loading indicator after operation
   }
 
-
   void _updateUIState() {
     //if below statement be true means application still loading and no error has been thrown
     if (pageState != const ResultState.loading()) return;
@@ -140,14 +140,15 @@ class HomeViewModel extends BaseController {
     } else {
       // Apply both filters to the full list
       absenceList.value = allAbsences.where((entity) {
-        final typeMatches = type == null || entity.type.toLowerCase() == type.toLowerCase();
+        final typeMatches =
+            type == null || entity.type.toLowerCase() == type.toLowerCase();
         // Check if _currentDateFilter is not null before calling isAtSameMomentAs
-        final dateMatches = _currentDateFilter == null || (entity.startDate.isAtSameMomentAs(_currentDateFilter!));
+        final dateMatches = _currentDateFilter == null ||
+            (entity.startDate.isAtSameMomentAs(_currentDateFilter!));
         return typeMatches && dateMatches;
       }).toList();
     }
   }
-
 
   void filterByDate(DateTime? dateTime) {
     _currentDateFilter = dateTime; // Store the current date filter
@@ -158,16 +159,35 @@ class HomeViewModel extends BaseController {
     } else {
       // Apply both filters to the full list
       absenceList.value = allAbsences.where((entity) {
-        final typeMatches = _currentTypeFilter == null || entity.type.toLowerCase() == _currentTypeFilter!.toLowerCase();
-        final dateMatches = dateTime == null || entity.startDate.isAtSameMomentAs(dateTime);
+        final typeMatches = _currentTypeFilter == null ||
+            entity.type.toLowerCase() == _currentTypeFilter!.toLowerCase();
+        final dateMatches =
+            dateTime == null || entity.startDate.isAtSameMomentAs(dateTime);
         return typeMatches && dateMatches;
       }).toList();
     }
   }
 
-  String fetchNameOfAbsence({required int index})
-  {
-    return idToNameMap[absenceList[index].userId] ?? AppText.unknown;
+  String fetchNameOfMember({required int index, bool isAdmitter = false}) {
+    return idToNameMap[isAdmitter
+            ? absenceList[index].admitterId
+            : absenceList[index].userId] ??
+        AppText.unknown;
   }
 
+  void serializeCalendarFile({required int index}) {
+    var absenceItem = absenceList[index];
+    IEvent(
+      start: absenceItem.startDate,
+      end: absenceItem.endDate,
+      duration: absenceItem.endDate.difference(absenceItem.startDate),
+      organizer: IOrganizer(name: fetchNameOfMember(index: index,isAdmitter: true)),
+      location: AppText.outOffice,
+      description:
+          "${AppText.admitterNote}: ${absenceItem.admitterNote} \n ${AppText.memberNote}: ${absenceItem.memberNote}",
+      summary:
+          '${fetchNameOfMember(index: index)} - ${absenceItem.type.toUpperCase()}',
+      rrule: IRecurrenceRule(frequency: IRecurrenceFrequency.DAILY),
+    ).serialize();
+  }
 }

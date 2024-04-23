@@ -11,16 +11,17 @@ class AbsenceItem extends StatelessWidget {
       {super.key,
       required this.leaveRequestEntity,
       this.onExpansionChanged,
-      required this.name});
+      required this.name, required this.iCalFunction});
   final LeaveRequestEntity leaveRequestEntity;
   final SingleBoolValueCallback? onExpansionChanged;
   final String name;
+  final VoidCallback iCalFunction;
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
         leading: IconButton(
-            onPressed: () => {}, icon: const Icon(Icons.calendar_today)),
+            onPressed: iCalFunction, icon: const Icon(Icons.calendar_today)),
         onExpansionChanged: onExpansionChanged,
         title: Text(name),
         subtitle: Text("${AppText.type}: ${leaveRequestEntity.type}"),
