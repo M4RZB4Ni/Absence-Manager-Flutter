@@ -14,28 +14,52 @@ import '../../domain/usecase/get_absences_usecase.dart';
 import '../../domain/usecase/get_crew_members_usecase.dart';
 
 /// A view model for the home page that extends the [BaseController].
+///
+/// It manages the state and business logic of the home page, handling
+/// the retrieval and pagination of crew members and leave requests.
+/// This class also provides filtering capabilities and generates iCal files.
 class HomeViewModel extends BaseController {
+
+  /// Use case for retrieving absences.
   final GetAbsencesUseCase _absencesUseCase;
+
+  /// Use case for retrieving crew members.
   final GetCrewMembersUseCase _crewMembersUseCase;
 
+  /// Reactive list of crew members.
   RxList<CrewMemberEntity> crewList = RxList.empty();
+
+  /// Reactive list of leave requests.
   RxList<LeaveRequestEntity> absenceList = RxList.empty(growable: true);
+
+  /// Full list of leave requests.
   List<LeaveRequestEntity> allAbsences = [];
 
+  /// Filter for the type of leave.
   String? _currentTypeFilter;
+
+  /// Filter for the date of leave.
   DateTime? _currentDateFilter;
+
+  /// Mapping of crew member IDs to their names.
   Map<int, String> idToNameMap = {};
 
   /// Constructs a [HomeViewModel] with the necessary use cases.
   HomeViewModel(this._absencesUseCase, this._crewMembersUseCase);
 
+  /// Controller for managing scroll events in the UI.
   final ScrollController paginationScrollController = ScrollController();
 
+  /// Current page index for pagination.
   int currentPage = 1;
+
+  /// Number of items per page.
   final int pageSize = 10;
 
+  /// Calendar object for generating iCal files.
   ICalendar cal = ICalendar();
 
+  /// Callback for handling scroll events to load more absences.
   void _onScroll() {
     if (paginationScrollController.position.pixels ==
         paginationScrollController.position.maxScrollExtent) {
@@ -43,6 +67,7 @@ class HomeViewModel extends BaseController {
     }
   }
 
+  /// Prepares the list of crew members by fetching them from the use case.
   Future<void> prepareMembers() async {
     var membersResult = await _crewMembersUseCase.call();
     membersResult.when(
@@ -57,6 +82,7 @@ class HomeViewModel extends BaseController {
     );
   }
 
+  /// Prepares the list of absences by fetching them from the use case.
   Future<void> prepareAbsence() async {
     var absenceResult = await _absencesUseCase.call();
     absenceResult.when(
@@ -75,6 +101,7 @@ class HomeViewModel extends BaseController {
     );
   }
 
+  /// Loads more absences when the end of the scroll is reached.
   Future<void> loadMoreAbsence() async {
     if (pageState == const ResultState.loading()) return;
     showLoading();
@@ -94,6 +121,7 @@ class HomeViewModel extends BaseController {
     hideLoading(); // Hide loading indicator after operation
   }
 
+  /// Updates the UI state based on the current data.
   void _updateUIState() {
     //if below statement be true means application still loading and no error has been thrown
     if (pageState != const ResultState.loading()) return;
@@ -106,6 +134,7 @@ class HomeViewModel extends BaseController {
     }
   }
 
+  /// Prepares all necessary data for the home page.
   Future prepareAll() async {
     showLoading();
     try {
@@ -131,10 +160,12 @@ class HomeViewModel extends BaseController {
     super.dispose();
   }
 
+  /// Maps crew member IDs to their names.
   void _crewMemberService(List<CrewMemberEntity> crewList) {
     idToNameMap = {for (var member in crewList) member.userId: member.name};
   }
 
+  /// Filters the list of absences by type.
   void filterByType(String? type) {
     _currentTypeFilter = type; // Store the current type filter
 
@@ -154,6 +185,7 @@ class HomeViewModel extends BaseController {
     }
   }
 
+  /// Filters the list of absences by date.
   void filterByDate(DateTime? dateTime) {
     _currentDateFilter = dateTime; // Store the current date filter
 
@@ -172,6 +204,7 @@ class HomeViewModel extends BaseController {
     }
   }
 
+  /// Fetches the name of a crew member based on the index and whether they are an admitter.
   String fetchNameOfMember({required int index, bool isAdmitter = false}) {
     return idToNameMap[isAdmitter
             ? absenceList[index].admitterId
@@ -179,6 +212,7 @@ class HomeViewModel extends BaseController {
         AppText.unknown;
   }
 
+  /// Generates an iCal file for a specific absence.
   void generateCalendarFile({required int index}) async {
     var absenceItem = absenceList[index];
     cal.addElement(
