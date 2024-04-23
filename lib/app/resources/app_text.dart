@@ -16,4 +16,5 @@ mixin AppText {
   static const duration = "Duration";
   static const admitterNote = "Admitter's Note";
   static const memberNote = "Member's Note";
+  static const tapSelectDate = "Tap to select a date";
 }

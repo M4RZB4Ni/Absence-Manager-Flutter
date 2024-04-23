@@ -1,6 +1,7 @@
 import 'package:communere/app/base/base_view.dart';
 import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
+import 'package:communere/presentation/components/date_picker_widget.dart';
 import 'package:communere/presentation/components/skeleton_list.dart';
 import 'package:communere/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
@@ -60,20 +61,40 @@ class HomeView extends BaseView<HomeViewModel> {
           width: 20,
         )
       ],
+      bottom: PreferredSize(
+          preferredSize: Size.fromHeight(40.0.h),
+          child: SizedBox(
+            height: 40.0.h,
+            width: Get.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                DatePickerWidget(
+                    onDateChanged: (value) {
+                      controller.filterByDate(value);
+                    },
+                ),
+
+              ],
+            ),
+          )),
     );
   }
 
   @override
   Widget body(BuildContext context) {
-    return ListView.separated(
+    return Obx(() => ListView.separated(
         itemBuilder: (ctx, idx) => AbsenceItem(
               leaveRequestEntity: controller.absenceList[idx],
               onExpansionChanged: (bool value) {
                 debugPrint("value--> $value");
               },
-              name: controller.idToNameMap[controller.absenceList[idx].userId] ?? AppText.unknown,
+              name:
+                  controller.idToNameMap[controller.absenceList[idx].userId] ??
+                      AppText.unknown,
             ),
         itemCount: controller.absenceList.length,
-        separatorBuilder: (BuildContext context, int index) => const Divider());
+        separatorBuilder: (BuildContext context, int index) =>
+            const Divider()));
   }
 }

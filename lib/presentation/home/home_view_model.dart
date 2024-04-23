@@ -15,7 +15,7 @@ class HomeViewModel extends BaseController {
   final GetCrewMembersUseCase _crewMembersUseCase;
 
   RxList<CrewMemberEntity> crewList = RxList.empty();
-  RxList<LeaveRequestEntity> absenceList = RxList.empty();
+  RxList<LeaveRequestEntity> absenceList = RxList.empty(growable: true);
   Map<int, String> idToNameMap = {};
 
   /// Constructs a [HomeViewModel] with the necessary use cases.
@@ -115,5 +115,20 @@ class HomeViewModel extends BaseController {
 
   void _crewMemberService(List<CrewMemberEntity> crewList) {
     idToNameMap = {for (var member in crewList) member.userId: member.name};
+  }
+
+  void filterByType(String type)
+  {
+    absenceList.value=absenceList.where((entity) => entity.type==type).toList();
+  }
+
+  void filterByDate(DateTime? dateTime)
+  {
+    if(dateTime==null)
+      {
+        prepareAll();
+        return;
+      }
+    absenceList.value=absenceList.where((entity) => entity.startDate.isAtSameMomentAs(dateTime)).toList();
   }
 }
