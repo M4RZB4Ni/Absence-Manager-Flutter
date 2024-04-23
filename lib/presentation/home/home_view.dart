@@ -12,6 +12,7 @@ import '../../app/network/exception_handler.dart';
 import '../../app/resources/app_text.dart';
 import '../../domain/entities/leave/absence_type.dart';
 import '../home/home_view_model.dart';
+
 /// A view representing the home screen of the application.
 ///
 /// This class extends [BaseView] and is responsible for rendering the UI elements
@@ -24,11 +25,6 @@ class HomeView extends BaseView<HomeViewModel> {
   /// Constructs a [HomeView] widget.
   HomeView({super.key});
 
-/*  /// Defines the background color of the page.
-  @override
-  Color pageBackgroundColor() {
-    return Colors.white;
-  }*/
 
   /// Returns the widget to display when the page is in a loading state.
   @override
@@ -60,15 +56,8 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
-
-      title: Text(
+      title: const Text(
         AppText.appName,
-        // style: TextStyle(
-        //   fontSize: 13.sp,
-        //   color: AppColors.onPrimary,
-        //   fontFamily: "SharpGrotesk",
-        //   fontWeight: FontWeight.bold,
-        // ),
       ),
       // backgroundColor: AppColors.primary,
       actions: [
@@ -76,7 +65,7 @@ class HomeView extends BaseView<HomeViewModel> {
           padding: const EdgeInsets.only(right: 20),
           child: Text(
             "${AppText.total}: ${controller.allAbsences.length}",
-          /*  style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)*/
+            /*  style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)*/
           ),
         ),
       ],
@@ -106,6 +95,8 @@ class HomeView extends BaseView<HomeViewModel> {
   /// Builds the body of the home screen.
   @override
   Widget body(BuildContext context) {
+
+
     return Obx(() => ListView.separated(
         controller: controller.paginationScrollController,
         itemBuilder: (ctx, i) => AbsenceItem(
@@ -117,4 +108,6 @@ class HomeView extends BaseView<HomeViewModel> {
         separatorBuilder: (BuildContext context, int index) =>
             const Divider()));
   }
+
+
 }

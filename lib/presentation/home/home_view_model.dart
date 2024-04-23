@@ -81,6 +81,8 @@ class HomeViewModel extends BaseController {
       },
       failure: (ExceptionHandler error) {
         updatePageState(ResultState.error(error: error));
+        debugPrint(ExceptionHandler.getErrorMessage(error));
+
       },
     );
   }
@@ -100,6 +102,7 @@ class HomeViewModel extends BaseController {
       },
       failure: (ExceptionHandler error) {
         updatePageState(ResultState.error(error: error));
+        debugPrint(ExceptionHandler.getErrorMessage(error));
       },
     );
   }
