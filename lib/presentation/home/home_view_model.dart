@@ -16,7 +16,7 @@ class HomeViewModel extends BaseController {
 
   RxList<CrewMemberEntity> crewList = RxList.empty();
   RxList<LeaveRequestEntity> absenceList = RxList.empty(growable: true);
-  List<LeaveRequestEntity> _allAbsences = [];
+  List<LeaveRequestEntity> allAbsences = [];
 
   String? _currentTypeFilter;
   DateTime? _currentDateFilter;
@@ -25,14 +25,14 @@ class HomeViewModel extends BaseController {
   /// Constructs a [HomeViewModel] with the necessary use cases.
   HomeViewModel(this._absencesUseCase, this._crewMembersUseCase);
 
-  final ScrollController _scrollController = ScrollController();
+  final ScrollController paginationScrollController = ScrollController();
 
   int currentPage = 1;
   final int pageSize = 10;
 
   void _onScroll() {
-    if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent) {
+    if (paginationScrollController.position.pixels ==
+        paginationScrollController.position.maxScrollExtent) {
       loadMoreAbsence();
     }
   }
@@ -57,10 +57,10 @@ class HomeViewModel extends BaseController {
       success: (data) {
         if (data.message == "Success" && data.payload.isNotEmpty) {
           // Store the full list of absences
-          _allAbsences = data.payload;
+          allAbsences = data.payload;
           // Initially display the first page of absences
-          final endIndex = min(pageSize, _allAbsences.length);
-          absenceList.addAll(_allAbsences.sublist(0, endIndex));
+          final endIndex = min(pageSize, allAbsences.length);
+          absenceList.addAll(allAbsences.sublist(0, endIndex));
         }
       },
       failure: (ExceptionHandler error) {
@@ -72,17 +72,22 @@ class HomeViewModel extends BaseController {
   Future<void> loadMoreAbsence() async {
     if (pageState == const ResultState.loading()) return;
     showLoading();
-    await prepareAbsence();
-    final startIndex = (currentPage - 1) * pageSize;
-    // Ensure we don't go out of bounds when slicing the list
-    final endIndex = min(startIndex + pageSize, absenceList.length);
-    final newItems = absenceList.sublist(startIndex, endIndex);
-    if (newItems.isNotEmpty) {
-      absenceList.addAll(newItems);
-      currentPage++;
+
+    final startIndex = currentPage * pageSize;
+
+    if (startIndex < allAbsences.length) {
+      final endIndex = min(startIndex + pageSize, allAbsences.length);
+
+      final newItems = allAbsences.sublist(startIndex, endIndex);
+      if (newItems.isNotEmpty) {
+        absenceList.addAll(newItems);
+        currentPage++;
+      }
     }
+
     hideLoading(); // Hide loading indicator after operation
   }
+
 
   void _updateUIState() {
     //if below statement be true means application still loading and no error has been thrown
@@ -111,13 +116,13 @@ class HomeViewModel extends BaseController {
   @override
   void onInit() async {
     prepareAll();
-    _scrollController.addListener(_onScroll);
+    paginationScrollController.addListener(_onScroll);
     super.onInit();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    paginationScrollController.dispose();
     super.dispose();
   }
 
@@ -130,10 +135,10 @@ class HomeViewModel extends BaseController {
 
     if (type == null && _currentDateFilter == null) {
       // If both filters are inactive, reset to the full list
-      absenceList.value = List.from(_allAbsences);
+      absenceList.value = List.from(allAbsences);
     } else {
       // Apply both filters to the full list
-      absenceList.value = _allAbsences.where((entity) {
+      absenceList.value = allAbsences.where((entity) {
         final typeMatches = type == null || entity.type.toLowerCase() == type.toLowerCase();
         // Check if _currentDateFilter is not null before calling isAtSameMomentAs
         final dateMatches = _currentDateFilter == null || (entity.startDate.isAtSameMomentAs(_currentDateFilter!));
@@ -148,10 +153,10 @@ class HomeViewModel extends BaseController {
 
     if (dateTime == null && _currentTypeFilter == null) {
       // If both filters are inactive, reset to the full list
-      absenceList.value = List.from(_allAbsences);
+      absenceList.value = List.from(allAbsences);
     } else {
       // Apply both filters to the full list
-      absenceList.value = _allAbsences.where((entity) {
+      absenceList.value = allAbsences.where((entity) {
         final typeMatches = _currentTypeFilter == null || entity.type.toLowerCase() == _currentTypeFilter!.toLowerCase();
         final dateMatches = dateTime == null || entity.startDate.isAtSameMomentAs(dateTime);
         return typeMatches && dateMatches;

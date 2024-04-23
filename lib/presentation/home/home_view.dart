@@ -56,7 +56,7 @@ class HomeView extends BaseView<HomeViewModel> {
               fontWeight: FontWeight.bold)),
       backgroundColor: AppColors.primary,
       actions: [
-        Text("${AppText.total}: ${controller.absenceList.length}",
+        Text("${AppText.total}: ${controller.allAbsences.length}",
             style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)),
         const SizedBox(
           width: 20,
@@ -85,6 +85,7 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   Widget body(BuildContext context) {
     return Obx(() => ListView.separated(
+        controller: controller.paginationScrollController,
         itemBuilder: (ctx, idx) => AbsenceItem(
               leaveRequestEntity: controller.absenceList[idx],
               onExpansionChanged: (bool value) {
