@@ -17,4 +17,5 @@ mixin AppText {
   static const admitterNote = "Admitter's Note";
   static const memberNote = "Member's Note";
   static const tapSelectDate = "Tap to select a date";
+  static const selectOption = "Select an option";
 }

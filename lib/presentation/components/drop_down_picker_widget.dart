@@ -1,4 +1,7 @@
+import 'package:communere/app/resources/app_colors.dart';
+import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 typedef StringSelectionCallback = ValueChanged<String?>;
 
@@ -29,6 +32,7 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 35.spMin,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -43,15 +47,19 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: _selectedOption,
               icon: const Icon(Icons.arrow_drop_down),
-              items: widget.options.map<DropdownMenuItem<String>>((String value) {
+              items:
+                  widget.options.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(value,
+                      style: TextStyle(
+                          fontSize: 12.sp, color: AppColors.infoDark)),
                 );
               }).toList(),
               onChanged: (String? newValue) {
@@ -60,17 +68,24 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
                 });
                 widget.onStringSelected(newValue);
               },
-              hint: const Text('Select an option'),
+              hint: Text(AppText.selectOption,
+                  style:
+                      TextStyle(fontSize: 12.sp, color: AppColors.primaryDark)),
             ),
           ),
           if (_selectedOption != null)
-            IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: _resetSelection,
+            SizedBox(
+              width: 18.w,
+              height: 18.h,
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                iconSize: 18.w,
+                icon: const Icon(Icons.clear),
+                onPressed: _resetSelection,
+              ),
             ),
         ],
       ),
     );
   }
 }
-
