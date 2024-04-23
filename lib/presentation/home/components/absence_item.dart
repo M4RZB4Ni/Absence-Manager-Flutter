@@ -2,7 +2,6 @@ import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../domain/entities/leave/leave_request_entity.dart';
 
@@ -18,39 +17,37 @@ class AbsenceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-        key: key,
-        child: ExpansionTile(
-            onExpansionChanged: (value) => onExpansionChanged(value),
-            title: Text(name),
-            subtitle: Text("${AppText.type}: ${leaveRequestEntity.type}"),
-            trailing: _statusSituation(leaveRequestEntity),
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            childrenPadding: const EdgeInsets.symmetric(horizontal: 8),
+    return ExpansionTile(
+        onExpansionChanged: (value) => onExpansionChanged(value),
+        title: Text(name),
+        subtitle: Text("${AppText.type}: ${leaveRequestEntity.type}"),
+        trailing: _statusSituation(leaveRequestEntity),
+        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+        childrenPadding: const EdgeInsets.symmetric(horizontal: 8),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                      "${AppText.startDate}: ${leaveRequestEntity.startDate.toString().toNormalDate}"),
-                  Text(
-                      "${AppText.endDate}: ${leaveRequestEntity.endDate.toString().toNormalDate}"),
-                  Text(
-                      "${AppText.duration}: ${leaveRequestEntity.endDate.difference(leaveRequestEntity.startDate).inDays}"),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("${AppText.admitterNote}: ${leaveRequestEntity.admitterNote}"),
-                    Text("${AppText.memberNote}: ${leaveRequestEntity.memberNote}"),
-                  ],
-                ),
-              ),
-            ]));
+              Text(
+                  "${AppText.startDate}: ${leaveRequestEntity.startDate.toString().toNormalDate}"),
+              Text(
+                  "${AppText.endDate}: ${leaveRequestEntity.endDate.toString().toNormalDate}"),
+              Text(
+                  "${AppText.duration}: ${leaveRequestEntity.endDate.difference(leaveRequestEntity.startDate).inDays}"),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("${AppText.admitterNote}: ${leaveRequestEntity.admitterNote}"),
+                Text("${AppText.memberNote}: ${leaveRequestEntity.memberNote}"),
+              ],
+            ),
+          ),
+        ]);
   }
 
   Widget _statusSituation(LeaveRequestEntity entity) {
