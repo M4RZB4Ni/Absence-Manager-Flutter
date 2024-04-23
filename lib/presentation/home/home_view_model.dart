@@ -59,6 +59,9 @@ class HomeViewModel extends BaseController {
   /// Calendar object for generating iCal files.
   ICalendar cal = ICalendar();
 
+  /// boolean variable to avoid the calling rapidly file generation
+  bool _fileProcessStart=false;
+
   /// Callback for handling scroll events to load more absences.
   void _onScroll() {
     if (paginationScrollController.position.pixels ==
@@ -214,6 +217,8 @@ class HomeViewModel extends BaseController {
 
   /// Generates an iCal file for a specific absence.
   void generateCalendarFile({required int index}) async {
+    if(_fileProcessStart) return;
+      _fileProcessStart=true;
     var absenceItem = absenceList[index];
     cal.addElement(
       IEvent(
@@ -232,5 +237,6 @@ class HomeViewModel extends BaseController {
     );
     var file = await cal.serialize().createCalendarFile("icalFile");
     await OpenFile.open(file.path);
+    _fileProcessStart=false;
   }
 }
