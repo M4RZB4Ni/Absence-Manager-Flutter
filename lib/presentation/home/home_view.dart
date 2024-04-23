@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../app/network/exception_handler.dart';
 import '../../app/resources/app_text.dart';
+import '../../domain/entities/leave/absence_type.dart';
 import 'home_view_model.dart';
 
 class HomeView extends BaseView<HomeViewModel> {
@@ -76,10 +77,7 @@ class HomeView extends BaseView<HomeViewModel> {
                 StringDropdownWidget(
                     onStringSelected: (value) =>
                         controller.filterByType(value.toString()),
-                    options: const [
-                      "Sickness",
-                      "Vacation",
-                    ])
+                    options: AbsenceTypeHelper.getStrings())
               ],
             ),
           )),
