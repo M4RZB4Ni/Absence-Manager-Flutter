@@ -6,19 +6,41 @@ import 'package:flutter/material.dart';
 import '../../../app/extentions/typedefs.dart';
 import '../../../domain/entities/leave/leave_request_entity.dart';
 
+
+/// A widget that displays a single absence item in an expandable format.
+///
+/// This widget shows the details of a leave request entity and allows users
+/// to expand the tile to view more information. It also provides an iCal
+/// function to add the event to a calendar.
 class AbsenceItem extends StatelessWidget {
+
+  /// Creates an [AbsenceItem] widget.
+  ///
+  /// Requires [leaveRequestEntity] to display its details, [name] to show
+  /// the name associated with the absence, and [iCalFunction] to handle
+  /// calendar integration. Optionally, [onExpansionChanged] can be used to
+  /// handle the expansion state change.
   const AbsenceItem(
       {super.key,
       required this.leaveRequestEntity,
       this.onExpansionChanged,
       required this.name, required this.iCalFunction});
+
+  /// The leave request entity containing the absence details.
   final LeaveRequestEntity leaveRequestEntity;
+
+  /// Callback for when the expansion state changes.
   final SingleBoolValueCallback? onExpansionChanged;
+
+  /// The name associated with the absence.
   final String name;
+
+  /// Function to execute when the calendar icon is tapped.
   final VoidCallback iCalFunction;
 
   @override
   Widget build(BuildContext context) {
+    // Builds the expansion tile with absence details.
     return ExpansionTile(
         leading: IconButton(
             onPressed: iCalFunction, icon: const Icon(Icons.calendar_today)),
@@ -55,6 +77,11 @@ class AbsenceItem extends StatelessWidget {
         ]);
   }
 
+
+  /// Builds the widget that indicates the status of the leave request.
+  ///
+  /// It will display different colors and texts depending on whether the
+  /// leave request is confirmed, rejected, or still pending
   Widget _statusSituation(LeaveRequestEntity entity) {
     String statusText;
     Color backgroundColor;
