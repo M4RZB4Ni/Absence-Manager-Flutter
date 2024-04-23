@@ -90,7 +90,7 @@ class HomeView extends BaseView<HomeViewModel> {
         itemBuilder: (ctx, i) => AbsenceItem(
               leaveRequestEntity: controller.absenceList[i],
               name: controller.fetchNameOfMember(index: i),
-              iCalFunction: () => controller.serializeCalendarFile(index: i),
+              iCalFunction: () => controller.generateCalendarFile(index: i),
             ),
         itemCount: controller.absenceList.length,
         separatorBuilder: (BuildContext context, int index) =>

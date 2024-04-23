@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:communere/app/extentions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ical/serializer.dart';
+import 'package:open_file/open_file.dart';
 import '../../app/base/base_controller.dart';
 import '../../app/base/result_state.dart';
 import '../../app/network/exception_handler.dart';
@@ -31,6 +33,8 @@ class HomeViewModel extends BaseController {
 
   int currentPage = 1;
   final int pageSize = 10;
+
+  ICalendar cal = ICalendar();
 
   void _onScroll() {
     if (paginationScrollController.position.pixels ==
@@ -175,20 +179,24 @@ class HomeViewModel extends BaseController {
         AppText.unknown;
   }
 
-  void serializeCalendarFile({required int index}) {
+  void generateCalendarFile({required int index}) async {
     var absenceItem = absenceList[index];
-    IEvent(
-      start: absenceItem.startDate,
-      end: absenceItem.endDate,
-      duration: absenceItem.endDate.difference(absenceItem.startDate),
-      organizer:
-          IOrganizer(name: fetchNameOfMember(index: index, isAdmitter: true)),
-      location: AppText.outOffice,
-      description:
-          "${AppText.admitterNote}: ${absenceItem.admitterNote} \n ${AppText.memberNote}: ${absenceItem.memberNote}",
-      summary:
-          '${fetchNameOfMember(index: index)} - ${absenceItem.type.toUpperCase()}',
-      rrule: IRecurrenceRule(frequency: IRecurrenceFrequency.DAILY),
-    ).serialize();
+    cal.addElement(
+      IEvent(
+        start: absenceItem.startDate,
+        end: absenceItem.endDate,
+        duration: absenceItem.endDate.difference(absenceItem.startDate),
+        organizer:
+            IOrganizer(name: fetchNameOfMember(index: index, isAdmitter: true)),
+        location: AppText.outOffice,
+        description:
+            "${AppText.admitterNote}: ${absenceItem.admitterNote} \n ${AppText.memberNote}: ${absenceItem.memberNote}",
+        summary:
+            '${fetchNameOfMember(index: index)} - ${absenceItem.type.toUpperCase()}',
+        rrule: IRecurrenceRule(frequency: IRecurrenceFrequency.DAILY),
+      ),
+    );
+    var file = await cal.serialize().createCalendarFile("icalFile");
+    await OpenFile.open(file.path);
   }
 }

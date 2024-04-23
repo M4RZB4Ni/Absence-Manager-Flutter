@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 extension AppString on String {
   /// Converts a string to a Text Widget
@@ -25,6 +27,15 @@ extension AppString on String {
   /// Get the real image address from the string name of an asset
   String get animation => 'assets/animations/$this.json';
 
+}
+
+extension WriteIcalendarFile on String
+{
+  Future<File> createCalendarFile(String fileName) async {
+    final directory = await getTemporaryDirectory();
+    final file = File('${directory.path}/$fileName.ics');
+    return await file.writeAsString(this);
+  }
 
 }
 
