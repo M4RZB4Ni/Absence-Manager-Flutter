@@ -181,7 +181,8 @@ class HomeViewModel extends BaseController {
       start: absenceItem.startDate,
       end: absenceItem.endDate,
       duration: absenceItem.endDate.difference(absenceItem.startDate),
-      organizer: IOrganizer(name: fetchNameOfMember(index: index,isAdmitter: true)),
+      organizer:
+          IOrganizer(name: fetchNameOfMember(index: index, isAdmitter: true)),
       location: AppText.outOffice,
       description:
           "${AppText.admitterNote}: ${absenceItem.admitterNote} \n ${AppText.memberNote}: ${absenceItem.memberNote}",

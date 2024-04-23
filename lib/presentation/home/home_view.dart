@@ -75,8 +75,7 @@ class HomeView extends BaseView<HomeViewModel> {
                   onDateChanged: (value) => controller.filterByDate(value),
                 ),
                 StringDropdownWidget(
-                    onStringSelected: (value) =>
-                        controller.filterByType(value),
+                    onStringSelected: (value) => controller.filterByType(value),
                     options: AbsenceTypeHelper.getStrings())
               ],
             ),
@@ -91,8 +90,7 @@ class HomeView extends BaseView<HomeViewModel> {
         itemBuilder: (ctx, i) => AbsenceItem(
               leaveRequestEntity: controller.absenceList[i],
               name: controller.fetchNameOfMember(index: i),
-          iCalFunction:() => controller.serializeCalendarFile(index: i),
-
+              iCalFunction: () => controller.serializeCalendarFile(index: i),
             ),
         itemCount: controller.absenceList.length,
         separatorBuilder: (BuildContext context, int index) =>
