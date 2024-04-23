@@ -110,7 +110,7 @@ class HomeViewModel extends BaseController {
     showLoading();
     try {
       // below delay is just to showing you loading state and performance without is definitely better
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(milliseconds: 2500));
       await Future.wait([prepareMembers(), prepareAbsence()]);
       _updateUIState();
     } on ExceptionHandler catch (error) {
