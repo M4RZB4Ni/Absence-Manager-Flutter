@@ -117,9 +117,14 @@ class HomeViewModel extends BaseController {
     idToNameMap = {for (var member in crewList) member.userId: member.name};
   }
 
-  void filterByType(String type)
+  void filterByType(String? type)
   {
-    absenceList.value=absenceList.where((entity) => entity.type==type).toList();
+    if(type==null)
+    {
+      prepareAll();
+      return;
+    }
+    absenceList.value=absenceList.where((entity) => entity.type.toLowerCase()==type.toLowerCase()).toList();
   }
 
   void filterByDate(DateTime? dateTime)

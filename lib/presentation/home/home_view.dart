@@ -2,6 +2,7 @@ import 'package:communere/app/base/base_view.dart';
 import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_colors.dart';
 import 'package:communere/presentation/components/date_picker_widget.dart';
+import 'package:communere/presentation/components/drop_down_picker_widget.dart';
 import 'package:communere/presentation/components/skeleton_list.dart';
 import 'package:communere/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
@@ -70,11 +71,11 @@ class HomeView extends BaseView<HomeViewModel> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 DatePickerWidget(
-                    onDateChanged: (value) {
-                      controller.filterByDate(value);
-                    },
+                  onDateChanged: (value) => controller.filterByDate(value),
                 ),
-
+                StringDropdownWidget(
+                    onStringSelected: (value) => controller.filterByType(value),
+                    options: const ["Sickness", "Vacation",])
               ],
             ),
           )),
