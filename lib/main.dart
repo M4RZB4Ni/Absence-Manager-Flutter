@@ -8,21 +8,29 @@ import 'package:get/get.dart';
 
 import 'app/router/pages.dart';
 
-// Main function to run the Flutter application.
+/// The entry point of the Crewmeister absence manager application.
+///
+/// This file contains the main function which initializes the Flutter bindings
+/// and runs the MyApp widget. It also includes the MyApp widget definition
+/// which sets up the application's environment, routes, and localization.
 void main() async {
-  // Ensure that Flutter bindings are initialized.
+  // Ensure that Flutter bindings are initialized before running the app.
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Run the application with the MyApp widget.
+  // Run the application with the MyApp widget as the root.
   runApp(const MyApp());
 }
 
-// MyApp widget, representing the root of the application.
+/// Represents the root of the application.
+///
+/// This widget is stateless and builds the application using the GetMaterialApp
+/// which provides an environment for internationalization, routing, and dependency
+/// injection using the MainBinding class.
 class MyApp extends StatelessWidget {
-  // Constructor for the MyApp widget.
+  /// Constructs the MyApp widget.
   const MyApp({super.key});
 
-  // Build method to define the overall structure of the application.
+  /// Builds the application with responsive design and route management.
   @override
   Widget build(BuildContext context) {
     // Initialize ScreenUtil for responsive design.
@@ -43,3 +51,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
