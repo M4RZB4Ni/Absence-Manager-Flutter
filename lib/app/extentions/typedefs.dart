@@ -1,3 +1,5 @@
 import 'package:flutter/material.dart';
 
-typedef SingleValueCallback = ValueChanged<dynamic>;
+typedef SingleStringValueCallback = ValueChanged<String?>;
+typedef SingleBoolValueCallback = ValueChanged<bool?>;
+typedef SingleDateValueCallback = ValueChanged<DateTime?>;

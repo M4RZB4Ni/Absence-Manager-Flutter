@@ -7,7 +7,7 @@ import '../../app/extentions/typedefs.dart';
 import '../../app/resources/app_colors.dart';
 
 class DatePickerWidget extends StatefulWidget {
-  final SingleValueCallback onDateChanged;
+  final SingleDateValueCallback onDateChanged;
 
   const DatePickerWidget({super.key, required this.onDateChanged});
 

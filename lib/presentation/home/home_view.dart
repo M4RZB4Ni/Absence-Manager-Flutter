@@ -76,7 +76,7 @@ class HomeView extends BaseView<HomeViewModel> {
                 ),
                 StringDropdownWidget(
                     onStringSelected: (value) =>
-                        controller.filterByType(value.toString()),
+                        controller.filterByType(value),
                     options: AbsenceTypeHelper.getStrings())
               ],
             ),

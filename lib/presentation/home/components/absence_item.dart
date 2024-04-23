@@ -13,7 +13,7 @@ class AbsenceItem extends StatelessWidget {
       this.onExpansionChanged,
       required this.name});
   final LeaveRequestEntity leaveRequestEntity;
-  final SingleValueCallback? onExpansionChanged;
+  final SingleBoolValueCallback? onExpansionChanged;
   final String name;
 
   @override

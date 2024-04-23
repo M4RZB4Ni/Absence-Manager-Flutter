@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../app/extentions/typedefs.dart';
 
 class StringDropdownWidget extends StatefulWidget {
-  final SingleValueCallback onStringSelected;
+  final SingleStringValueCallback onStringSelected;
   final List<String> options;
 
   const StringDropdownWidget({

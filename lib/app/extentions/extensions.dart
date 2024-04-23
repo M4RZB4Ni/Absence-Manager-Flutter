@@ -24,6 +24,8 @@ extension AppString on String {
 
   /// Get the real image address from the string name of an asset
   String get animation => 'assets/animations/$this.json';
+
+
 }
 
 extension JsonFileReaderExtension on String {
