@@ -92,9 +92,7 @@ class HomeView extends BaseView<HomeViewModel> {
         controller: controller.paginationScrollController,
         itemBuilder: (ctx, i) => AbsenceItem(
               leaveRequestEntity: controller.absenceList[i],
-              name:
-                  controller.idToNameMap[controller.absenceList[i].userId] ??
-                      AppText.unknown,
+              name: controller.fetchNameOfAbsence(index: i),
             ),
         itemCount: controller.absenceList.length,
         separatorBuilder: (BuildContext context, int index) =>

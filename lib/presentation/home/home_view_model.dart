@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../app/base/base_controller.dart';
 import '../../app/base/result_state.dart';
 import '../../app/network/exception_handler.dart';
+import '../../app/resources/app_text.dart';
 import '../../domain/entities/crew/crew_entity.dart';
 import '../../domain/entities/leave/leave_request_entity.dart';
 import '../../domain/usecase/get_absences_usecase.dart';
@@ -162,6 +163,11 @@ class HomeViewModel extends BaseController {
         return typeMatches && dateMatches;
       }).toList();
     }
+  }
+
+  String fetchNameOfAbsence({required int index})
+  {
+    return idToNameMap[absenceList[index].userId] ?? AppText.unknown;
   }
 
 }
