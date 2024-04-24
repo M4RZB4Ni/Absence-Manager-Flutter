@@ -165,14 +165,31 @@ class HomeViewModel extends BaseController {
   }
 
 
+  /// Filters the absence list based on the current type and date filters.
+  ///
+  /// This function applies the current type and date filters to the full list of absences.
+  /// If no filters are set, it resets to the first page of absences. If filters are active,
+  /// it applies them and updates the list accordingly. It also updates the page state
+  /// based on whether the filtered list is empty or not.
+  ///
+  /// When no filters are applied, the function:
+  /// - Resets the current page to 1.
+  /// - Clears the existing absence list.
+  /// - Adds the first page of absences from the full list to the absence list.
+  ///
+  /// When filters are applied, the function:
+  /// - Filters the full list of absences by the type and date filters.
+  /// - Updates the absence list with the filtered results.
+  ///
+  /// After filtering, the function checks if the absence list is empty:
+  /// - If it is, the page state is updated to [ResultState.empty].
+  /// - If it is not, the page state is reset to its default state.
   void _filterAbsenceList() {
     if (_currentTypeFilter == null && _currentDateFilter == null) {
-
-      _currentPage=1;
+      _currentPage = 1;
       absenceList.clear();
       final endIndex = min(_pageSize, _allAbsences.length);
       absenceList.addAll(_allAbsences.sublist(0, endIndex));
-
     } else {
       absenceList.value = _allAbsences.where((entity) {
         final typeMatches = _currentTypeFilter == null ||
@@ -188,6 +205,7 @@ class HomeViewModel extends BaseController {
       resetPageState();
     }
   }
+
 
   /// Fetches the name of a crew member based on the index and whether they are an admitter.
   String fetchNameOfMember({required int index, bool isAdmitter = false}) {
