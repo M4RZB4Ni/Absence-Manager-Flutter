@@ -26,7 +26,13 @@ class AbsenceManagerRepositoryImpl implements AbsenceManagerRepository {
     try {
       final result = await _dataSource.getCrewMemberList();
       return result.when(
-        success: (data) => ApiResult.success(data: data.toEntity()),
+        success: (data) {
+          if (data.message == "Success" && data.payload.isNotEmpty) {
+            return ApiResult.success(data: data.toEntity());
+          }
+          return const ApiResult.failure(
+              error: ExceptionHandler.payloadEmpty());
+        },
         failure: (error) => ApiResult.failure(error: error),
       );
     } on Exception catch (e) {
@@ -43,7 +49,13 @@ class AbsenceManagerRepositoryImpl implements AbsenceManagerRepository {
     try {
       final result = await _dataSource.getLeavesList();
       return result.when(
-        success: (data) => ApiResult.success(data: data.toEntity()),
+        success: (data) {
+          if (data.message == "Success" && data.payload.isNotEmpty) {
+            return ApiResult.success(data: data.toEntity());
+          }
+          return const ApiResult.failure(
+              error: ExceptionHandler.payloadEmpty());
+        },
         failure: (error) => ApiResult.failure(error: error),
       );
     } on Exception catch (e) {

@@ -70,20 +70,23 @@ class HomeViewModel extends BaseController {
     }
   }
 
+  void _handleError(ExceptionHandler error)
+  {
+    if(error==const ExceptionHandler.payloadEmpty())
+    {
+      updatePageState(const ResultState.empty());
+    }else{
+      updatePageState(ResultState.error(error: error));
+    }
+    debugPrint(ExceptionHandler.getErrorMessage(error));
+  }
+
   /// Prepares the list of crew members by fetching them from the use case.
   Future<void> prepareMembers() async {
     var membersResult = await _crewMembersUseCase.call();
     membersResult.when(
-      success: (data) {
-        if (data.message == "Success" && data.payload.isNotEmpty) {
-          crewList.addAll(data.payload);
-        }
-      },
-      failure: (ExceptionHandler error) {
-        updatePageState(ResultState.error(error: error));
-        debugPrint(ExceptionHandler.getErrorMessage(error));
-
-      },
+      success: (data) => crewList.addAll(data.payload),
+      failure: (error) => _handleError(error),
     );
   }
 
@@ -92,25 +95,20 @@ class HomeViewModel extends BaseController {
     var absenceResult = await _absencesUseCase.call();
     absenceResult.when(
       success: (data) {
-        if (data.message == "Success" && data.payload.isNotEmpty) {
           // Store the full list of absences
           allAbsences = data.payload;
           // Initially display the first page of absences
           final endIndex = min(pageSize, allAbsences.length);
           absenceList.addAll(allAbsences.sublist(0, endIndex));
-        }
+
       },
-      failure: (ExceptionHandler error) {
-        updatePageState(ResultState.error(error: error));
-        debugPrint(ExceptionHandler.getErrorMessage(error));
-      },
+      failure: (error) => _handleError(error),
     );
   }
 
   /// Loads more absences when the end of the scroll is reached.
   Future<void> loadMoreAbsence() async {
     if (pageState == const ResultState.loading()) return;
-    showLoading();
 
     final startIndex = currentPage * pageSize;
 
@@ -123,8 +121,6 @@ class HomeViewModel extends BaseController {
         currentPage++;
       }
     }
-
-    hideLoading(); // Hide loading indicator after operation
   }
 
   /// Updates the UI state based on the current data.
@@ -135,7 +131,6 @@ class HomeViewModel extends BaseController {
       updatePageState(const ResultState.empty());
     } else {
       _crewMemberService(crewList);
-
       hideLoading();
     }
   }
