@@ -66,7 +66,7 @@ class HomeViewModel extends BaseController {
   void _onScroll() {
     if (paginationScrollController.position.pixels ==
         paginationScrollController.position.maxScrollExtent) {
-      loadMoreAbsence();
+      _loadMoreAbsence();
     }
   }
 
@@ -80,7 +80,7 @@ class HomeViewModel extends BaseController {
   }
 
   /// Prepares the list of crew members by fetching them from the use case.
-  Future<void> prepareMembers() async {
+  Future<void> _prepareMembers() async {
     var membersResult = await _crewMembersUseCase.call();
     membersResult.when(
       success: (data) => _crewList.addAll(data.payload),
@@ -89,7 +89,7 @@ class HomeViewModel extends BaseController {
   }
 
   /// Prepares the list of absences by fetching them from the use case.
-  Future<void> prepareAbsence() async {
+  Future<void> _prepareAbsence() async {
     var absenceResult = await _absencesUseCase.call();
     absenceResult.when(
       success: (data) {
@@ -104,7 +104,7 @@ class HomeViewModel extends BaseController {
   }
 
   /// Loads more absences when the end of the scroll is reached.
-  Future<void> loadMoreAbsence() async {
+  Future<void> _loadMoreAbsence() async {
     if (pageState == const ResultState.loading()) return;
 
     final startIndex = _currentPage * _pageSize;
@@ -121,17 +121,17 @@ class HomeViewModel extends BaseController {
   }
 
   /// Prepares all necessary data for the home page.
-  Future prepareAll() async {
+  Future _prepareAll() async {
     // below delay is just to showing you loading state and performance without is definitely better
     await Future.delayed(const Duration(milliseconds: 2500));
-    await Future.wait([prepareMembers(), prepareAbsence()]);
+    await Future.wait([_prepareMembers(), _prepareAbsence()]);
     _crewMemberService(_crewList);
   }
 
   @override
   void onInit() async {
     showLoading();
-    prepareAll();
+    _prepareAll();
     paginationScrollController.addListener(_onScroll);
     super.onInit();
   }
