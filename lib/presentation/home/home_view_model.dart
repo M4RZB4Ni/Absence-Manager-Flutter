@@ -1,13 +1,12 @@
 import 'dart:math';
-import 'package:communere/app/extentions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ical/serializer.dart';
 import 'package:open_file/open_file.dart';
 import '../../app/base/base_controller.dart';
 import '../../app/base/result_state.dart';
 import '../../app/result/exception_handler.dart';
 import '../../app/resources/app_text.dart';
+import '../../app/services/calendar_service.dart';
 import '../../domain/entities/crew/crew_entity.dart';
 import '../../domain/entities/leave/leave_request_entity.dart';
 import '../../domain/usecase/get_absences_usecase.dart';
@@ -28,6 +27,9 @@ class HomeViewModel extends BaseController {
 
   /// Use case for retrieving crew members.
   final GetCrewMembersUseCase _crewMembersUseCase;
+
+  /// Provide service regarding calendar operations globally
+  final CalendarService _calendarService= CalendarService();
 
   /// Reactive list of crew members.
   final List<CrewMemberEntity> _crewList = List.empty(growable: true);
@@ -56,11 +58,6 @@ class HomeViewModel extends BaseController {
   /// Number of items per page.
   final int _pageSize = 10;
 
-  /// Calendar object for generating iCal files.
-  final ICalendar _cal = ICalendar();
-
-  /// boolean variable to avoid the calling rapidly file generation
-  bool _fileProcessStart = false;
 
   /// Callback for handling scroll events to load more absences.
   void _onScroll() {
@@ -215,28 +212,13 @@ class HomeViewModel extends BaseController {
         AppText.unknown;
   }
 
+
   /// Generates an iCal file for a specific absence.
-  void generateCalendarFile({required int index}) async {
-    if (_fileProcessStart) return;
-    _fileProcessStart = true;
-    var absenceItem = absenceList[index];
-    _cal.addElement(
-      IEvent(
-        start: absenceItem.startDate,
-        end: absenceItem.endDate,
-        duration: absenceItem.endDate.difference(absenceItem.startDate),
-        organizer:
-            IOrganizer(name: fetchNameOfMember(index: index, isAdmitter: true)),
-        location: AppText.outOffice,
-        description:
-            "${AppText.admitterNote}: ${absenceItem.admitterNote} \n ${AppText.memberNote}: ${absenceItem.memberNote}",
-        summary:
-            '${fetchNameOfMember(index: index)} - ${absenceItem.type.toUpperCase()}',
-        rrule: IRecurrenceRule(frequency: IRecurrenceFrequency.DAILY),
-      ),
-    );
-    var file = await _cal.serialize().createCalendarFile("icalFile");
+  void openCalendarFile({required int index}) async {
+    showLoading();
+    final names={"admitter":fetchNameOfMember(index: index, isAdmitter: true),"member":fetchNameOfMember(index: index)};
+    final file=await _calendarService.generateCalendarFile(absenceItem: absenceList[index], names: names);
     await OpenFile.open(file.path);
-    _fileProcessStart = false;
+    hideLoading();
   }
 }
