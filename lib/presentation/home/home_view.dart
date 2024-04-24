@@ -21,13 +21,13 @@ class HomeView extends BaseView<HomeViewModel> {
   static String name = "/HomeScreen";
 
   /// Constructs a [HomeView] widget.
-  const HomeView({super.key});
+   HomeView({super.key});
 
 
   /// Returns the widget to display when the page is in a loading state.
   @override
   Widget loading() {
-    return const LottieWidget(name: "loading_img",);
+    return const LottieWidget(name: "searching",);
   }
 
   /// Returns the widget to display when the page has no content.
@@ -102,12 +102,6 @@ class HomeView extends BaseView<HomeViewModel> {
         itemCount: controller.absenceList.length,
         separatorBuilder: (BuildContext context, int index) =>
         const Divider());
-  }
-
-
-  @override
-  bool canPop() {
-    return false;
   }
 
 }
