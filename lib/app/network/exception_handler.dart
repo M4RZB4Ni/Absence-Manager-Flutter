@@ -3,12 +3,13 @@ part 'exception_handler.freezed.dart';
 
 @freezed
 class ExceptionHandler with _$ExceptionHandler {
-
-  const factory ExceptionHandler.jsonDecodingError({required Exception exception}) = JsonDecodingError;
+  const factory ExceptionHandler.jsonDecodingError(
+      {required Exception exception}) = JsonDecodingError;
 
   const factory ExceptionHandler.requestCancelled() = RequestCancelled;
 
-  const factory ExceptionHandler.payloadEmpty({final String? className}) = PayloadEmpty;
+  const factory ExceptionHandler.payloadEmpty({final String? className}) =
+      PayloadEmpty;
 
   const factory ExceptionHandler.unauthorizedRequest(final String message) =
       UnauthorizedRequest;
@@ -192,53 +193,12 @@ class ExceptionHandler with _$ExceptionHandler {
       preConditionError: () {
         errorMessage =
             'This phone number already has been registered, Please try again.';
-      }, payloadEmpty: (String? className) {
-          errorMessage = 'The payload is empty $className';
-    },
+      },
+      payloadEmpty: (String? className) {
+        errorMessage = 'The payload is empty $className';
+      },
     );
 
     return errorMessage;
   }
-
-  factory ExceptionHandler.handleResponse(final int error, {stackTrace}) {
-    switch (error) {
-      case 400:
-        return const ExceptionHandler.badRequest();
-
-      case 401:
-        return const ExceptionHandler.unauthorizedRequest('Please Check Token');
-      case 403:
-        return const ExceptionHandler.forbidden();
-      case 404:
-        return const ExceptionHandler.notFound(
-            'Route Not found, Check your address');
-      case 405:
-        return const ExceptionHandler.methodNotAllowed();
-      case 409:
-        return const ExceptionHandler.conflict();
-      case 408:
-        return const ExceptionHandler.requestTimeout();
-      case 412:
-        return const ExceptionHandler.preConditionError();
-      case 500:
-        return const ExceptionHandler.internalServerError();
-      case 501:
-        return const ExceptionHandler.notImplemented();
-      case 502:
-        return const ExceptionHandler.badGateway();
-      case 503:
-        return const ExceptionHandler.serviceUnavailable();
-      case 504:
-        return const ExceptionHandler.gatewayTimeout();
-      case 511:
-        return const ExceptionHandler.networkAuthRequired();
-      default:
-        return const ExceptionHandler.unexpectedError();
-      // return ExceptionHandler.defaultError(
-      //   'Received invalid status code: $responseCode',
-      // );
-    }
-  }
-
-
 }
