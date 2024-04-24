@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         // Use GetMaterialApp for managing the application's state and routes.
         return GetMaterialApp(
           theme: ThemeData.light(useMaterial3: true),
-          darkTheme: ThemeData.light(useMaterial3: true),
+          darkTheme: ThemeData.dark(useMaterial3: true),
           debugShowCheckedModeBanner: false,
           locale: Get.locale, // Set the locale for localization.
           title: AppText.appName, // Set the application title.
