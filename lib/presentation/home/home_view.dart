@@ -1,13 +1,11 @@
 import 'package:communere/app/base/base_view.dart';
-import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/presentation/components/date_picker_widget.dart';
 import 'package:communere/presentation/components/drop_down_picker_widget.dart';
-import 'package:communere/presentation/components/skeleton_list.dart';
+import 'package:communere/presentation/components/loading_widget.dart';
 import 'package:communere/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import '../../app/network/exception_handler.dart';
 import '../../app/resources/app_text.dart';
 import '../../domain/entities/leave/absence_type.dart';
@@ -23,21 +21,19 @@ class HomeView extends BaseView<HomeViewModel> {
   static String name = "/HomeScreen";
 
   /// Constructs a [HomeView] widget.
-  HomeView({super.key});
+  const HomeView({super.key});
 
 
   /// Returns the widget to display when the page is in a loading state.
   @override
   Widget loading() {
-    return const SkeletonList();
+    return const LottieWidget(name: "loading_img",);
   }
 
   /// Returns the widget to display when the page has no content.
   @override
   Widget empty() {
-    return Center(
-      child: Lottie.asset('nothing_found'.animation, width: Get.width),
-    );
+    return const LottieWidget(name: "nothing_found",);
   }
 
   /// Returns the widget to display when the page encounters an error.
@@ -46,7 +42,7 @@ class HomeView extends BaseView<HomeViewModel> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Lottie.asset('error'.animation, fit: BoxFit.fill),
+        const LottieWidget(name: "error"),
         Text(ExceptionHandler.getErrorMessage(e!))
       ],
     );
@@ -96,18 +92,22 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   Widget body(BuildContext context) {
 
-
-    return Obx(() => ListView.separated(
+    return ListView.separated(
         controller: controller.paginationScrollController,
         itemBuilder: (ctx, i) => AbsenceItem(
-              leaveRequestEntity: controller.absenceList[i],
-              name: controller.fetchNameOfMember(index: i),
-              iCalFunction: () => controller.generateCalendarFile(index: i),
-            ),
+          leaveRequestEntity: controller.absenceList[i],
+          name: controller.fetchNameOfMember(index: i),
+          iCalFunction: () => controller.generateCalendarFile(index: i),
+        ),
         itemCount: controller.absenceList.length,
         separatorBuilder: (BuildContext context, int index) =>
-            const Divider()));
+        const Divider());
   }
 
+
+  @override
+  bool canPop() {
+    return false;
+  }
 
 }
