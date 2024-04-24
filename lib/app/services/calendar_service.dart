@@ -9,6 +9,11 @@ import '../resources/app_text.dart';
 ///
 /// This abstract class defines the contract for a calendar service that
 /// generates iCalendar files from leave request details.
+///
+/// Services like CalendarService often require
+/// platform-specific features (e.g., file system access on mobile devices).
+/// Placing it in the app layer allows direct access to these features
+/// without leaking platform dependencies into the domain layer.
 abstract class CalendarService {
   /// Generates an iCal file based on the provided leave request and participant names.
   ///
