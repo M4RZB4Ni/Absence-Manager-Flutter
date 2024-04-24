@@ -8,6 +8,8 @@ class ExceptionHandler with _$ExceptionHandler {
 
   const factory ExceptionHandler.requestCancelled() = RequestCancelled;
 
+  const factory ExceptionHandler.payloadEmpty({final String? className}) = PayloadEmpty;
+
   const factory ExceptionHandler.unauthorizedRequest(final String message) =
       UnauthorizedRequest;
 
@@ -190,7 +192,9 @@ class ExceptionHandler with _$ExceptionHandler {
       preConditionError: () {
         errorMessage =
             'This phone number already has been registered, Please try again.';
-      },
+      }, payloadEmpty: (String? className) {
+          errorMessage = 'The payload is empty $className';
+    },
     );
 
     return errorMessage;
