@@ -1,11 +1,12 @@
-import 'package:communere/app/base/base_controller.dart';
-import 'package:communere/app/network/exception_handler.dart';
-import 'package:communere/app/resources/app_colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+
+import '../result/exception_handler.dart';
+import 'base_controller.dart';
 
 
 abstract class BaseView<Controller extends BaseController>
@@ -75,7 +76,6 @@ abstract class BaseView<Controller extends BaseController>
   Widget annotatedRegion(final BuildContext context, {final Widget? child}) => AnnotatedRegion(
         value: SystemUiOverlayStyle(
           //Status bar color for android
-          statusBarColor: statusBarColor(),
           statusBarIconBrightness: Brightness.light,
         ),
         child: pageContent(context,child: child),
@@ -102,21 +102,16 @@ abstract class BaseView<Controller extends BaseController>
         )
       : pageScaffold(context,child: child);
 
-  Widget showErrorSnackBar(final String message) {
+  void showErrorSnackBar(final String message) {
     var snackBar = SnackBar(content: Text(message));
     WidgetsBinding.instance.addPostFrameCallback((final timeStamp) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(snackBar);
     });
-
-    return Container(
-      color: AppColors.background,
-    );
   }
 
   Color pageBackgroundColor() => Theme.of(Get.context!).brightness == Brightness.light ?
       ThemeData.light(useMaterial3: true).scaffoldBackgroundColor : ThemeData.dark(useMaterial3: true).colorScheme.background;
 
-  Color statusBarColor() => AppColors.transparent;
 
   Widget? floatingActionButton() => null;
 

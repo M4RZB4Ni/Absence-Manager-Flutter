@@ -6,7 +6,7 @@ import 'package:communere/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../app/network/exception_handler.dart';
+import '../../app/result/exception_handler.dart';
 import '../../app/resources/app_text.dart';
 import '../../domain/entities/leave/absence_type.dart';
 import '../home/home_view_model.dart';
@@ -100,8 +100,6 @@ class HomeView extends BaseView<HomeViewModel> {
           iCalFunction: () => controller.generateCalendarFile(index: i),
         ),
         itemCount: controller.absenceList.length,
-        separatorBuilder: (BuildContext context, int index) =>
-        const Divider());
+        separatorBuilder: (BuildContext context, int index) => const Divider());
   }
-
 }

@@ -1,5 +1,6 @@
-import 'package:communere/app/network/exception_handler.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../result/exception_handler.dart';
 
 part 'result_state.freezed.dart';
 
