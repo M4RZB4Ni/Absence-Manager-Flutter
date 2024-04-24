@@ -20,6 +20,9 @@ import '../../domain/usecase/get_crew_members_usecase.dart';
 /// This class also provides filtering capabilities and generates iCal files.
 class HomeViewModel extends BaseController {
 
+  /// Constructs a [HomeViewModel] with the necessary use cases.
+  HomeViewModel(this._absencesUseCase, this._crewMembersUseCase);
+
   /// Use case for retrieving absences.
   final GetAbsencesUseCase _absencesUseCase;
 
@@ -27,13 +30,13 @@ class HomeViewModel extends BaseController {
   final GetCrewMembersUseCase _crewMembersUseCase;
 
   /// Reactive list of crew members.
-  RxList<CrewMemberEntity> crewList = RxList.empty();
+  final RxList<CrewMemberEntity> _crewList = RxList.empty();
 
   /// Reactive list of leave requests.
   RxList<LeaveRequestEntity> absenceList = RxList.empty(growable: true);
 
   /// Full list of leave requests.
-  List<LeaveRequestEntity> allAbsences = [];
+  List<LeaveRequestEntity> _allAbsences = [];
 
   /// Filter for the type of leave.
   String? _currentTypeFilter;
@@ -42,25 +45,22 @@ class HomeViewModel extends BaseController {
   DateTime? _currentDateFilter;
 
   /// Mapping of crew member IDs to their names.
-  Map<int, String> idToNameMap = {};
-
-  /// Constructs a [HomeViewModel] with the necessary use cases.
-  HomeViewModel(this._absencesUseCase, this._crewMembersUseCase);
+  Map<int, String> _idToNameMap = {};
 
   /// Controller for managing scroll events in the UI.
   final ScrollController paginationScrollController = ScrollController();
 
   /// Current page index for pagination.
-  int currentPage = 1;
+  int _currentPage = 1;
 
   /// Number of items per page.
-  final int pageSize = 10;
+  final int _pageSize = 10;
 
   /// Calendar object for generating iCal files.
-  ICalendar cal = ICalendar();
+  final ICalendar _cal = ICalendar();
 
   /// boolean variable to avoid the calling rapidly file generation
-  bool _fileProcessStart=false;
+  bool _fileProcessStart = false;
 
   /// Callback for handling scroll events to load more absences.
   void _onScroll() {
@@ -70,12 +70,10 @@ class HomeViewModel extends BaseController {
     }
   }
 
-  void _handleError(ExceptionHandler error)
-  {
-    if(error==const ExceptionHandler.payloadEmpty())
-    {
+  void _handleError(ExceptionHandler error) {
+    if (error == const ExceptionHandler.payloadEmpty()) {
       updatePageState(const ResultState.empty());
-    }else{
+    } else {
       updatePageState(ResultState.error(error: error));
     }
     debugPrint(ExceptionHandler.getErrorMessage(error));
@@ -85,7 +83,7 @@ class HomeViewModel extends BaseController {
   Future<void> prepareMembers() async {
     var membersResult = await _crewMembersUseCase.call();
     membersResult.when(
-      success: (data) => crewList.addAll(data.payload),
+      success: (data) => _crewList.addAll(data.payload),
       failure: (error) => _handleError(error),
     );
   }
@@ -95,12 +93,11 @@ class HomeViewModel extends BaseController {
     var absenceResult = await _absencesUseCase.call();
     absenceResult.when(
       success: (data) {
-          // Store the full list of absences
-          allAbsences = data.payload;
-          // Initially display the first page of absences
-          final endIndex = min(pageSize, allAbsences.length);
-          absenceList.addAll(allAbsences.sublist(0, endIndex));
-
+        // Store the full list of absences
+        _allAbsences = data.payload;
+        // Initially display the first page of absences
+        final endIndex = min(_pageSize, _allAbsences.length);
+        absenceList.addAll(_allAbsences.sublist(0, endIndex));
       },
       failure: (error) => _handleError(error),
     );
@@ -110,46 +107,30 @@ class HomeViewModel extends BaseController {
   Future<void> loadMoreAbsence() async {
     if (pageState == const ResultState.loading()) return;
 
-    final startIndex = currentPage * pageSize;
+    final startIndex = _currentPage * _pageSize;
 
-    if (startIndex < allAbsences.length) {
-      final endIndex = min(startIndex + pageSize, allAbsences.length);
+    if (startIndex < _allAbsences.length) {
+      final endIndex = min(startIndex + _pageSize, _allAbsences.length);
 
-      final newItems = allAbsences.sublist(startIndex, endIndex);
+      final newItems = _allAbsences.sublist(startIndex, endIndex);
       if (newItems.isNotEmpty) {
         absenceList.addAll(newItems);
-        currentPage++;
+        _currentPage++;
       }
-    }
-  }
-
-  /// Updates the UI state based on the current data.
-  void _updateUIState() {
-    //if below statement be true means application still loading and no error has been thrown
-    if (pageState != const ResultState.loading()) return;
-    if (crewList.isEmpty && absenceList.isEmpty) {
-      updatePageState(const ResultState.empty());
-    } else {
-      _crewMemberService(crewList);
-      hideLoading();
     }
   }
 
   /// Prepares all necessary data for the home page.
   Future prepareAll() async {
-    showLoading();
-    try {
-      // below delay is just to showing you loading state and performance without is definitely better
-      await Future.delayed(const Duration(milliseconds: 2500));
-      await Future.wait([prepareMembers(), prepareAbsence()]);
-      _updateUIState();
-    } on ExceptionHandler catch (error) {
-      updatePageState(ResultState.error(error: error));
-    }
+    // below delay is just to showing you loading state and performance without is definitely better
+    await Future.delayed(const Duration(milliseconds: 2500));
+    await Future.wait([prepareMembers(), prepareAbsence()]);
+    _crewMemberService(_crewList);
   }
 
   @override
   void onInit() async {
+    showLoading();
     prepareAll();
     paginationScrollController.addListener(_onScroll);
     super.onInit();
@@ -163,7 +144,10 @@ class HomeViewModel extends BaseController {
 
   /// Maps crew member IDs to their names.
   void _crewMemberService(List<CrewMemberEntity> crewList) {
-    idToNameMap = {for (var member in crewList) member.userId: member.name};
+    if (pageState is! Error && pageState != const ResultState.empty()) {
+      _idToNameMap = {for (var member in crewList) member.userId: member.name};
+      hideLoading();
+    }
   }
 
   /// Filters the list of absences by type.
@@ -187,10 +171,10 @@ class HomeViewModel extends BaseController {
   void _filterAbsenceList() {
     if (_currentTypeFilter == null && _currentDateFilter == null) {
       // No filters are set, so reset to the full list of absences.
-      absenceList.value = List.from(allAbsences);
+      absenceList.value = List.from(_allAbsences);
     } else {
       // At least one filter is active, so apply it to the full list.
-      absenceList.value = allAbsences.where((entity) {
+      absenceList.value = _allAbsences.where((entity) {
         // Check if the absence type matches the type filter (if set).
         final typeMatches = _currentTypeFilter == null ||
             entity.type.toLowerCase() == _currentTypeFilter!.toLowerCase();
@@ -211,10 +195,9 @@ class HomeViewModel extends BaseController {
     }
   }
 
-
   /// Fetches the name of a crew member based on the index and whether they are an admitter.
   String fetchNameOfMember({required int index, bool isAdmitter = false}) {
-    return idToNameMap[isAdmitter
+    return _idToNameMap[isAdmitter
             ? absenceList[index].admitterId
             : absenceList[index].userId] ??
         AppText.unknown;
@@ -222,10 +205,10 @@ class HomeViewModel extends BaseController {
 
   /// Generates an iCal file for a specific absence.
   void generateCalendarFile({required int index}) async {
-    if(_fileProcessStart) return;
-      _fileProcessStart=true;
+    if (_fileProcessStart) return;
+    _fileProcessStart = true;
     var absenceItem = absenceList[index];
-    cal.addElement(
+    _cal.addElement(
       IEvent(
         start: absenceItem.startDate,
         end: absenceItem.endDate,
@@ -240,8 +223,8 @@ class HomeViewModel extends BaseController {
         rrule: IRecurrenceRule(frequency: IRecurrenceFrequency.DAILY),
       ),
     );
-    var file = await cal.serialize().createCalendarFile("icalFile");
+    var file = await _cal.serialize().createCalendarFile("icalFile");
     await OpenFile.open(file.path);
-    _fileProcessStart=false;
+    _fileProcessStart = false;
   }
 }

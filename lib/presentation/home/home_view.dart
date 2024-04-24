@@ -64,7 +64,7 @@ class HomeView extends BaseView<HomeViewModel> {
         Padding(
           padding: const EdgeInsets.only(right: 20),
           child: Text(
-            "${AppText.total}: ${controller.allAbsences.length}",
+            "${AppText.total}: ${controller.absenceList.length}",
             /*  style: TextStyle(fontSize: 12.sp, color: AppColors.onPrimary)*/
           ),
         ),
