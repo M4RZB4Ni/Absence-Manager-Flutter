@@ -66,7 +66,9 @@ class HomeViewModel extends BaseController {
   void _onScroll() {
     if (paginationScrollController.position.pixels ==
         paginationScrollController.position.maxScrollExtent) {
-      _loadMoreAbsence();
+      // if(_currentTypeFilter==null && _currentDateFilter==null) {
+        _loadMoreAbsence();
+      // }
     }
   }
 
@@ -162,35 +164,27 @@ class HomeViewModel extends BaseController {
     _filterAbsenceList();
   }
 
-  /// Filters the list of absences based on type and date.
-  ///
-  /// This function applies the current type and date filters to the full list of absences.
-  /// If no filters are set, it resets to the full list of absences. If filters are active,
-  /// it applies them and updates the list accordingly. Additionally, it updates the page state
-  /// based on whether the filtered list is empty or not.
+
   void _filterAbsenceList() {
     if (_currentTypeFilter == null && _currentDateFilter == null) {
-      // No filters are set, so reset to the full list of absences.
-      absenceList.value = List.from(_allAbsences);
+
+      _currentPage=1;
+      absenceList.clear();
+      final endIndex = min(_pageSize, _allAbsences.length);
+      absenceList.addAll(_allAbsences.sublist(0, endIndex));
+
     } else {
-      // At least one filter is active, so apply it to the full list.
       absenceList.value = _allAbsences.where((entity) {
-        // Check if the absence type matches the type filter (if set).
         final typeMatches = _currentTypeFilter == null ||
             entity.type.toLowerCase() == _currentTypeFilter!.toLowerCase();
-        // Check if the absence start date matches the date filter (if set).
         final dateMatches = _currentDateFilter == null ||
             entity.startDate.isAtSameMomentAs(_currentDateFilter!);
-        // Include the absence in the list if it matches both filters.
         return typeMatches && dateMatches;
       }).toList();
     }
-    // Update the page state based on the filtered list's content.
     if (absenceList.isEmpty) {
-      // If the filtered list is empty, set the page state to empty.
       updatePageState(const ResultState.empty());
     } else {
-      // If the filtered list is not empty, reset the page state to its default.
       resetPageState();
     }
   }
