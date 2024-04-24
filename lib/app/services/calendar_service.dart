@@ -5,10 +5,11 @@ import 'package:path_provider/path_provider.dart';
 import '../../domain/entities/leave/leave_request_entity.dart';
 import '../resources/app_text.dart';
 
-class CalendarService {
-  /// Internal iCalendar object used for generating iCal files.
-  final ICalendar _cal = ICalendar();
-
+/// A service interface for generating iCal files based on leave requests.
+///
+/// This abstract class defines the contract for a calendar service that
+/// generates iCalendar files from leave request details.
+abstract class CalendarService {
   /// Generates an iCal file based on the provided leave request and participant names.
   ///
   /// This method creates an iCalendar event using the details from [absenceItem] and
@@ -18,6 +19,24 @@ class CalendarService {
   /// description, summary, and recurrence rule.
   ///
   /// Returns a [File] representing the generated iCal file.
+  Future<File> generateCalendarFile({
+    required LeaveRequestEntity absenceItem,
+    required Map<String, String> names,
+  });
+}
+
+/// Implementation of [CalendarService] that generates iCal files.
+///
+/// This implementation utilizes an internal [ICalendar] object for generating
+/// iCalendar events based on leave request details.
+class CalendarServiceImpl extends CalendarService {
+  /// Internal iCalendar object used for generating iCal files.
+  final ICalendar _cal;
+
+  /// Constructs a [CalendarServiceImpl] with an existing [ICalendar] instance.
+  CalendarServiceImpl(this._cal);
+
+  @override
   Future<File> generateCalendarFile({
     required LeaveRequestEntity absenceItem,
     required Map<String, String> names,

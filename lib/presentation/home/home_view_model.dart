@@ -20,7 +20,7 @@ import '../../domain/usecase/get_crew_members_usecase.dart';
 class HomeViewModel extends BaseController {
 
   /// Constructs a [HomeViewModel] with the necessary use cases.
-  HomeViewModel(this._absencesUseCase, this._crewMembersUseCase);
+  HomeViewModel(this._absencesUseCase, this._crewMembersUseCase, this._calendarService);
 
   /// Use case for retrieving absences.
   final GetAbsencesUseCase _absencesUseCase;
@@ -28,8 +28,8 @@ class HomeViewModel extends BaseController {
   /// Use case for retrieving crew members.
   final GetCrewMembersUseCase _crewMembersUseCase;
 
-  /// Provide service regarding calendar operations globally
-  final CalendarService _calendarService= CalendarService();
+  final CalendarService _calendarService;
+
 
   /// Reactive list of crew members.
   final List<CrewMemberEntity> _crewList = List.empty(growable: true);

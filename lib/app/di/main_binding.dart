@@ -1,3 +1,4 @@
+import 'package:communere/app/services/calendar_service.dart';
 import 'package:communere/data/data_source/local/absence_manager_local_data_source.dart';
 import 'package:communere/data/repository/absence_manager_repository_impl.dart';
 import 'package:communere/domain/data_source/absence_manager_data_source.dart';
@@ -6,6 +7,7 @@ import 'package:communere/domain/usecase/get_absences_usecase.dart';
 import 'package:communere/domain/usecase/get_crew_members_usecase.dart';
 import 'package:communere/presentation/home/home_view_model.dart';
 import 'package:get/get.dart';
+import 'package:ical/serializer.dart';
 
 /// The `MainBinding` class is responsible for setting up and binding all the necessary dependencies
 /// for the application using the GetX package.
@@ -23,7 +25,9 @@ class MainBinding implements Bindings {
     // It will find the required use cases (`GetAbsencesUseCase` and `GetCrewMembersUseCase`)
     // and inject them into the `HomeViewModel`.
     Get.lazyPut<HomeViewModel>(() => HomeViewModel(
-        Get.find<GetAbsencesUseCase>(), Get.find<GetCrewMembersUseCase>()));
+        Get.find<GetAbsencesUseCase>(),
+        Get.find<GetCrewMembersUseCase>(),
+        Get.find<CalendarService>()));
 
     // Binds the `GetAbsencesUseCase` to the dependency injection system.
     // It will find the required repository (`AbsenceManagerRepository`)
@@ -48,6 +52,16 @@ class MainBinding implements Bindings {
     // the local data handling implementation for absence management.
     Get.lazyPut<AbsenceManagerDataSource>(
             () => AbsenceManagerLocalDataSource());
+
+    // Binds the `ICalendar` to the dependency injection system.
+    // It creates an instance of `ICalendar` which is used by the `CalendarServiceImpl`
+    // for generating iCalendar events.
+    Get.lazyPut<ICalendar>(() => ICalendar());
+
+    // Binds the `CalendarService` to the dependency injection system.
+    // It creates an instance of `CalendarServiceImpl` and injects the `ICalendar`
+    // instance into it for generating iCal files.
+    Get.lazyPut<CalendarService>(
+            () => CalendarServiceImpl(Get.find<ICalendar>()));
   }
 }
-
