@@ -30,7 +30,7 @@ class HomeViewModel extends BaseController {
   final GetCrewMembersUseCase _crewMembersUseCase;
 
   /// Reactive list of crew members.
-  final RxList<CrewMemberEntity> _crewList = RxList.empty();
+  final List<CrewMemberEntity> _crewList = List.empty(growable: true);
 
   /// Reactive list of leave requests.
   RxList<LeaveRequestEntity> absenceList = RxList.empty(growable: true);
@@ -131,7 +131,7 @@ class HomeViewModel extends BaseController {
   }
 
   @override
-  void onInit() async {
+  void onInit() {
     showLoading();
     _prepareAll();
     paginationScrollController.addListener(_onScroll);
