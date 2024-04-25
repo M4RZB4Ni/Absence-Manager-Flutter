@@ -1,4 +1,4 @@
-import 'package:communere/app/resources/app_colors.dart';
+import 'package:crewmeister/app/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

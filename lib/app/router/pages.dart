@@ -1,5 +1,5 @@
 // Class containing static configuration for the app's pages.
-import 'package:communere/presentation/home/home_view.dart';
+import 'package:crewmeister/presentation/home/home_view.dart';
 import 'package:get/get.dart';
 
 mixin AppPages {

@@ -1,5 +1,5 @@
-import 'package:communere/app/extentions/extensions.dart';
-import 'package:communere/app/resources/app_text.dart';
+import 'package:crewmeister/app/extentions/extensions.dart';
+import 'package:crewmeister/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/extentions/typedefs.dart';

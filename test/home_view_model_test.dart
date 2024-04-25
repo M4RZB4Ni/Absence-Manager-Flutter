@@ -1,13 +1,13 @@
-import 'package:communere/app/base/result_state.dart';
-import 'package:communere/app/di/main_binding.dart';
-import 'package:communere/app/services/calendar_service.dart';
-import 'package:communere/domain/usecase/get_absences_usecase.dart';
-import 'package:communere/domain/usecase/get_crew_members_usecase.dart';
+import 'package:crewmeister/app/base/result_state.dart';
+import 'package:crewmeister/app/di/main_binding.dart';
+import 'package:crewmeister/app/services/calendar_service.dart';
+import 'package:crewmeister/domain/usecase/get_absences_usecase.dart';
+import 'package:crewmeister/domain/usecase/get_crew_members_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:communere/presentation/home/home_view_model.dart';
+import 'package:crewmeister/presentation/home/home_view_model.dart';
 
 class MockHomeViewModel extends GetxController
     with Mock

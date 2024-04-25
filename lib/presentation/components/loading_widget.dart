@@ -1,4 +1,4 @@
-import 'package:communere/app/extentions/extensions.dart';
+import 'package:crewmeister/app/extentions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

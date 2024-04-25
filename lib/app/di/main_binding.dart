@@ -1,11 +1,11 @@
-import 'package:communere/app/services/calendar_service.dart';
-import 'package:communere/data/data_source/local/absence_manager_local_data_source.dart';
-import 'package:communere/data/repository/absence_manager_repository_impl.dart';
-import 'package:communere/domain/data_source/absence_manager_data_source.dart';
-import 'package:communere/domain/repository/absence_manager_repository.dart';
-import 'package:communere/domain/usecase/get_absences_usecase.dart';
-import 'package:communere/domain/usecase/get_crew_members_usecase.dart';
-import 'package:communere/presentation/home/home_view_model.dart';
+import 'package:crewmeister/app/services/calendar_service.dart';
+import 'package:crewmeister/data/data_source/local/absence_manager_local_data_source.dart';
+import 'package:crewmeister/data/repository/absence_manager_repository_impl.dart';
+import 'package:crewmeister/domain/data_source/absence_manager_data_source.dart';
+import 'package:crewmeister/domain/repository/absence_manager_repository.dart';
+import 'package:crewmeister/domain/usecase/get_absences_usecase.dart';
+import 'package:crewmeister/domain/usecase/get_crew_members_usecase.dart';
+import 'package:crewmeister/presentation/home/home_view_model.dart';
 import 'package:get/get.dart';
 import 'package:ical/serializer.dart';
 

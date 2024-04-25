@@ -1,5 +1,5 @@
 // Importing necessary classes from the application's architecture.
-import 'package:communere/domain/entities/crew/crew_entity.dart';
+import 'package:crewmeister/domain/entities/crew/crew_entity.dart';
 
 import '../../app/base/api_result.dart';
 import '../repository/absence_manager_repository.dart';

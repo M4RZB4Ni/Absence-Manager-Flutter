@@ -1,4 +1,4 @@
-import 'package:communere/app/base/result_state.dart';
+import 'package:crewmeister/app/base/result_state.dart';
 import 'package:get/get.dart';
 
 

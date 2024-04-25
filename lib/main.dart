@@ -1,7 +1,7 @@
 // Import necessary packages and files.
-import 'package:communere/app/di/main_binding.dart';
-import 'package:communere/app/resources/app_text.dart';
-import 'package:communere/presentation/home/home_view.dart';
+import 'package:crewmeister/app/di/main_binding.dart';
+import 'package:crewmeister/app/resources/app_text.dart';
+import 'package:crewmeister/presentation/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,10 +39,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       locale: Get.locale, // Set the locale for localization.
       title: AppText.appName, // Set the application title.
-      initialBinding: MainBinding(), // Use MainBinding for initial setup and dependency injection.
+      initialBinding:
+          MainBinding(), // Use MainBinding for initial setup and dependency injection.
       initialRoute: HomeView.name, // Set the initial route to the HomeScreen.
-      getPages: AppPages.pages, // Define the application's pages using AppPages.
+      getPages:
+          AppPages.pages, // Define the application's pages using AppPages.
     );
   }
 }
-

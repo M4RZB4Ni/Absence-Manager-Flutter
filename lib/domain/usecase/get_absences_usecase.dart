@@ -1,4 +1,4 @@
-import 'package:communere/domain/entities/leave/leave_request_entity.dart';
+import 'package:crewmeister/domain/entities/leave/leave_request_entity.dart';
 
 import '../usecase/base/usecase.dart';
 import '../../app/base/api_result.dart';

@@ -1,8 +1,10 @@
-import 'package:communere/app/base/base_view.dart';
-import 'package:communere/presentation/components/date_picker_widget.dart';
-import 'package:communere/presentation/components/drop_down_picker_widget.dart';
-import 'package:communere/presentation/components/loading_widget.dart';
-import 'package:communere/presentation/home/components/absence_item.dart';
+import 'dart:ui';
+
+import 'package:crewmeister/app/base/base_view.dart';
+import 'package:crewmeister/presentation/components/date_picker_widget.dart';
+import 'package:crewmeister/presentation/components/drop_down_picker_widget.dart';
+import 'package:crewmeister/presentation/components/loading_widget.dart';
+import 'package:crewmeister/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../app/result/exception_handler.dart';
@@ -20,19 +22,23 @@ class HomeView extends BaseView<HomeViewModel> {
   static String name = "/HomeScreen";
 
   /// Constructs a [HomeView] widget.
-   HomeView({super.key});
-
+  HomeView({super.key});
 
   /// Returns the widget to display when the page is in a loading state.
   @override
   Widget loading() {
-    return const LottieWidget(name: "searching",key: Key("searching"),);
+    return const LottieWidget(
+      name: "searching",
+      key: Key("searching"),
+    );
   }
 
   /// Returns the widget to display when the page has no content.
   @override
   Widget empty() {
-    return const LottieWidget(name: "nothing_found",);
+    return const LottieWidget(
+      name: "nothing_found",
+    );
   }
 
   /// Returns the widget to display when the page encounters an error.
@@ -90,16 +96,16 @@ class HomeView extends BaseView<HomeViewModel> {
   /// Builds the body of the home screen.
   @override
   Widget body(BuildContext context) {
-
     return ListView.separated(
-      physics: const AlwaysScrollableScrollPhysics(),
         controller: controller.paginationScrollController,
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (ctx, i) => AbsenceItem(
-          leaveRequestEntity: controller.absenceList[i],
-          name: controller.fetchNameOfMember(index: i),
-          iCalFunction: () => controller.openCalendarFile(index: i),
-        ),
+              leaveRequestEntity: controller.absenceList[i],
+              name: controller.fetchNameOfMember(index: i),
+              iCalFunction: () => controller.openCalendarFile(index: i),
+            ),
         itemCount: controller.absenceList.length,
-        separatorBuilder: (BuildContext context, int index) => const Divider());
+        separatorBuilder: (BuildContext context, int index) =>
+            const Divider());
   }
 }
