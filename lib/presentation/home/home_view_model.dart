@@ -127,6 +127,12 @@ class HomeViewModel extends BaseController {
     _crewMemberService(_crewList);
   }
 
+  @visibleForTesting
+  Future testPrepareAll() async {
+    await Future.wait([_prepareMembers(), _prepareAbsence()]);
+    _crewMemberService(_crewList);
+  }
+
   @override
   void onInit() {
     showLoading();

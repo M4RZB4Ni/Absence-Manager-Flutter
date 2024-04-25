@@ -27,7 +27,7 @@ void main() {
 
     test('Test Initial Fetching absences', () async {
       expect(homeViewModel.absenceList.isEmpty, true);
-      await homeViewModel.prepareAll();
+      await homeViewModel.testPrepareAll();
       expect(homeViewModel.absenceList.length, 10);
     });
 
