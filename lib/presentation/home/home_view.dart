@@ -91,18 +91,15 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   Widget body(BuildContext context) {
 
-    return Scrollbar(
-      controller: controller.paginationScrollController,
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-          controller: controller.paginationScrollController,
-          itemBuilder: (ctx, i) => AbsenceItem(
-            leaveRequestEntity: controller.absenceList[i],
-            name: controller.fetchNameOfMember(index: i),
-            iCalFunction: () => controller.openCalendarFile(index: i),
-          ),
-          itemCount: controller.absenceList.length,
-          separatorBuilder: (BuildContext context, int index) => const Divider()),
-    );
+    return ListView.separated(
+      physics: const AlwaysScrollableScrollPhysics(),
+        controller: controller.paginationScrollController,
+        itemBuilder: (ctx, i) => AbsenceItem(
+          leaveRequestEntity: controller.absenceList[i],
+          name: controller.fetchNameOfMember(index: i),
+          iCalFunction: () => controller.openCalendarFile(index: i),
+        ),
+        itemCount: controller.absenceList.length,
+        separatorBuilder: (BuildContext context, int index) => const Divider());
   }
 }
