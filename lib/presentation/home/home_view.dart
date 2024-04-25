@@ -4,7 +4,6 @@ import 'package:communere/presentation/components/drop_down_picker_widget.dart';
 import 'package:communere/presentation/components/loading_widget.dart';
 import 'package:communere/presentation/home/components/absence_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../app/result/exception_handler.dart';
 import '../../app/resources/app_text.dart';
@@ -27,7 +26,7 @@ class HomeView extends BaseView<HomeViewModel> {
   /// Returns the widget to display when the page is in a loading state.
   @override
   Widget loading() {
-    return const LottieWidget(name: "searching",);
+    return const LottieWidget(name: "searching",key: Key("searching"),);
   }
 
   /// Returns the widget to display when the page has no content.
@@ -66,11 +65,11 @@ class HomeView extends BaseView<HomeViewModel> {
         ),
       ],
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(40.0.h),
+        preferredSize: const Size.fromHeight(40.0),
         child: Container(
-          height: 40.0.h,
+          height: 40.0,
           width: Get.width,
-          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -92,14 +91,18 @@ class HomeView extends BaseView<HomeViewModel> {
   @override
   Widget body(BuildContext context) {
 
-    return ListView.separated(
-        controller: controller.paginationScrollController,
-        itemBuilder: (ctx, i) => AbsenceItem(
-          leaveRequestEntity: controller.absenceList[i],
-          name: controller.fetchNameOfMember(index: i),
-          iCalFunction: () => controller.openCalendarFile(index: i),
-        ),
-        itemCount: controller.absenceList.length,
-        separatorBuilder: (BuildContext context, int index) => const Divider());
+    return Scrollbar(
+      controller: controller.paginationScrollController,
+      child: ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+          controller: controller.paginationScrollController,
+          itemBuilder: (ctx, i) => AbsenceItem(
+            leaveRequestEntity: controller.absenceList[i],
+            name: controller.fetchNameOfMember(index: i),
+            iCalFunction: () => controller.openCalendarFile(index: i),
+          ),
+          itemCount: controller.absenceList.length,
+          separatorBuilder: (BuildContext context, int index) => const Divider()),
+    );
   }
 }

@@ -57,24 +57,9 @@ abstract class BaseView<Controller extends BaseController>
 
   Widget noInternetWidget() => const Placeholder();
 
-  Widget noInternet() {
-    return Scaffold(
-        backgroundColor: pageBackgroundColor(),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            noInternetWidget(),
-            const SizedBox(height: 16),
-            const Text(
-              "Oops! No Internet Connection",
-              style: TextStyle(fontSize: 16),
-            ),
-          ],
-        ));
-  }
 
   Widget annotatedRegion(final BuildContext context, {final Widget? child}) => AnnotatedRegion(
-        value: SystemUiOverlayStyle(
+        value: const SystemUiOverlayStyle(
           //Status bar color for android
           statusBarIconBrightness: Brightness.light,
         ),
@@ -85,7 +70,7 @@ abstract class BaseView<Controller extends BaseController>
         canPop: false,
         child: Scaffold(
           //sets ios status bar color
-          backgroundColor: pageBackgroundColor(),
+          backgroundColor: pageBackgroundColor(context),
           appBar: appBar(context),
           floatingActionButton: floatingActionButton(),
           floatingActionButtonLocation: floatingActionButtonLocation(),
@@ -109,7 +94,7 @@ abstract class BaseView<Controller extends BaseController>
     });
   }
 
-  Color pageBackgroundColor() => Theme.of(Get.context!).brightness == Brightness.light ?
+  Color pageBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.light ?
       ThemeData.light(useMaterial3: true).scaffoldBackgroundColor : ThemeData.dark(useMaterial3: true).colorScheme.background;
 
 

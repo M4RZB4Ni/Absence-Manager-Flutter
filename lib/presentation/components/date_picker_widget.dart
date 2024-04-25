@@ -1,7 +1,6 @@
 import 'package:communere/app/extentions/extensions.dart';
 import 'package:communere/app/resources/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../app/extentions/typedefs.dart';
 import '../../app/resources/app_colors.dart';
@@ -36,7 +35,7 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160.spMin,
+      width: 160,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color:Theme.of(context).brightness == Brightness.light ?
@@ -62,7 +61,7 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
                     ? _selectedDate.toString().toNormalDate
                     : AppText.tapSelectDate,
                 style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: Theme.of(context).brightness == Brightness.light ?
                     ThemeData.light(useMaterial3: true).colorScheme.onPrimary : ThemeData.dark(useMaterial3: true).colorScheme.onSecondary),
@@ -71,10 +70,10 @@ class DatePickerWidgetState extends State<DatePickerWidget> {
           ),
           if (_selectedDate != null)
             SizedBox(
-              width: 18.w,
-              height: 18.h,
+              width: 18,
+              height: 18,
               child: IconButton(
-                iconSize: 18.w,
+                iconSize: 18,
                 padding: EdgeInsets.zero,
                 icon: const Icon(Icons.close_outlined,
                     color: AppColors.errorLight),

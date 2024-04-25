@@ -1,16 +1,16 @@
 import 'dart:math';
+import 'package:communere/app/base/base_controller.dart';
+import 'package:communere/app/base/result_state.dart';
+import 'package:communere/app/resources/app_text.dart';
+import 'package:communere/app/result/exception_handler.dart';
+import 'package:communere/app/services/calendar_service.dart';
+import 'package:communere/domain/entities/crew/crew_entity.dart';
+import 'package:communere/domain/entities/leave/leave_request_entity.dart';
+import 'package:communere/domain/usecase/get_absences_usecase.dart';
+import 'package:communere/domain/usecase/get_crew_members_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
-import '../../app/base/base_controller.dart';
-import '../../app/base/result_state.dart';
-import '../../app/result/exception_handler.dart';
-import '../../app/resources/app_text.dart';
-import '../../app/services/calendar_service.dart';
-import '../../domain/entities/crew/crew_entity.dart';
-import '../../domain/entities/leave/leave_request_entity.dart';
-import '../../domain/usecase/get_absences_usecase.dart';
-import '../../domain/usecase/get_crew_members_usecase.dart';
 
 /// A view model for the home page that extends the [BaseController].
 ///
@@ -120,7 +120,7 @@ class HomeViewModel extends BaseController {
   }
 
   /// Prepares all necessary data for the home page.
-  Future _prepareAll() async {
+  Future prepareAll() async {
     // below delay is just to showing you loading state and performance without is definitely better
     await Future.delayed(const Duration(milliseconds: 2500));
     await Future.wait([_prepareMembers(), _prepareAbsence()]);
@@ -130,7 +130,7 @@ class HomeViewModel extends BaseController {
   @override
   void onInit() {
     showLoading();
-    _prepareAll();
+    prepareAll();
     paginationScrollController.addListener(_onScroll);
     super.onInit();
   }
