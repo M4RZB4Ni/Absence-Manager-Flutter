@@ -14,16 +14,16 @@ This Flutter project was developed as a technical test by **Hamid Marzbani** by 
 
 ## Architecture
 
-The Project is Based on MVVM and Clean-Architecture with consideration of SOLID principles which Includes four Module:
+The Project is Based on MVVM and Clean Architecture with consideration of SOLID principles which Includes four Module:
 
-1. App: is responsible for infrastructure of the project include network handlers and exception handlers and base files.
-2. Data: The data layer serves as a bridge between the domain layer and the presentation layer, supplying data through implementations of data sources, repositories, and models.
-3. Domain: The domain layer encapsulates the core business logic and rules, acting as an intermediary between the data layer and presentation layer to ensure separation of concerns and maintain a clean, business-centric architecture.  
+1. App: responsible for the project's infrastructure including network handlers, exception handlers, and base files.
+2. Data: The data layer serves as a bridge between the domain layer and the presentation layer, supplying data by implementing data sources, repositories, and models.
+3. Domain: The domain layer encapsulates the core business logic and rules, acting as an intermediary between the data layer and presentation layer to ensure the separation of concerns and maintain a clean, business-centric architecture.  
 4. Presentation: The presentation layer manages user interfaces and interactions, focusing on the visual representation of data and user experience. It relies on the domain layer for business logic and the data layer for data retrieval, fostering a clear separation of concerns in the application architecture.
 
 ## Technologies and Libraries Used
 
-- **Flutter**: Flutter is a UI toolkit that enables the creation of natively compiled applications for mobile, web, and desktop from a single codebase.
+- **Flutter**: Flutter is a UI toolkit that enables the creation of natively compiled mobile, web, and desktop applications from a single codebase.
 
 - **[Freezed](https://pub.dev/packages/freezed)**: A code generation package for unions/pattern-matching/copy/toString/equals/hashCode.
 
@@ -37,7 +37,11 @@ The Project is Based on MVVM and Clean-Architecture with consideration of SOLID 
 
 - **[Liquid Pull To Refresh](https://pub.dev/packages/liquid_pull_to_refresh)**: A beautiful and custom refresh indicator for flutter.
 
-- **[Flutter Slidable](https://pub.dev/packages/flutter_slidable)**: A Flutter implementation of slidable list item with directional slide actions that can be dismissed.
+- **[iCal](https://pub.dev/packages/ical)**: A Dart package to generate iCalendar files.
+
+- **[Path Provider](https://pub.dev/packages/path_provider)**: A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS, Linux, macOS and Windows.
+
+- **[Open File](https://pub.dev/packages/open_file)**: A plug-in that can call native APP to open files with string results in the Flutter, support iOS(DocumentInteraction) / android(intent) / PC(ffi) / web(dart:html).
 
 - **[Build Runner](https://pub.dev/packages/build_runner)**: Provides a concrete way of generating files using Dart code. Files are always generated directly on disk, and rebuilds are incremental.
 
@@ -55,7 +59,7 @@ The Project is Based on MVVM and Clean-Architecture with consideration of SOLID 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/m4rzb4ni/communere.git
+   git clone https://github.com/m4rzb4ni/Absence-Manager-Flutter.git
 
 ### Running the Project
 
@@ -78,7 +82,7 @@ The Project is Based on MVVM and Clean-Architecture with consideration of SOLID 
  **Hamidreza Marzbani**
 
 - **LinkedIn**: https://www.linkedin.com/in/marzbani/
-- **Email**: [marzbani.business@gmail.com]()
+- **Email**: [marzbani.business[at]gmail[dot]com]()
 
 
 
