@@ -35,8 +35,6 @@ The Project is Based on MVVM and Clean Architecture with consideration of SOLID 
 
 - **[Lottie](https://pub.dev/packages/lottie)**: A Flutter package for smoothly displaying Lottie animations.
 
-- **[Liquid Pull To Refresh](https://pub.dev/packages/liquid_pull_to_refresh)**: A beautiful and custom refresh indicator for flutter.
-
 - **[iCal](https://pub.dev/packages/ical)**: A Dart package to generate iCalendar files.
 
 - **[Path Provider](https://pub.dev/packages/path_provider)**: A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS, Linux, macOS and Windows.
