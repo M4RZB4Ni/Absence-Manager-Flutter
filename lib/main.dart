@@ -17,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Run the application with the MyApp widget as the root.
-  runApp(const MyApp());
+  runApp( const MyApp());
 }
 
 /// Represents the root of the application.

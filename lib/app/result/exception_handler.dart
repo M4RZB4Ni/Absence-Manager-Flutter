@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'exception_handler.freezed.dart';
 
+/// Represents various exception types and their associated error messages.
 @freezed
 class ExceptionHandler with _$ExceptionHandler {
   const factory ExceptionHandler.jsonDecodingError(
@@ -70,16 +71,13 @@ class ExceptionHandler with _$ExceptionHandler {
 
   const factory ExceptionHandler.operationNotAllowed() = OperationNotAllowed;
 
-  const factory ExceptionHandler.emailAlreadyExists() = EmailAlreadyExists;
 
-  const factory ExceptionHandler.customTokenMismatch() = CustomTokenMismatch;
 
-  const factory ExceptionHandler.invalidCustomToken() = InvalidCustomToken;
 
   const factory ExceptionHandler.undefined() = undefined;
 
-  const factory ExceptionHandler.preConditionError() = UserRegisterBefore;
 
+  /// Retrieves the error message associated with the given [exceptionHandler].
   static String getErrorMessage(
     final ExceptionHandler exceptionHandler, {
     final bool showInLog = true,

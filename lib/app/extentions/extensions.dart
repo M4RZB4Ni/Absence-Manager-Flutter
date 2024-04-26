@@ -1,44 +1,28 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Extensions for handling strings, JSON files, and numeric ranges.
 extension AppString on String {
-  /// Converts a string to a Text Widget
-  Text toWidget({TextStyle? textStyle}) => Text(
-        this,
-        style: textStyle,
-      );
+  /// Converts a date string to a normal date format (YYYY-MM-DD).
+  String get toNormalDate => substring(0, 10);
 
-  /// Converts the string to an integer value
-  int toInt() {
-    try {
-      return int.parse(this);
-    } catch (e) {
-      return 0;
-    }
-  }
-
-  String get toNormalDate => substring(0,10);
-
-  /// Get the real image address from the string name of an asset
+  /// Generates the real image address from the string name of an asset.
   String get animation => 'assets/animations/$this.json';
-
 }
 
-
+/// Extensions for reading JSON files.
 extension JsonFileReaderExtension on String {
-  Future<Map<String,dynamic>> readJsonFile() async {
+  /// Reads and parses a JSON file from the asset bundle.
+  Future<Map<String, dynamic>> readJsonFile() async {
     String content = await rootBundle.loadString(this);
     return jsonDecode(content);
   }
 }
 
-
-
+/// Extensions for numeric ranges.
 extension Range on int {
+  /// Checks if the current value is within the specified range.
   bool isBetween(num from, num to) {
     return from >= this && this <= to;
   }
-
 }
