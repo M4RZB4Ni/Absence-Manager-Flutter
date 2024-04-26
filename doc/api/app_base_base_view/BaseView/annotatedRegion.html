@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_view/app_base_base_view-library.html">base_view</a></li>
     <li><a href="../../app_base_base_view/BaseView-class.html">BaseView<span class="signature">&lt;<wbr><span class="type-parameter">Controller extends BaseController</span>&gt;</span></a></li>
     <li class="self-crumb">annotatedRegion method</li>
@@ -64,26 +64,29 @@
       
 
 <span class="returntype"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span>
-<span class="name ">annotatedRegion</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="annotatedRegion-param-context"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span></span></li>
+<span class="name ">annotatedRegion</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="annotatedRegion-param-context"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span>, </span></li>
+<li><span class="parameter" id="annotatedRegion-param-child">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a>?</span> <span class="parameter-name">child</span>}</span></li>
 </ol>)
 
       
 
     </section>
     
+<section class="desc markdown">
+  <p>Wraps the content with an <a href="https://api.flutter.dev/flutter/widgets/AnnotatedRegion-class.html">AnnotatedRegion</a> to customize system UI overlay styles.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Widget annotatedRegion(final BuildContext context) =&gt; AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-        &#47;&#47;Status bar color for android
-        statusBarColor: statusBarColor(),
-        statusBarIconBrightness: Brightness.light,
-      ),
-      child: pageContent(context),
-    );</code></pre>
+  <pre class="language-dart"><code class="language-dart">Widget annotatedRegion(final BuildContext context, {final Widget? child}) =&gt; AnnotatedRegion(
+  value: const SystemUiOverlayStyle(
+    &#47;&#47; Status bar color for Android
+    statusBarIconBrightness: Brightness.light,
+  ),
+  child: pageContent(context, child: child),
+);</code></pre>
 </section>
 
 
@@ -98,7 +101,7 @@
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_view/app_base_base_view-library.html">base_view</a></li>
     <li><a href="../../app_base_base_view/BaseView-class.html">BaseView<span class="signature">&lt;<wbr><span class="type-parameter">Controller extends BaseController</span>&gt;</span></a></li>
     <li class="self-crumb">annotatedRegion method</li>
@@ -116,7 +119,7 @@
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_di_main_binding/app_di_main_binding-library.html">main_binding</a></li>
     <li><a href="../../app_di_main_binding/MainBinding-class.html">MainBinding</a></li>
     <li class="self-crumb">dependencies method</li>
@@ -75,6 +75,11 @@
 
     </section>
     
+<section class="desc markdown">
+  <p>Overrides the <code>dependencies</code> method to define how the dependencies should be created and injected.</p>
+<p>It uses the <code>Get.lazyPut</code> method to lazily instantiate the classes only when they are needed.
+This is more memory efficient as opposed to eagerly creating instances that may not be immediately required.</p>
+</section>
 
 
     
@@ -82,8 +87,48 @@
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 void dependencies() {
-  HomeBinding().dependencies();
-  Get.lazyPut&lt;NetworkClient&gt;(NetworkClient.new, fenix: true);
+  &#47;&#47; Binds the `HomeViewModel` to the dependency injection system.
+  &#47;&#47; It will find the required use cases (`GetAbsencesUseCase` and `GetCrewMembersUseCase`)
+  &#47;&#47; and inject them into the `HomeViewModel`.
+  Get.lazyPut&lt;HomeViewModel&gt;(() =&gt; HomeViewModel(
+      Get.find&lt;GetAbsencesUseCase&gt;(),
+      Get.find&lt;GetCrewMembersUseCase&gt;(),
+      Get.find&lt;CalendarService&gt;()));
+
+  &#47;&#47; Binds the `GetAbsencesUseCase` to the dependency injection system.
+  &#47;&#47; It will find the required repository (`AbsenceManagerRepository`)
+  &#47;&#47; and inject it into the `GetAbsencesUseCase`.
+  Get.lazyPut&lt;GetAbsencesUseCase&gt;(
+          () =&gt; GetAbsencesUseCase(Get.find&lt;AbsenceManagerRepository&gt;()));
+
+  &#47;&#47; Binds the `GetCrewMembersUseCase` to the dependency injection system.
+  &#47;&#47; It will find the required repository (`AbsenceManagerRepository`)
+  &#47;&#47; and inject it into the `GetCrewMembersUseCase`.
+  Get.lazyPut&lt;GetCrewMembersUseCase&gt;(
+          () =&gt; GetCrewMembersUseCase(Get.find&lt;AbsenceManagerRepository&gt;()));
+
+  &#47;&#47; Binds the `AbsenceManagerRepository` to the dependency injection system.
+  &#47;&#47; It will find the required data source (`AbsenceManagerDataSource`)
+  &#47;&#47; and inject it into the `AbsenceManagerRepositoryImpl`.
+  Get.lazyPut&lt;AbsenceManagerRepository&gt;(() =&gt;
+      AbsenceManagerRepositoryImpl(Get.find&lt;AbsenceManagerDataSource&gt;()));
+
+  &#47;&#47; Binds the `AbsenceManagerDataSource` to the dependency injection system.
+  &#47;&#47; It creates an instance of `AbsenceManagerLocalDataSource` which is presumably
+  &#47;&#47; the local data handling implementation for absence management.
+  Get.lazyPut&lt;AbsenceManagerDataSource&gt;(
+          () =&gt; AbsenceManagerLocalDataSource());
+
+  &#47;&#47; Binds the `ICalendar` to the dependency injection system.
+  &#47;&#47; It creates an instance of `ICalendar` which is used by the `CalendarServiceImpl`
+  &#47;&#47; for generating iCalendar events.
+  Get.lazyPut&lt;ICalendar&gt;(() =&gt; ICalendar());
+
+  &#47;&#47; Binds the `CalendarService` to the dependency injection system.
+  &#47;&#47; It creates an instance of `CalendarServiceImpl` and injects the `ICalendar`
+  &#47;&#47; instance into it for generating iCal files.
+  Get.lazyPut&lt;CalendarService&gt;(
+          () =&gt; CalendarServiceImpl(Get.find&lt;ICalendar&gt;()));
 }</code></pre>
 </section>
 
@@ -99,7 +144,7 @@ void dependencies() {
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_di_main_binding/app_di_main_binding-library.html">main_binding</a></li>
     <li><a href="../../app_di_main_binding/MainBinding-class.html">MainBinding</a></li>
     <li class="self-crumb">dependencies method</li>
@@ -117,7 +162,7 @@ void dependencies() {
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

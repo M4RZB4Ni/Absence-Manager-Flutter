@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_view/app_base_base_view-library.html">base_view</a></li>
     <li><a href="../../app_base_base_view/BaseView-class.html">BaseView<span class="signature">&lt;<wbr><span class="type-parameter">Controller extends BaseController</span>&gt;</span></a></li>
     <li class="self-crumb">build method</li>
@@ -123,14 +123,13 @@ Widget build(final BuildContext context) {
       FocusScope.of(context).requestFocus(FocusNode());
     },
     child: Obx(
-      () =&gt; controller.pageState.when(
+          () =&gt; controller.pageState.when(
         idle: () =&gt; annotatedRegion(context),
-        loading: () =&gt; _showLoading(),
+        loading: () =&gt; annotatedRegion(context, child: this.loading()),
         data: (final data) =&gt; annotatedRegion(context),
-        lostConnection: (widget) =&gt; noInternet(),
-        error: (ExceptionHandler error) {
-          return &quot;Error in Load Data&quot;.toWidget();
-        },
+        &#47;&#47; lostConnection: (widget) =&gt; noInternet(),
+        error: (error) =&gt; annotatedRegion(context, child: this.error(error)),
+        empty: () =&gt; annotatedRegion(context, child: this.empty()),
       ),
     ),
   );
@@ -149,7 +148,7 @@ Widget build(final BuildContext context) {
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_view/app_base_base_view-library.html">base_view</a></li>
     <li><a href="../../app_base_base_view/BaseView-class.html">BaseView<span class="signature">&lt;<wbr><span class="type-parameter">Controller extends BaseController</span>&gt;</span></a></li>
     <li class="self-crumb">build method</li>
@@ -167,7 +166,7 @@ Widget build(final BuildContext context) {
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../app_base_base_controller/app_base_base_controller-library.html">base_controller</a></li>
     <li class="self-crumb">BaseController class</li>
   </ol>
@@ -62,6 +62,10 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>Abstract base class for controllers in the application.
+Subclasses should extend this class and provide their own implementations.</p>
+</section>
 
 
     <section>
@@ -197,7 +201,7 @@ lifetime cycle of the subclass.
 
 </dt>
 <dd>
-  
+  Getter method to retrieve the current page state.
   <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
@@ -261,16 +265,16 @@ lifetime cycle of the subclass.
 
 </dd>
 
-        <dt id="dispose" class="callable">
-  <span class="name"><a href="../app_base_base_controller/BaseController/dispose.html">dispose</a></span><span class="signature">(<wbr>)
+        <dt id="dispose" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/get/4.6.6/get_state_manager_src_simple_list_notifier/ListNotifierMixin/dispose.html">dispose</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
+<dd class="inherited">
   
-  <div class="features"><span class="feature">override</span></div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -291,13 +295,13 @@ the Widget from the Controller.
 
         <dt id="hideLoading" class="callable">
   <span class="name"><a href="../app_base_base_controller/BaseController/hideLoading.html">hideLoading</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd>
-  
+  Hide the loading state by resetting the page state.
   
 
 </dd>
@@ -346,17 +350,17 @@ Might be useful as well to persist some data on disk.
 
 </dd>
 
-        <dt id="onInit" class="callable">
-  <span class="name"><a href="../app_base_base_controller/BaseController/onInit.html">onInit</a></span><span class="signature">(<wbr>)
+        <dt id="onInit" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/get/4.6.6/get_state_manager_src_rx_flutter_rx_disposable/DisposableInterface/onInit.html">onInit</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
+<dd class="inherited">
   Called immediately after the widget is allocated in memory.
 You might use this to initialize something for the controller.
-  <div class="features"><span class="feature">override</span></div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
@@ -430,26 +434,26 @@ object notifies.
 
         <dt id="resetPageState" class="callable">
   <span class="name"><a href="../app_base_base_controller/BaseController/resetPageState.html">resetPageState</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd>
-  
+  Reset the page state to "idle".
   
 
 </dd>
 
         <dt id="showLoading" class="callable">
   <span class="name"><a href="../app_base_base_controller/BaseController/showLoading.html">showLoading</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd>
-  
+  Show a loading state by updating the page state to "loading".
   
 
 </dd>
@@ -486,13 +490,13 @@ The update will only notify the Widgets, if <code>condition</code> is true.
 
         <dt id="updatePageState" class="callable">
   <span class="name"><a href="../app_base_base_controller/BaseController/updatePageState.html">updatePageState</a></span><span class="signature">(<wbr><span class="parameter" id="updatePageState-param-state"><span class="type-annotation"><a href="../app_base_result_state/ResultState-class.html">ResultState</a></span> <span class="parameter-name">state</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd>
-  
+  Method to update the page state.
   
 
 </dd>
@@ -536,7 +540,7 @@ The update will only notify the Widgets, if <code>condition</code> is true.
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../app_base_base_controller/app_base_base_controller-library.html">base_controller</a></li>
     <li class="self-crumb">BaseController class</li>
 </ol>
@@ -553,7 +557,7 @@ The update will only notify the Widgets, if <code>condition</code> is true.
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

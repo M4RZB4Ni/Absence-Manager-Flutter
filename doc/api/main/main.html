@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../main/main-library.html">main</a></li>
     <li class="self-crumb">main function</li>
   </ol>
@@ -70,20 +70,23 @@
 
     </section>
     
+<section class="desc markdown">
+  <p>The entry point of the Crewmeister absence manager application.</p>
+<p>This file contains the main function which initializes the Flutter bindings
+and runs the MyApp widget. It also includes the MyApp widget definition
+which sets up the application's environment, routes, and localization.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void main() async {
-  &#47;&#47; Ensure that Flutter bindings are initialized.
+  &#47;&#47; Ensure that Flutter bindings are initialized before running the app.
   WidgetsFlutterBinding.ensureInitialized();
 
-  &#47;&#47; Load environment variables from the .env file.
-  await dotenv.load(fileName: &quot;.env&quot;);
-
-  &#47;&#47; Run the application with the MyApp widget.
-  runApp(const MyApp());
+  &#47;&#47; Run the application with the MyApp widget as the root.
+  runApp( const MyApp());
 }</code></pre>
 </section>
 
@@ -99,7 +102,7 @@
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../main/main-library.html">main</a></li>
     <li class="self-crumb">main function</li>
 </ol>
@@ -116,7 +119,7 @@
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

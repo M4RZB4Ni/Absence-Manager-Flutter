@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_result_state/app_base_result_state-library.html">result_state</a></li>
     <li><a href="../../app_base_result_state/ResultState-class.html">ResultState<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
     <li class="self-crumb">maybeMap&lt;<wbr><span class="type-parameter">TResult extends Object?</span>&gt; method</li>
@@ -75,7 +75,7 @@
 <li><span class="parameter" id="maybeMap-param-loading"><span class="type-annotation">TResult</span> <span class="parameter-name">loading</span>(<ol class="parameter-list"><li><span class="parameter" id="param-value"><span class="type-annotation"><a href="../../app_base_result_state/Loading-class.html">Loading</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">value</span></span></li>
 </ol>
 )?, </span></li>
-<li><span class="parameter" id="maybeMap-param-lostConnection"><span class="type-annotation">TResult</span> <span class="parameter-name">lostConnection</span>(<ol class="parameter-list"><li><span class="parameter" id="param-value"><span class="type-annotation"><a href="../../app_base_result_state/LostConnection-class.html">LostConnection</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">value</span></span></li>
+<li><span class="parameter" id="maybeMap-param-empty"><span class="type-annotation">TResult</span> <span class="parameter-name">empty</span>(<ol class="parameter-list"><li><span class="parameter" id="param-value"><span class="type-annotation"><a href="../../app_base_result_state/Empty-class.html">Empty</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">value</span></span></li>
 </ol>
 )?, </span></li>
 <li><span class="parameter" id="maybeMap-param-data"><span class="type-annotation">TResult</span> <span class="parameter-name">data</span>(<ol class="parameter-list"><li><span class="parameter" id="param-value"><span class="type-annotation"><a href="../../app_base_result_state/Data-class.html">Data</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">value</span></span></li>
@@ -101,7 +101,7 @@
 TResult maybeMap&lt;TResult extends Object?&gt;({
   TResult Function(Idle&lt;T&gt; value)? idle,
   TResult Function(Loading&lt;T&gt; value)? loading,
-  TResult Function(LostConnection&lt;T&gt; value)? lostConnection,
+  TResult Function(Empty&lt;T&gt; value)? empty,
   TResult Function(Data&lt;T&gt; value)? data,
   TResult Function(Error&lt;T&gt; value)? error,
   required TResult orElse(),
@@ -121,7 +121,7 @@ TResult maybeMap&lt;TResult extends Object?&gt;({
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_result_state/app_base_result_state-library.html">result_state</a></li>
     <li><a href="../../app_base_result_state/ResultState-class.html">ResultState<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
     <li class="self-crumb">maybeMap&lt;<wbr><span class="type-parameter">TResult extends Object?</span>&gt; method</li>
@@ -139,7 +139,7 @@ TResult maybeMap&lt;TResult extends Object?&gt;({
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

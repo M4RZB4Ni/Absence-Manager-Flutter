@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../presentation_home_home_view_model/presentation_home_home_view_model-library.html">home_view_model</a></li>
     <li class="self-crumb">HomeViewModel class</li>
   </ol>
@@ -61,6 +61,12 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>A view model for the home page that extends the <a href="../app_base_base_controller/BaseController-class.html">BaseController</a>.</p>
+<p>It manages the state and business logic of the home page, handling
+the retrieval and pagination of crew members and leave requests.
+This class also provides filtering capabilities and generates iCal files.</p>
+</section>
 
 
     <section>
@@ -95,10 +101,10 @@
 
     <dl class="constructor-summary-list">
         <dt id="HomeViewModel" class="callable">
-          <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/HomeViewModel.html">HomeViewModel</a></span><span class="signature">(<span class="parameter" id="-param-_photoUseCase"><span class="type-annotation"><a href="../domain_usecase_photo_photo_usecase/PhotoUseCase-class.html">PhotoUseCase</a></span> <span class="parameter-name">_photoUseCase</span></span>)</span>
+          <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/HomeViewModel.html">HomeViewModel</a></span><span class="signature">(<span class="parameter" id="-param-_absencesUseCase"><span class="type-annotation"><a href="../domain_usecase_get_absences_usecase/GetAbsencesUseCase-class.html">GetAbsencesUseCase</a></span> <span class="parameter-name">_absencesUseCase</span>, </span><span class="parameter" id="-param-_crewMembersUseCase"><span class="type-annotation"><a href="../domain_usecase_get_crew_members_usecase/GetCrewMembersUseCase-class.html">GetCrewMembersUseCase</a></span> <span class="parameter-name">_crewMembersUseCase</span>, </span><span class="parameter" id="-param-_calendarService"><span class="type-annotation"><a href="../app_services_calendar_service/CalendarService-class.html">CalendarService</a></span> <span class="parameter-name">_calendarService</span></span>)</span>
         </dt>
         <dd>
-          
+          Constructs a <a href="../presentation_home_home_view_model/HomeViewModel-class.html">HomeViewModel</a> with the necessary use cases.
         </dd>
     </dl>
   </section>
@@ -107,6 +113,17 @@
       <h2>Properties</h2>
 
       <dl class="properties">
+        <dt id="absenceList" class="property">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/absenceList.html">absenceList</a></span>
+  <span class="signature">&#8596; <a href="https://pub.dev/documentation/get/4.6.6/rx_types/RxList-class.html">RxList</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../domain_entities_leave_leave_request_entity/LeaveRequestEntity-class.html">LeaveRequestEntity</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Reactive list of leave requests.
+  <div class="features"><span class="feature">getter/setter pair</span></div>
+
+</dd>
+
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
@@ -148,17 +165,6 @@
 <dd class="inherited">
   Checks whether the controller has already been closed.
   <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="isLoading" class="property">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/isLoading.html">isLoading</a></span>
-  <span class="signature">&#8594; <a href="https://pub.dev/documentation/get/4.6.6/rx_types/RxBool-class.html">RxBool</a></span> 
-
-</dt>
-<dd>
-  
-  <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
@@ -204,19 +210,19 @@ lifetime cycle of the subclass.
 
 </dt>
 <dd class="inherited">
-  
+  Getter method to retrieve the current page state.
   <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="photos" class="property">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/photos.html">photos</a></span>
-  <span class="signature">&#8594; <a href="https://pub.dev/documentation/get/4.6.6/rx_types/Rx-class.html">Rx</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../domain_entities_photo_photo/Photos-class.html">Photos</a></span>&gt;</span></span> 
+        <dt id="paginationScrollController" class="property">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/paginationScrollController.html">paginationScrollController</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/widgets/ScrollController-class.html">ScrollController</a></span> 
 
 </dt>
 <dd>
-  
-  <div class="features"><span class="feature">no setter</span></div>
+  Controller for managing scroll events in the UI.
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
@@ -228,17 +234,6 @@ lifetime cycle of the subclass.
 <dd class="inherited">
   A representation of the runtime type of the object.
   <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="searchController" class="property">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/searchController.html">searchController</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/widgets/TextEditingController-class.html">TextEditingController</a></span> 
-
-</dt>
-<dd>
-  
-  <div class="features"><span class="feature">no setter</span></div>
 
 </dd>
 
@@ -290,8 +285,8 @@ lifetime cycle of the subclass.
 
 </dd>
 
-        <dt id="clearSearchBox" class="callable">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/clearSearchBox.html">clearSearchBox</a></span><span class="signature">(<wbr>)
+        <dt id="dispose" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/dispose.html">dispose</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -299,20 +294,7 @@ lifetime cycle of the subclass.
 </dt>
 <dd>
   
-  
-
-</dd>
-
-        <dt id="dispose" class="callable inherited">
-  <span class="name"><a href="../app_base_base_controller/BaseController/dispose.html">dispose</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  
-  <div class="features"><span class="feature">inherited</span></div>
+  <div class="features"><span class="feature">override</span></div>
 
 </dd>
 
@@ -331,28 +313,54 @@ the Widget from the Controller.
 
 </dd>
 
-        <dt id="getRecentPhotos" class="callable">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/getRecentPhotos.html">getRecentPhotos</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+        <dt id="fetchNameOfMember" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/fetchNameOfMember.html">fetchNameOfMember</a></span><span class="signature">(<wbr><span class="parameter" id="fetchNameOfMember-param-index">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">index</span>, </span><span class="parameter" id="fetchNameOfMember-param-isAdmitter"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isAdmitter</span> = <span class="default-value">false</span>}</span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
   </span>
   
 
 </dt>
 <dd>
+  Fetches the name of a crew member based on the index and whether they are an admitter.
   
+
+</dd>
+
+        <dt id="filterByDate" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/filterByDate.html">filterByDate</a></span><span class="signature">(<wbr><span class="parameter" id="filterByDate-param-dateTime"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">dateTime</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Filters the list of absences by date.
+  
+
+</dd>
+
+        <dt id="filterByType" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/filterByType.html">filterByType</a></span><span class="signature">(<wbr><span class="parameter" id="filterByType-param-type"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Filters the list of absences by type.
   
 
 </dd>
 
         <dt id="hideLoading" class="callable inherited">
   <span class="name"><a href="../app_base_base_controller/BaseController/hideLoading.html">hideLoading</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  
+  Hide the loading state by resetting the page state.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -430,6 +438,32 @@ async request.
 
 </dd>
 
+        <dt id="openCalendarFile" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/openCalendarFile.html">openCalendarFile</a></span><span class="signature">(<wbr><span class="parameter" id="openCalendarFile-param-index">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">index</span>}</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Opens a calendar file based on the specified <code>index</code>.
+  
+
+</dd>
+
+        <dt id="prepareAll" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/prepareAll.html">prepareAll</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Prepares all necessary data for the home page.
+  
+
+</dd>
+
         <dt id="refresh" class="callable inherited">
   <span class="name"><a href="https://pub.dev/documentation/get/4.6.6/get_state_manager_src_simple_list_notifier/ListNotifierMixin/refresh.html">refresh</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
@@ -485,53 +519,40 @@ object notifies.
 
         <dt id="resetPageState" class="callable inherited">
   <span class="name"><a href="../app_base_base_controller/BaseController/resetPageState.html">resetPageState</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="searchButtonHandler" class="callable">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/searchButtonHandler.html">searchButtonHandler</a></span><span class="signature">(<wbr><span class="parameter" id="searchButtonHandler-param-value"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">value</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
-  
-  
-
-</dd>
-
-        <dt id="searchPhotos" class="callable">
-  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/searchPhotos.html">searchPhotos</a></span><span class="signature">(<wbr><span class="parameter" id="searchPhotos-param-searchCriteria"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">searchCriteria</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd>
-  
-  
+<dd class="inherited">
+  Reset the page state to "idle".
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
         <dt id="showLoading" class="callable inherited">
   <span class="name"><a href="../app_base_base_controller/BaseController/showLoading.html">showLoading</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  
+  Show a loading state by updating the page state to "loading".
   <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="testPrepareAll" class="callable">
+  <span class="name"><a href="../presentation_home_home_view_model/HomeViewModel/testPrepareAll.html">testPrepareAll</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
 
 </dd>
 
@@ -567,13 +588,13 @@ The update will only notify the Widgets, if <code>condition</code> is true.
 
         <dt id="updatePageState" class="callable inherited">
   <span class="name"><a href="../app_base_base_controller/BaseController/updatePageState.html">updatePageState</a></span><span class="signature">(<wbr><span class="parameter" id="updatePageState-param-state"><span class="type-annotation"><a href="../app_base_result_state/ResultState-class.html">ResultState</a></span> <span class="parameter-name">state</span></span>)
-    <span class="returntype parameter">&#8594; <a href="../app_base_result_state/ResultState-class.html">ResultState</a></span>
+    <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd class="inherited">
-  
+  Method to update the page state.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -617,7 +638,7 @@ The update will only notify the Widgets, if <code>condition</code> is true.
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../presentation_home_home_view_model/presentation_home_home_view_model-library.html">home_view_model</a></li>
     <li class="self-crumb">HomeViewModel class</li>
 </ol>
@@ -634,7 +655,7 @@ The update will only notify the Widgets, if <code>condition</code> is true.
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

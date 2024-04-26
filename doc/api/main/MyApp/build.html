@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../main/main-library.html">main</a></li>
     <li><a href="../../main/MyApp-class.html">MyApp</a></li>
     <li class="self-crumb">build method</li>
@@ -77,39 +77,7 @@
     </section>
     
 <section class="desc markdown">
-  <p>Describes the part of the user interface represented by this widget.</p>
-<p>The framework calls this method when this widget is inserted into the tree
-in a given <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a> and when the dependencies of this widget change
-(e.g., an <a href="https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html">InheritedWidget</a> referenced by this widget changes). This
-method can potentially be called in every frame and should not have any side
-effects beyond building a widget.</p>
-<p>The framework replaces the subtree below this widget with the widget
-returned by this method, either by updating the existing subtree or by
-removing the subtree and inflating a new subtree, depending on whether the
-widget returned by this method can update the root of the existing
-subtree, as determined by calling <a href="https://api.flutter.dev/flutter/widgets/Widget/canUpdate.html">Widget.canUpdate</a>.</p>
-<p>Typically implementations return a newly created constellation of widgets
-that are configured with information from this widget's constructor and
-from the given <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a>.</p>
-<p>The given <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a> contains information about the location in the
-tree at which this widget is being built. For example, the context
-provides the set of inherited widgets for this location in the tree. A
-given widget might be built with multiple different <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a>
-arguments over time if the widget is moved around the tree or if the
-widget is inserted into the tree in multiple places at once.</p>
-<p>The implementation of this method must only depend on:</p>
-<ul>
-<li>the fields of the widget, which themselves must not change over time,
-and</li>
-<li>any ambient state obtained from the <code>context</code> using
-<a href="https://api.flutter.dev/flutter/widgets/BuildContext/dependOnInheritedWidgetOfExactType.html">BuildContext.dependOnInheritedWidgetOfExactType</a>.</li>
-</ul>
-<p>If a widget's <a href="../../main/MyApp/build.html">build</a> method is to depend on anything else, use a
-<a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> instead.</p>
-<p>See also:</p>
-<ul>
-<li><a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html">StatelessWidget</a>, which contains the discussion on performance considerations.</li>
-</ul>
+  <p>Builds the application with responsive design and route management.</p>
 </section>
 
 
@@ -119,25 +87,17 @@ and</li>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
   &#47;&#47; Initialize ScreenUtil for responsive design.
-  return ScreenUtilInit(
-    designSize: const Size(360, 640),
-    minTextAdapt: true,
-    splitScreenMode: true,
-    builder: (context, child) {
-      &#47;&#47; Use GetMaterialApp for managing the application&#39;s state and routes.
-      return GetMaterialApp(
-        locale: Get.locale, &#47;&#47; Set the locale for localization.
-        title: AppText.appName, &#47;&#47; Set the application title.
-        initialBinding:
-            MainBinding(), &#47;&#47; Use MainBinding for initial setup and dependency injection.
-        debugShowCheckedModeBanner:
-            true, &#47;&#47; Show the debug banner in checked mode.
-        initialRoute:
-            HomeScreen.url, &#47;&#47; Set the initial route to the HomeScreen.
-        getPages:
-            AppPages.pages, &#47;&#47; Define the application&#39;s pages using AppPages.
-      );
-    },
+  return GetMaterialApp(
+    theme: ThemeData.light(useMaterial3: true),
+    darkTheme: ThemeData.dark(useMaterial3: true),
+    debugShowCheckedModeBanner: false,
+    locale: Get.locale, &#47;&#47; Set the locale for localization.
+    title: AppText.appName, &#47;&#47; Set the application title.
+    initialBinding:
+        MainBinding(), &#47;&#47; Use MainBinding for initial setup and dependency injection.
+    initialRoute: HomeView.name, &#47;&#47; Set the initial route to the HomeScreen.
+    getPages:
+        AppPages.pages, &#47;&#47; Define the application&#39;s pages using AppPages.
   );
 }</code></pre>
 </section>
@@ -154,7 +114,7 @@ Widget build(BuildContext context) {
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../main/main-library.html">main</a></li>
     <li><a href="../../main/MyApp-class.html">MyApp</a></li>
     <li class="self-crumb">build method</li>
@@ -172,7 +132,7 @@ Widget build(BuildContext context) {
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

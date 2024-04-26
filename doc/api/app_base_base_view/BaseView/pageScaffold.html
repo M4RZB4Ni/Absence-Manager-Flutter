@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_view/app_base_base_view-library.html">base_view</a></li>
     <li><a href="../../app_base_base_view/BaseView-class.html">BaseView<span class="signature">&lt;<wbr><span class="type-parameter">Controller extends BaseController</span>&gt;</span></a></li>
     <li class="self-crumb">pageScaffold method</li>
@@ -64,32 +64,36 @@
       
 
 <span class="returntype"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span>
-<span class="name ">pageScaffold</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="pageScaffold-param-context"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span></span></li>
+<span class="name ">pageScaffold</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="pageScaffold-param-context"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span>, </span></li>
+<li><span class="parameter" id="pageScaffold-param-child">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a>?</span> <span class="parameter-name">child</span>}</span></li>
 </ol>)
 
       
 
     </section>
     
+<section class="desc markdown">
+  <p>Wraps the content with a <a href="https://api.flutter.dev/flutter/material/Scaffold-class.html">Scaffold</a> widget.</p>
+</section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Widget pageScaffold(final BuildContext context) =&gt; PopScope(
-      canPop: false,
-      child: Scaffold(
-        &#47;&#47;sets ios status bar color
-        backgroundColor: pageBackgroundColor(),
-        appBar: appBar(context),
-        floatingActionButton: floatingActionButton(),
-        floatingActionButtonLocation: floatingActionButtonLocation(),
-        body: body(context),
-        bottomNavigationBar: bottomNavigationBar(context),
-        drawer: drawer(),
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
-      ),
-    );</code></pre>
+  <pre class="language-dart"><code class="language-dart">Widget pageScaffold(final BuildContext context, {final Widget? child}) =&gt; PopScope(
+  canPop: false,
+  child: Scaffold(
+    &#47;&#47; Sets iOS status bar color
+    backgroundColor: pageBackgroundColor(context),
+    appBar: appBar(context),
+    floatingActionButton: floatingActionButton(),
+    floatingActionButtonLocation: floatingActionButtonLocation(),
+    body: child ?? body(context),
+    bottomNavigationBar: bottomNavigationBar(context),
+    drawer: drawer(),
+    resizeToAvoidBottomInset: resizeToAvoidBottomInset(),
+  ),
+);</code></pre>
 </section>
 
 
@@ -104,7 +108,7 @@
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_view/app_base_base_view-library.html">base_view</a></li>
     <li><a href="../../app_base_base_view/BaseView-class.html">BaseView<span class="signature">&lt;<wbr><span class="type-parameter">Controller extends BaseController</span>&gt;</span></a></li>
     <li class="self-crumb">pageScaffold method</li>
@@ -122,7 +126,7 @@
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

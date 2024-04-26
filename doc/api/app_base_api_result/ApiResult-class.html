@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../app_base_api_result/app_base_api_result-library.html">api_result</a></li>
     <li class="self-crumb">ApiResult<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class</li>
   </ol>
@@ -95,7 +95,7 @@
 
     <dl class="constructor-summary-list">
         <dt id="ApiResult.failure" class="callable">
-          <span class="name"><a href="../app_base_api_result/ApiResult/ApiResult.failure.html">ApiResult.failure</a></span><span class="signature">(<span class="parameter" id="failure-param-error">{<span>required</span> <span class="type-annotation"><a href="../app_network_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span>}</span>)</span>
+          <span class="name"><a href="../app_base_api_result/ApiResult/ApiResult.failure.html">ApiResult.failure</a></span><span class="signature">(<span class="parameter" id="failure-param-error">{<span>required</span> <span class="type-annotation"><a href="../app_result_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span>}</span>)</span>
         </dt>
         <dd>
           
@@ -188,7 +188,7 @@
 </dd>
 
         <dt id="maybeWhen" class="callable inherited">
-  <span class="name"><a href="../app_base_api_result/ApiResult/maybeWhen.html">maybeWhen</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends <a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="maybeWhen-param-success">{<span class="type-annotation">TResult</span> <span class="parameter-name">success</span>(<span class="parameter" id="param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>)?, </span><span class="parameter" id="maybeWhen-param-failure"><span class="type-annotation">TResult</span> <span class="parameter-name">failure</span>(<span class="parameter" id="param-error"><span class="type-annotation"><a href="../app_network_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span></span>)?, </span><span class="parameter" id="maybeWhen-param-orElse"><span>required</span> <span class="type-annotation">TResult</span> <span class="parameter-name">orElse</span>()}</span>)
+  <span class="name"><a href="../app_base_api_result/ApiResult/maybeWhen.html">maybeWhen</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends <a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="maybeWhen-param-success">{<span class="type-annotation">TResult</span> <span class="parameter-name">success</span>(<span class="parameter" id="param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>)?, </span><span class="parameter" id="maybeWhen-param-failure"><span class="type-annotation">TResult</span> <span class="parameter-name">failure</span>(<span class="parameter" id="param-error"><span class="type-annotation"><a href="../app_result_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span></span>)?, </span><span class="parameter" id="maybeWhen-param-orElse"><span>required</span> <span class="type-annotation">TResult</span> <span class="parameter-name">orElse</span>()}</span>)
     <span class="returntype parameter">&#8594; TResult</span>
   </span>
   
@@ -227,7 +227,7 @@
 </dd>
 
         <dt id="when" class="callable inherited">
-  <span class="name"><a href="../app_base_api_result/ApiResult/when.html">when</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends <a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="when-param-success">{<span>required</span> <span class="type-annotation">TResult</span> <span class="parameter-name">success</span>(<span class="parameter" id="param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>), </span><span class="parameter" id="when-param-failure"><span>required</span> <span class="type-annotation">TResult</span> <span class="parameter-name">failure</span>(<span class="parameter" id="param-error"><span class="type-annotation"><a href="../app_network_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span></span>)}</span>)
+  <span class="name"><a href="../app_base_api_result/ApiResult/when.html">when</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends <a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="when-param-success">{<span>required</span> <span class="type-annotation">TResult</span> <span class="parameter-name">success</span>(<span class="parameter" id="param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>), </span><span class="parameter" id="when-param-failure"><span>required</span> <span class="type-annotation">TResult</span> <span class="parameter-name">failure</span>(<span class="parameter" id="param-error"><span class="type-annotation"><a href="../app_result_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span></span>)}</span>)
     <span class="returntype parameter">&#8594; TResult</span>
   </span>
   
@@ -240,7 +240,7 @@
 </dd>
 
         <dt id="whenOrNull" class="callable inherited">
-  <span class="name"><a href="../app_base_api_result/ApiResult/whenOrNull.html">whenOrNull</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends <a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="whenOrNull-param-success">{<span class="type-annotation">TResult?</span> <span class="parameter-name">success</span>(<span class="parameter" id="param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>)?, </span><span class="parameter" id="whenOrNull-param-failure"><span class="type-annotation">TResult?</span> <span class="parameter-name">failure</span>(<span class="parameter" id="param-error"><span class="type-annotation"><a href="../app_network_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span></span>)?}</span>)
+  <span class="name"><a href="../app_base_api_result/ApiResult/whenOrNull.html">whenOrNull</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends <a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a>?</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="whenOrNull-param-success">{<span class="type-annotation">TResult?</span> <span class="parameter-name">success</span>(<span class="parameter" id="param-data"><span class="type-annotation">T</span> <span class="parameter-name">data</span></span>)?, </span><span class="parameter" id="whenOrNull-param-failure"><span class="type-annotation">TResult?</span> <span class="parameter-name">failure</span>(<span class="parameter" id="param-error"><span class="type-annotation"><a href="../app_result_exception_handler/ExceptionHandler-class.html">ExceptionHandler</a></span> <span class="parameter-name">error</span></span>)?}</span>)
     <span class="returntype parameter">&#8594; TResult?</span>
   </span>
   
@@ -291,7 +291,7 @@
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../index.html">communere</a></li>
+    <li><a href="../index.html">crewmeister</a></li>
     <li><a href="../app_base_api_result/app_base_api_result-library.html">api_result</a></li>
     <li class="self-crumb">ApiResult<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class</li>
 </ol>
@@ -308,7 +308,7 @@
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 

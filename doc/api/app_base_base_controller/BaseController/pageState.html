@@ -28,7 +28,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_controller/app_base_base_controller-library.html">base_controller</a></li>
     <li><a href="../../app_base_base_controller/BaseController-class.html">BaseController</a></li>
     <li class="self-crumb">pageState property</li>
@@ -73,11 +73,14 @@
 </section>
 
 
+<section class="desc markdown">
+  <p>Getter method to retrieve the current page state.</p>
+</section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">ResultState get pageState =&gt; _pageStateController.value;</code></pre>
+  <pre class="language-dart"><code class="language-dart">ResultState get pageState =&gt; _pageStateController.value ?? const ResultState.idle();</code></pre>
 </section>
 
 </section>
@@ -94,7 +97,7 @@
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="../../index.html">communere</a></li>
+    <li><a href="../../index.html">crewmeister</a></li>
     <li><a href="../../app_base_base_controller/app_base_base_controller-library.html">base_controller</a></li>
     <li><a href="../../app_base_base_controller/BaseController-class.html">BaseController</a></li>
     <li class="self-crumb">pageState property</li>
@@ -112,7 +115,7 @@
 
 <footer>
   <span class="no-break">
-    communere
+    crewmeister
       1.0.0+1
   </span>
 
