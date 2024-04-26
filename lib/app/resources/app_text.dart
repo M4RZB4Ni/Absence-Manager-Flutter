@@ -19,4 +19,5 @@ mixin AppText {
   static const tapSelectDate = "Tap to select a date";
   static const selectOption = "Select an option";
   static const outOffice = "Out Of Office";
+  static const notSupport = "Operation system not supporting yed.";
 }

@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:crewmeister/app/base/api_result.dart';
+import 'package:crewmeister/app/result/exception_handler.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ical/serializer.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../domain/entities/leave/leave_request_entity.dart';
@@ -24,7 +27,7 @@ abstract class CalendarService {
   /// description, summary, and recurrence rule.
   ///
   /// Returns a [File] representing the generated iCal file.
-  Future<File> generateCalendarFile({
+  Future<ApiResult<File>> generateCalendarFile({
     required LeaveRequestEntity absenceItem,
     required Map<String, String> names,
   });
@@ -42,7 +45,7 @@ class CalendarServiceImpl extends CalendarService {
   CalendarServiceImpl(this._cal);
 
   @override
-  Future<File> generateCalendarFile({
+  Future<ApiResult<File>> generateCalendarFile({
     required LeaveRequestEntity absenceItem,
     required Map<String, String> names,
   }) async {
@@ -60,12 +63,16 @@ class CalendarServiceImpl extends CalendarService {
         rrule: IRecurrenceRule(frequency: IRecurrenceFrequency.DAILY),
       ),
     );
+    if(!kIsWeb) {
+      // Get the temporary directory to store the generated iCal file
+      final directory = await getTemporaryDirectory();
 
-    // Get the temporary directory to store the generated iCal file
-    final directory = await getTemporaryDirectory();
+      // Write the serialized iCalendar data to a file in the temporary directory
+      return ApiResult.success(data: await File('${directory.path}/icalFile.ics')
+          .writeAsString(_cal.serialize()));
 
-    // Write the serialized iCalendar data to a file in the temporary directory
-    return await File('${directory.path}/icalFile.ics')
-        .writeAsString(_cal.serialize());
+    }else{
+      return const ApiResult.failure(error: ExceptionHandler.defaultError(AppText.notSupport));
+    }
   }
 }

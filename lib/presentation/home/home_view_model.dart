@@ -18,9 +18,9 @@ import 'package:open_file/open_file.dart';
 /// the retrieval and pagination of crew members and leave requests.
 /// This class also provides filtering capabilities and generates iCal files.
 class HomeViewModel extends BaseController {
-
   /// Constructs a [HomeViewModel] with the necessary use cases.
-  HomeViewModel(this._absencesUseCase, this._crewMembersUseCase, this._calendarService);
+  HomeViewModel(
+      this._absencesUseCase, this._crewMembersUseCase, this._calendarService);
 
   /// Use case for retrieving absences.
   final GetAbsencesUseCase _absencesUseCase;
@@ -29,7 +29,6 @@ class HomeViewModel extends BaseController {
   final GetCrewMembersUseCase _crewMembersUseCase;
 
   final CalendarService _calendarService;
-
 
   /// Reactive list of crew members.
   final List<CrewMemberEntity> _crewList = List.empty(growable: true);
@@ -58,13 +57,12 @@ class HomeViewModel extends BaseController {
   /// Number of items per page.
   final int _pageSize = 10;
 
-
   /// Callback for handling scroll events to load more absences.
   void _onScroll() {
     if (paginationScrollController.position.pixels ==
         paginationScrollController.position.maxScrollExtent) {
       // if(_currentTypeFilter==null && _currentDateFilter==null) {
-        _loadMoreAbsence();
+      _loadMoreAbsence();
       // }
     }
   }
@@ -167,7 +165,6 @@ class HomeViewModel extends BaseController {
     _filterAbsenceList();
   }
 
-
   /// Filters the absence list based on the current type and date filters.
   ///
   /// This function applies the current type and date filters to the full list of absences.
@@ -209,7 +206,6 @@ class HomeViewModel extends BaseController {
     }
   }
 
-
   /// Fetches the name of a crew member based on the index and whether they are an admitter.
   String fetchNameOfMember({required int index, bool isAdmitter = false}) {
     return _idToNameMap[isAdmitter
@@ -218,13 +214,18 @@ class HomeViewModel extends BaseController {
         AppText.unknown;
   }
 
-
   /// Generates an iCal file for a specific absence.
   void openCalendarFile({required int index}) async {
     showLoading();
-    final names={"admitter":fetchNameOfMember(index: index, isAdmitter: true),"member":fetchNameOfMember(index: index)};
-    final file=await _calendarService.generateCalendarFile(absenceItem: absenceList[index], names: names);
-    await OpenFile.open(file.path);
-    hideLoading();
+    final names = {
+      "admitter": fetchNameOfMember(index: index, isAdmitter: true),
+      "member": fetchNameOfMember(index: index)
+    };
+    final file = await _calendarService.generateCalendarFile(
+        absenceItem: absenceList[index], names: names);
+    file.when(
+        success: (file) async => await OpenFile.open(file.path),
+        failure: (error) => updatePageState(ResultState.error(error: error)));
+    Future.delayed(const Duration(milliseconds: 1500)).whenComplete(() =>resetPageState());
   }
 }
