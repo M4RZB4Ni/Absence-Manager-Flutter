@@ -214,18 +214,33 @@ class HomeViewModel extends BaseController {
         AppText.unknown;
   }
 
-  /// Generates an iCal file for a specific absence.
+  /// Opens a calendar file based on the specified [index].
+  ///
+  /// This function performs the following steps:
+  /// 1. Displays a loading indicator (presumably to provide feedback to the user).
+  /// 2. Retrieves the names of relevant members (admitter and general member) using the [fetchNameOfMember] function.
+  /// 3. Generates a calendar file using the [_calendarService.generateCalendarFile] method, passing in the [absenceItem] and [names].
+  /// 4. If the file generation is successful, it opens the file using [OpenFile.open].
+  /// 5. If an error occurs during file generation, it updates the page state with an error message.
+  /// 6. After a delay of 1500 milliseconds, it resets the page state.
+  ///
+  /// Parameters:
+  /// - [index]: The index corresponding to the absence item.
   void openCalendarFile({required int index}) async {
-    showLoading();
+    showLoading(); // Display loading indicator
     final names = {
       "admitter": fetchNameOfMember(index: index, isAdmitter: true),
-      "member": fetchNameOfMember(index: index)
+      "member": fetchNameOfMember(index: index),
     };
     final file = await _calendarService.generateCalendarFile(
-        absenceItem: absenceList[index], names: names);
+      absenceItem: absenceList[index],
+      names: names,
+    );
     file.when(
-        success: (file) async => await OpenFile.open(file.path),
-        failure: (error) => updatePageState(ResultState.error(error: error)));
-    Future.delayed(const Duration(milliseconds: 1500)).whenComplete(() =>resetPageState());
+      success: (file) async => await OpenFile.open(file.path), // Open the generated file
+      failure: (error) => updatePageState(ResultState.error(error: error)), // Handle error
+    );
+    Future.delayed(const Duration(milliseconds: 1500)).whenComplete(() => resetPageState()); // Reset page state after delay
   }
+
 }

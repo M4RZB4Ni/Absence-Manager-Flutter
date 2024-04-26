@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../app/extentions/typedefs.dart';
 
+
+
 /// A custom dropdown widget that allows users to select from a list of string options.
 ///
 /// This widget is stateful to manage the selected option internally and to provide
@@ -58,11 +60,11 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
             value: _selectedOption,
             icon: const Icon(Icons.arrow_drop_down),
             items:
-                widget.options.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value)
-                  );
+            widget.options.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value)
+              );
             }).toList(),
             onChanged: (String? newValue) {
               setState(() {
@@ -76,15 +78,11 @@ class StringDropdownWidgetState extends State<StringDropdownWidget> {
 
         // Clear button to reset the selection.
         if (_selectedOption != null)
-          SizedBox(
-            // width: 18,
-            // height: 18,
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              // iconSize: 18,
-              icon: const Icon(Icons.clear),
-              onPressed: _resetSelection,
-            ),
+          IconButton(
+            padding: EdgeInsets.zero,
+            // iconSize: 18,
+            icon: const Icon(Icons.clear),
+            onPressed: _resetSelection,
           ),
       ],
     );
