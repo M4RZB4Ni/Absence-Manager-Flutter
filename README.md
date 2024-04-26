@@ -1,11 +1,12 @@
 # The Crewmeister coding challenge - Flutter
 
 ## Overview
-This Flutter project was developed as a technical test by **Hamid Marzbani** by request of Crewmeister company. The project focuses on creating a structured, robust, testable, scalable application for absence managers.
+This Flutter project was developed as a technical test by **Hamid Marzbani** by request of Crewmeister company. The project focuses on creating a structured, robust, testable, scalable application for absence managers with supporting dark and light themes.
 
 ## Table of Contents
 - [Architecture](#architecture)
 - [Technologies and Libraries Used](#technologies-and-libraries-used)
+- [Supporting Operating Systems](#supporting-operating-systems)
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
@@ -45,6 +46,11 @@ The Project is Based on MVVM and Clean Architecture with consideration of SOLID 
 
 - **[Flutter Lints](https://pub.dev/packages/flutter_lints)**: Contains a recommended set of lints for Flutter apps, packages, and plugins to encourage good coding practices.
 
+## Supporting Operating Systems
+
+- **Android**
+
+- **Web**: generating the .iCal file is not supported on the web yet...
 
 ## Getting Started
 
@@ -75,6 +81,11 @@ The Project is Based on MVVM and Clean Architecture with consideration of SOLID 
    ```bash
    flutter build apk
 
+4. Build the web:
+
+   ```bash
+   flutter build web
+   
 ### Author
 
  **Hamidreza Marzbani**
