@@ -28,8 +28,6 @@ The Project is Based on MVVM and Clean Architecture with consideration of SOLID 
 
 - **[Freezed](https://pub.dev/packages/freezed)**: A code generation package for unions/pattern-matching/copy/toString/equals/hashCode.
 
-- **[Flutter Screenutil](https://pub.dev/packages/flutter_screenutil)**: A Flutter plugin to provide a simple way to set the width and height of widgets based on screen size.
-
 - **[Get](https://pub.dev/packages/get)**: A state management, Dependency Injection library for Flutter.
 
 - **[Json Annotation](https://pub.dev/packages/json_annotation) and [Json Serializable](https://pub.dev/packages/json_serializable)**: Packages for converting Dart objects to and from JSON.
