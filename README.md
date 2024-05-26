@@ -1,7 +1,7 @@
 # The Crewmeister coding challenge - Flutter
 
 ## Overview
-This Flutter project was developed as a technical test by **Hamid Marzbani** by request of Crewmeister company. The project focuses on creating a structured, robust, testable, scalable application for absence managers with supporting dark and light themes.
+The project focuses on creating a structured, robust, testable, scalable application for absence managers with supporting dark and light themes.
 
 ## Table of Contents
 - [Architecture](#architecture)
