@@ -1,7 +1,7 @@
 # The Crewmeister coding challenge - Flutter
 
 ## Overview
-The project focuses on creating a structured, robust, testable, scalable application for absence managers with supporting dark and light themes.
+The project focuses on creating a structured, robust, testable, scalable application for absence managers with mock data (JSON), supporting dark and light themes.
 
 ## Table of Contents
 - [Architecture](#architecture)
