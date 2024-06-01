@@ -1,4 +1,4 @@
-# The Crewmeister coding challenge - Flutter
+# The Clean Architecture with MVVM - Flutter
 
 ## Overview
 The project focuses on creating a structured, robust, testable, scalable application for absence managers with mock data (JSON), supporting dark and light themes.
