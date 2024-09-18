@@ -108,7 +108,7 @@ abstract class BaseView<Controller extends BaseController>
   /// Determines the background color of the page based on the theme brightness.
   Color pageBackgroundColor(BuildContext context) => Theme.of(context).brightness == Brightness.light
       ? ThemeData.light(useMaterial3: true).scaffoldBackgroundColor
-      : ThemeData.dark(useMaterial3: true).colorScheme.background;
+      : ThemeData.dark(useMaterial3: true).colorScheme.surface;
 
   /// Override this method to provide a custom floating action button.
   Widget? floatingActionButton() => null;
